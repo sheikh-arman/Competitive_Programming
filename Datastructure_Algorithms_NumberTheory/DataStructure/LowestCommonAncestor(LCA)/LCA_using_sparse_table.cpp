@@ -38,7 +38,7 @@ typedef unsigned long long int ull;
 ll dx[] = {0,0,1,-1,2,2,-2,-2,1,-1,1,-1};
 ll dy[] = {1,-1,0,0,1,-1,1,-1,2,2,-2,-2};
 using namespace std;
-#define N 20010
+#define N 200100
 vector<ll>edj[N];
 bool color[N];
 ll label[N];
