@@ -25,7 +25,7 @@ void seive(){
 }
 ll ma=0,cn=0;
 //unordered_map<ll,ll>mp;
-void factorization(ll n,ll val){
+void factorization(ll n,ll val,ll num){
     if(n==1){
        cn+=val;return;
     }
@@ -37,7 +37,7 @@ void factorization(ll n,ll val){
             while(n%i==0)
                 n/=i;
         }
-        if(i>n||i>sq)break;
+        if(i>n||i>sq||num * i >= 1.5e7)break;
     }
     if(n>1){
         fact[n]+=val;
@@ -65,7 +65,7 @@ int main(){
     for(ll i:V){
             ll val=ck_ar[i];
             if(val){
-                factorization(i,val);ck_ar[i]=0;
+                factorization(i,val,n);ck_ar[i]=0;
             }
     }
     n-=cn;
