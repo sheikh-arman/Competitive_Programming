@@ -3,7 +3,7 @@
     University of Barisal
 
     Problem : Longest Common Subsequence
-    Solution : Dynamic Programming
+    Solution : Dynamic Programming(Recursive)
  */
 #include<bits/stdc++.h>
 using namespace std;
