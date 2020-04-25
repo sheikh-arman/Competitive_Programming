@@ -2,7 +2,7 @@
     Author : SK Arman Hossain
     University of Barishal
     Problem:
-    Solution:Strongly Connected Conponent
+    Solution:Strongly Connected Conponent(Kosaraju_Algorithm)
 */
 #include<bits/stdc++.h>
 using namespace std;
