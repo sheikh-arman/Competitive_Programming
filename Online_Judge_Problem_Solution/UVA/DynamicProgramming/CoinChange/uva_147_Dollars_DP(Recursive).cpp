@@ -36,7 +36,7 @@ int main()
     ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
 //   freopen("1input.txt","r",stdin);
 //   freopen("1output.txt","w",stdout);
-    for(ll i=0; i<=30000; i++)
+    for(ll i=0; i<=30000; i+=5)
     {
         for(ll j=0; j<=11; j++)
             dp[i][j]=-1;
