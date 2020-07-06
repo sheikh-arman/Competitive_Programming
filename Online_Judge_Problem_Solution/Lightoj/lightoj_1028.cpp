@@ -23,9 +23,9 @@ int dy[]= {1,1,0,0};
 typedef long long int ll;
 typedef unsigned long long int ull;
 using namespace std;
-const int N1=1000101;
+const int N1=1000011;
 vector<int>prime_list;
-int prime_ck[N1];
+int prime_ck[N1+1];
 void sieve(){
     prime_list.push_back(2);
     for(int i=3;i<N1;i+=2){
@@ -38,21 +38,23 @@ void sieve(){
     }
 }
 int ck(ll n){
-    int sq=sqrt(n),cnt=0;
+    int sq=sqrt(n)+1,cnt=0;
     int ans=1;
     for(int i=0;prime_list[i]<=sq&&prime_list[i]<=n;i++){
             int c=0;
-        while(n%prime_list[i]==0){
-            cnt++;n/=prime_list[i];c++;
+            if(n%prime_list[i]==0){               while(n%prime_list[i]==0){
+            n/=prime_list[i];c++;
         }
+      sq=sqrt(n);
     if(c){
         ans*=c+1;
+}
     }
     }
     if(n>1)ans*=2;
     return ans;
 }
-
+ 
 int main()
 {
     ///freopen("input.txt","r",stdin);
@@ -66,6 +68,5 @@ int main()
         int ans=ck(n);
         printf("Case %d: %d\n",++cnt,ans-1);
     }
-
 ///*****************************  ALHAMDULILLAH  *****************************/
 }
