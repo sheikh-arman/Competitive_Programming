@@ -3,7 +3,7 @@
     University of Barisal
 
     Problem :
-    Solution :
+    Solution : DFS + DSU
  */
 #include<bits/stdc++.h>
 typedef long long int ll;
@@ -23,7 +23,6 @@ void dfs(ll node)
         {
             color[i]=true;
             ar[i]+=ar[node];
-            //cout<<i<<" "<<node<<"\n";
             dfs(i);
         }
     }
