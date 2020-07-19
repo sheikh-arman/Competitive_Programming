@@ -10,7 +10,7 @@ using namespace std;
 #define PB push_back
 typedef long long int ll;
 ll n,sum;
-ll chache[110][50000];
+ll chache[110][26000];
 vector<ll>V;
 ll dp(ll i,ll val){
     if(i>=n){
@@ -34,6 +34,11 @@ int main()
     //freopen("1output.txt","w",stdout);
     ll tcase=1;
     //sf1(tcase);
+    for(ll i=0;i<=100;i++){
+        for(ll j=0;j<=25100;j++){
+            chache[i][j]=-1;
+        }
+    }
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
@@ -47,7 +52,7 @@ int main()
             sum+=a;
         }
         for(ll i=0;i<=n;i++){
-            for(ll j=0;j<=25100;j++){
+            for(ll j=0;j<=(sum/2)+500;j++){
                 chache[i][j]=-1;
             }
         }
