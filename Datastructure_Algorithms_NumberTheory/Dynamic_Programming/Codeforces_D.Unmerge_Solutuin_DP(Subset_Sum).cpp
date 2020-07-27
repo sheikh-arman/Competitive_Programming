@@ -3,7 +3,7 @@
     Sk arman Hossain
     University of Barisal
 
-    Problem :
+    Problem : codeforces 1382D
     Solution : DP(Subset Sum)
  */
 #include<bits/stdc++.h>
