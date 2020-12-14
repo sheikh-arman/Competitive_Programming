@@ -110,7 +110,7 @@ int main()
     seive();
     //ios_base::sync_with_stdio(false);cin.tie(0);
     //freopen("1input.txt","r",stdin);
-//    freopen("1output.txt","w",stdout);
+    //freopen("1output.txt","w",stdout);
     ll tcase=1;
     //sf1(tcase);
     //cin>>tcase;
@@ -162,6 +162,19 @@ ans impossible
 ans 16
 18 24 432
 ans 432
+6
+3 4 24
+3 4 48
+4 8 24
+4 8 12
+2 2 24
+18 24 432
+Case 1: 8
+Case 2: 16
+Case 3: 3
+Case 4: impossible
+Case 5: 24
+Case 6: 432
 */
 
 
