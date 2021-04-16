@@ -5,12 +5,16 @@ typedef long long int ll;
 #define VST(V) sort(V.begin(),V.end())
 #define VSTrev(V) sort(V.begin(),V.end(),greater<long long int>())
 #define fast ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
+#define  base1 129
+#define  base2 137
+#define  MOD1  1479386893
+#define  MOD2  1928476349
 vector<ll>for_hash1;
 vector<ll>power_p;
 void pow_p()
 {
     ll POWER=1;
-    ll P=31,M=1e9+7;
+    ll P=base1,M=MOD1;
     power_p.PB(POWER);
     for(ll i=1; i<=1000000; i++)
     {
@@ -20,7 +24,7 @@ void pow_p()
 }
 ll hash1(string S,ll status)
 {
-    ll P=31,M=1e9+7;
+    ll P=base1,M=MOD1;
     ll SIZ=S.size();
     ll ANS=0;
     for(ll i=0; i<SIZ; i++)
@@ -34,7 +38,7 @@ ll hash1(string S,ll status)
 }
 ll seg_hash(ll l,ll r)
 {
-    ll P=31,M=1e9+7;
+    ll P=base1,M=MOD1;
     ll ans=for_hash1[r];
     if(l>0)
     {
@@ -51,7 +55,7 @@ int main()
     //freopen("1input.txt","r",stdin);
     //fast;
     ll tcase=1;
-    cin>>tcase;
+    //cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
         for_hash1.clear();
@@ -61,4 +65,3 @@ int main()
     }
     return 0;
 }
-
