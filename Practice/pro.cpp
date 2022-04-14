@@ -15,7 +15,6 @@ typedef long long int ll;
 #define  MOD2  1928476349
 #define MAX 2000010
 #define T(n) printf("test : %d\n",n);
-
 int main()
 {
     //freopen("1input.txt","r",stdin);
