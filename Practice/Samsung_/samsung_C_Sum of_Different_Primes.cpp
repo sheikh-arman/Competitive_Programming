@@ -15,8 +15,10 @@ typedef long long int ll;
 #define  MOD2  1928476349
 #define MAX 1125
 #define T(n) printf("test : %d\n",n);
-ll mem[1130][16];
+ll mem[195][1132][16];
 bitset<1130>prime;
+vector<ll>prime_list;
+ll n,k;
 void seive()
 {
     prime.set();
@@ -26,10 +28,12 @@ void seive()
     {
         prime[i]=0;
     }
+    prime_list.PB(2);
     for(ll i=3; i<=1125; i+=2)
     {
         if(prime[i])
         {
+            prime_list.PB(i);
             for(ll j=i*i; j<=1125; j+=2*i)
             {
                 prime[j]=0;
@@ -37,56 +41,64 @@ void seive()
         }
     }
 }
-void solve_dp()
+ll dp(ll pos,ll current,ll siz)
 {
-    for(ll i=0; i<=MAX; i++)
+    if(pos>=(ll)prime_list.size())
     {
-        for(ll j=0; j<15; j++)
+        return 0;
+    }
+    if(prime_list[pos]>n)
+    {
+        if(current==0&&siz==k)
         {
-            mem[i][j]=0;
+            return 1;
         }
+        return 0;
     }
-    for(ll i=0; i<=MAX; i++)
+    if(current<=0)
     {
-        mem[i][1]=prime[i];
-    }
-    for(ll j=2; j<=3; j++)
-    {
-        for(ll i=1; i<=25; i++)
+        if(current==0&&siz==k)
         {
-            cout<<i<<" x:\n";
-            for(ll k=1; k<i; k++)
-            {
-                if(mem[k][j-1]>0&&prime[i-k]==1)
-                {
-                    if(prime[k]==1&&i-k==k)continue;
-                    mem[i][j]+=mem[k][j-1];
-                    cout<<k<<" "<<i-k<<" f\n";
-                }
-            }
-             cout<<mem[i][j]<<" x2\n";
-
+            return 1;
         }
+        return 0;
     }
+    if(mem[pos][current][siz]!=-1)
+    {
+        return mem[pos][current][siz];
+    }
+    ll ans=0;
+    ans+=dp(pos+1,current,siz);
+    if(siz<k)
+    ans+=dp(pos+1,current-prime_list[pos],siz+1);
+    return mem[pos][current][siz]=ans;
 }
 int main()
 {
     seive();
-    solve_dp();
     //freopen("1input.txt","r",stdin);
     //freopen("1output.txt","w",stdout);
-    //fast;
+    fast;
     ll tcase=1;
     //cin>>tcase;
     for(ll test=1; ; test++)
     {
-        ll n,k;
         cin>>n>>k;
         if(n==0&&k==0)
         {
             break;
         }
-        cout<<mem[n][k]<<"\n";
+        for(ll i=0; i<=190; i++)
+        {
+            for(ll j=0; j<=n; j++)
+            {
+                for(ll z=0;z<=k;z++){
+                    mem[i][j][z]=-1;
+                }
+            }
+        }
+        ll ans=dp(0,n,0);
+        cout<<ans<<"\n";
     }
     return 0;
 }
