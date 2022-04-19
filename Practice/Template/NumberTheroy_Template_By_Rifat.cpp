@@ -305,5 +305,6 @@ vector<ll>catNum(ll n, ll mod)
     }
     return cNum;
 }
-int main(){
+int main()
+{
 }
