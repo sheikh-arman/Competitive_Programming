@@ -5,6 +5,11 @@ typedef long long ll;
 #define PB push_back
 //DFS
 #define max_array_size 200010
+ll dx[]= {1,-1,0,0,1,-1,-1,1};
+ll dy[]= {0,0,1,-1,1,1,-1,-1};
+ll knx[]= {2,2,1,-1,-2,-2,1,-1};
+ll kny[]= {1,-1,2,2,1,-1,-2,-2};
+
 vector<ll>edj[max_array_size];
 bitset<max_array_size>color;
 /// stack<ll>stk; //uncomment for top sort;

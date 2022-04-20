@@ -15,6 +15,12 @@ typedef long long int ll;
 #define  MOD2  1928476349
 #define MAX 2000010
 #define T(n) printf("test : %d\n",n);
+ll dx[]= {1,-1,0,0,1,-1,-1,1};
+ll dy[]= {0,0,1,-1,1,1,-1,-1};
+ll knx[]= {2,2,1,-1,-2,-2,1,-1};
+ll kny[]= {1,-1,2,2,1,-1,-2,-2};
+
+
 int main()
 {
     //freopen("1input.txt","r",stdin);
