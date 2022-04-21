@@ -15,11 +15,6 @@ typedef long long int ll;
 #define  MOD2  1928476349
 #define MAX 2000010
 #define T(n) printf("test : %d\n",n);
-ll dx[]= {1,-1,0,0,1,-1,-1,1};
-ll dy[]= {0,0,1,-1,1,1,-1,-1};
-ll knx[]= {2,2,1,-1,-2,-2,1,-1};
-ll kny[]= {1,-1,2,2,1,-1,-2,-2};
-
 
 int main()
 {
@@ -28,27 +23,39 @@ int main()
     fast;
     ll tcase=1;
     cin>>tcase;
-
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,k;
-        cin>>n>>k;
-        vector<ll>V;
-        for(ll i=0; i<n; i++)
+        ll n;
+        cin>>n;
+        ll num=n;
+        n-=1;
+        n%=4;
+        if(n==0)
         {
-            ll a;
-            cin>>a;
-            V.PB(a);
+            n=4;
         }
-        VST(V);
-        ll ans=0;
-        ans+=(k/V[0])+(k%V[0]!=0);
-        ans=max(ans,n);
-        cout<<ans<<"\n";
+        if(n==1)
+        {
+            cout<<"3\n";
+        }
+        else if(n==2)
+        {
+            cout<<"3\n";
+        }
+        else if(n==3)
+        {
+            cout<<num+3<<"\n";
+        }
+        else
+        {
+            cout<<num<<"\n";
+        }
+
+
+
     }
     return 0;
 }
-
 
 
 

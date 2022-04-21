@@ -1,3 +1,4 @@
+
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long int ll;
@@ -28,27 +29,37 @@ int main()
     fast;
     ll tcase=1;
     cin>>tcase;
-
     for(ll test=1; test<=tcase; test++)
     {
         ll n,k;
         cin>>n>>k;
-        vector<ll>V;
-        for(ll i=0; i<n; i++)
+        if(k==0)
         {
-            ll a;
-            cin>>a;
-            V.PB(a);
+            ll init=4;
+            init+=n;
+            init%=4;
+            if(init==0)
+            {
+                cout<<"Off\n";
+            }
+            else
+            {
+                cout<<"On\n";
+            }
         }
-        VST(V);
-        ll ans=0;
-        ans+=(k/V[0])+(k%V[0]!=0);
-        ans=max(ans,n);
-        cout<<ans<<"\n";
+        else
+        {
+            if(n%4==0){
+                cout<<"On\n";
+            }
+            else{
+                cout<<"Ambiguous\n";
+            }
+        }
+
     }
     return 0;
 }
-
 
 
 

@@ -15,12 +15,6 @@ typedef long long int ll;
 #define  MOD2  1928476349
 #define MAX 2000010
 #define T(n) printf("test : %d\n",n);
-ll dx[]= {1,-1,0,0,1,-1,-1,1};
-ll dy[]= {0,0,1,-1,1,1,-1,-1};
-ll knx[]= {2,2,1,-1,-2,-2,1,-1};
-ll kny[]= {1,-1,2,2,1,-1,-2,-2};
-
-
 int main()
 {
     //freopen("1input.txt","r",stdin);
@@ -28,23 +22,23 @@ int main()
     fast;
     ll tcase=1;
     cin>>tcase;
-
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,k;
-        cin>>n>>k;
-        vector<ll>V;
-        for(ll i=0; i<n; i++)
+        ll A,B;
+        cin>>A>>B;
+        ll gcd=__gcd(A,B);
+        if(A==1||B==1)
         {
-            ll a;
-            cin>>a;
-            V.PB(a);
+            cout<<"-1\n";
         }
-        VST(V);
-        ll ans=0;
-        ans+=(k/V[0])+(k%V[0]!=0);
-        ans=max(ans,n);
-        cout<<ans<<"\n";
+        else
+        {
+            if(gcd>1){
+                cout<<"0\n";
+            }
+            else
+            cout<<"1\n";
+        }
     }
     return 0;
 }

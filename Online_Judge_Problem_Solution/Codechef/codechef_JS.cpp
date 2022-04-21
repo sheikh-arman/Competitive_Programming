@@ -135,7 +135,7 @@ int main()
             ll siz=cumulative.size();
             for(ll i=0; i<siz; i++)
             {
-                // cout<<cumulative[i]<<" "<<status[i]<<" "<<pos[i]<<" v\n";
+               // cout<<cumulative[i]<<" "<<status[i]<<" "<<pos[i]<<" v\n";
                 if(status[i]==val)
                 {
                     ll pos1=0;
