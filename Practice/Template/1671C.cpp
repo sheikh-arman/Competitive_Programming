@@ -55,7 +55,6 @@ int main()
                 ans+=1;
                 ll dif=k-V[i];
                 ans+=(dif/cnt);
-                //cout<<i<<" "<<dif/cnt<<" x\n";
                 cnt++;
             }
             else

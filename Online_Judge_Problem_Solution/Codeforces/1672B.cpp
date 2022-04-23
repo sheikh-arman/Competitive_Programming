@@ -19,52 +19,61 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
-ll mem[(1<<18)+1000];
-ll s_tree[(1<<18)+1000];
-ll num;
-string s;
-ll segmentTree(ll n,ll b,ll e)
-{
-    if(b==e)
-    {
-        s_tree[n]=1;
-        return 1;
-    }
-    ll l=n*2;
-    ll r=n*2+1;
-    ll mid=(b+e)/2;
-    ll p=segmentTree(l,b,mid);
-    ll q=segmentTree(r,mid+1,e);
-    s_tree[n]=s_tree[l]|s_tree[r];
-    if(s[l]!=s[r])
-    {
-        s_tree[n]=1;
-        return p+q;
-    }
-    else
-    {
-        if(s_tree[n])
-            return p+q;
-        else return p;
-    }
-}
 int main()
 {
     //freopen("1input.txt","r",stdin);
     //freopen("1output.txt","w",stdout);
     fast;
     ll tcase=1;
-    //cin>>tcase;
+    cin>>tcase;
+
     for(ll test=1; test<=tcase; test++)
     {
-        cin>>num;
+        ll n;
+        string s;
         cin>>s;
-        ll node=pow(2,num-1);
-        ll ans=segmentTree(1,1,node);
-        cout<<ans<<"\n";
+        n=s.size();
+        ll ck=1;
+        if(s[0]!='A'||s[n-1]!='B')
+        {
+            NO;
+            continue;
+        }
+        ll pos=n-1;
+        stack<char>stk;
+        for(ll i=0; i<n; i++)
+        {
+            if(s[i]=='A')
+            {
+                stk.push('A');
+            }
+            if(s[i]=='B')
+            {
+                if(stk.empty())
+                {
+                    ck=0;
+                    break;
+                }
+                else
+                {
+                    stk.pop();
+                }
+            }
+        }
+        if(ck)
+        {
+            YES;
+        }
+        else
+        {
+            NO;
+        }
+
+
     }
     return 0;
 }
+
 
 
 
