@@ -24,11 +24,13 @@ ll status;
 ll r,c;
 ll checking(ll x,ll y,ll ck)
 {
+    cout<<x<<" "<<y<<" "<<ck<<" "<<x+dx[ck]<<" "<<dy[ck]+y<<" c\n";
     if(x+dx[ck]>=0&&x+dx[ck]<r&&dy[ck]+y>=0&&dy[ck]+y<c)
     {
-        cout<<x<<" "<<y<<" "<<ck<<" c\n";
-        if(str[x+dx[ck]][y+dy[ck]]=='.')
+        cout<<" checking \n";
+        if(str[x+dx[ck]][y+dy[ck]]=='*')
         {
+            cout<<x+dx[ck]<<" "<<y+dy[ck]<<" "<<str[x+dx[ck]][y+dy[ck]]<<" cc\n";
             return 1;
         }
         else
@@ -44,21 +46,20 @@ ll checking(ll x,ll y,ll ck)
 string ans;
 void dfs(ll x,ll y, ll prev)
 {
+    cout<<x<<" "<<y<<" "<<prev<<" ck\n";
     if(prev==0)
     {
-        T(prev)
+        //T(prev)
         ll st;
         st=checking(x,y,3);
         if(st)
         {
             ans+='W';
-            str[x-1][y]='#';
-            dfs(x-1,y,3);
-            T(3);
+            str[x][y-1]='#';
+            dfs(x,y-1,3);
             return;
         }
         st=checking(x,y,0);
-        cout<<st<<" hi\n";
         if(st)
         {
             ans+='S';
@@ -78,29 +79,29 @@ void dfs(ll x,ll y, ll prev)
     }
     else if(prev==1)
     {
-        ll st=checking(x,y,1);
-        st=checking(x,y,3);
+        ll st;
+        st=checking(x,y,2);
         if(st)
         {
-            ans+='W';
-            str[x-1][y]='#';
-            dfs(x-1,y,3);
+            ans+='E';
+            str[x][y+1]='#';
+            dfs(x,y+1,2);
             return;
         }
         st=checking(x,y,1);
         if(st)
         {
             ans+='N';
-            str[x][y-1]='#';
-            dfs(x,y-1,1);
+            str[x-1][y]='#';
+            dfs(x-1,y,1);
             return;
         }
-        st=checking(x,y,2);
+        st=checking(x,y,3);
         if(st)
         {
-            ans+='S';
-            str[x+1][y]='#';
-            dfs(x+1,y,2);
+            ans+='W';
+            str[x][y-1]='#';
+            dfs(x,y-1,3);
             return;
         }
     }
@@ -118,17 +119,17 @@ void dfs(ll x,ll y, ll prev)
         st=checking(x,y,2);
         if(st)
         {
-            ans+='S';
-            str[x+1][y]='#';
-            dfs(x+1,y,2);
+            ans+='E';
+            str[x][y+1]='#';
+            dfs(x,y+1,2);
             return;
         }
         st=checking(x,y,1);
         if(st)
         {
             ans+='N';
-            str[x][y-1]='#';
-            dfs(x,y-1,1);
+            str[x-1][y]='#';
+            dfs(x-1,y,1);
             return;
         }
     }
@@ -147,16 +148,16 @@ void dfs(ll x,ll y, ll prev)
         if(st)
         {
             ans+='N';
-            str[x][y-1]='#';
-            dfs(x,y-1,1);
+            str[x-1][y]='#';
+            dfs(x-1,y,1);
             return;
         }
         st=checking(x,y,3);
         if(st)
         {
             ans+='W';
-            str[x-1][y]='#';
-            dfs(x-1,y,3);
+            str[x][y-1]='#';
+            dfs(x,y-1,3);
             return;
         }
     }
@@ -178,18 +179,21 @@ int main()
         ll cnt=0;
         r*=2;
         c*=2;
+        ll total_star=0;
         for(ll i=0; i<r; i+=2)
         {
             cin>>s;
             cnt=0;
             for(ll j=0; j<c; j+=2)
             {
-                if(s[cnt++]=='.')
+                //cout<<cnt<<" "<<s[cnt]<<" why?\n";
+                if(s[cnt]!='#')
                 {
-                    str[i][j]='.';
-                    str[i+1][j]='.';
-                    str[i][j+1]='.';
-                    str[i+1][j+1]='.';
+                    total_star+=1;
+                    str[i][j]='*';
+                    str[i+1][j]='*';
+                    str[i][j+1]='*';
+                    str[i+1][j+1]='*';
                 }
                 else
                 {
@@ -198,21 +202,27 @@ int main()
                     str[i][j+1]='#';
                     str[i+1][j+1]='#';
                 }
+                cnt++;
             }
         }
-        dfs(0,0,0);
-        if(status)
+        for(ll i=0; i<r; i++)
         {
-            cout<<"Case #"<<test<<": "<<ans<<"\n";
+            for(ll j=0; j<c; j++)
+            {
+                cout<<str[i][j]<<" ";
+            }
+            cout<<" xx\n";
+        }
+        dfs(0,0,0);
+        cout<<ans;
+        if((ll)ans.size()==4*total_star)
+        {
+            cout<<" Case #"<<test<<": "<<ans<<"\n";
         }
         else
         {
-            cout<<"Case #"<<test<<": IMPOSSIBLE\n";
+            cout<<" Case #"<<test<<": IMPOSSIBLE\n";
         }
     }
     return 0;
 }
-
-
-
-
