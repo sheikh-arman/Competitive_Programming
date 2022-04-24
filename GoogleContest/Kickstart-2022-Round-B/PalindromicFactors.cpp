@@ -19,6 +19,17 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
+ll ck(ll n)
+{
+    ll tm=n;
+    ll sum=0;
+    while(tm)
+    {
+        sum=(sum*10)+(tm%10);
+        tm/=10;
+    }
+    return (sum==n);
+}
 int main()
 {
     //freopen("1input.txt","r",stdin);
@@ -29,10 +40,33 @@ int main()
 
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,sum=0;
+        ll n;
+        cin>>n;
+        ll sq=sqrt(n+1);
+        ll ans=0;
+        for(ll i=1; i<=sq; i++)
+        {
+            ll num2=n/i;
+            if(n%i==0)
+            {
+                //cout<<i<<" "<<n/i<<" hi\n";
+                if(ck(i))
+                {
+                    ans++;
+                    //  cout<<i<<" x\n";
+                }
+                if(i<num2)
+                {
+                    if(ck(num2))
+                    {
+                        ans++;
+                        // cout<<num2<<" x\n";
+                    }
+                }
+            }
 
-
-
+        }
+        cout<<"Case #"<<test<<": "<<ans<<"\n";
     }
     return 0;
 }
