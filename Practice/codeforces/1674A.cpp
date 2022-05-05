@@ -28,41 +28,16 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n;
-        cin>>n;
-        vector<ll>even,odd;
-        for(ll i=0; i<n; i++)
-        {
-            ll a;
-            cin>>a;
-            if(a%2==0)
-            {
-                even.PB(a);
-            }
-            else
-            {
-                odd.PB(a);
-            }
+        ll x,y;
+        cin>>x>>y;
+        if(y%x!=0){
+            cout<<"0 0\n";continue;
         }
-        ll eve=0;
-        ll od=0;
-        ll ev_mx=8;
-        ll od_mx=-1;
-        for(ll i=0; i<n/2; i++)
-        {
-            od+=abs(odd[i]-od_mx);
-            eve+=abs(even[i]-ev_mx);
-        }
-        if(od>eve)swap(eve,od);
-        ll dif=abs(eve-od);
-        if(eve%od==0||dif%4==0)
-        {
-            YES;
-        }
-        else
-        {
-            NO;
-        }
+        ll m=y/x;
+        cout<<"1 "<<m<<"\n";
+
+
+
     }
     return 0;
 }
