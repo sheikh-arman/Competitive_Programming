@@ -26,16 +26,13 @@ int main()
     fast;
     ll tcase=1;
     cin>>tcase;
+
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,x,y;
-        cin>>n>>x>>y;
-        ll ans=(n+n)-2;
-        ans+=min(x,y)-1;
-        ans+=min(n-x+1,n-y+1)-1;
-        ans+=min(x,n-y+1)-1;
-        ans+=min(n-x+1,y)-1;
-        cout<<ans<<"\n";
+        ll n,sum=0;
+
+
+
     }
     return 0;
 }

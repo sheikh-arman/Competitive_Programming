@@ -26,15 +26,23 @@ int main()
     fast;
     ll tcase=1;
     cin>>tcase;
+
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,x,y;
-        cin>>n>>x>>y;
-        ll ans=(n+n)-2;
-        ans+=min(x,y)-1;
-        ans+=min(n-x+1,n-y+1)-1;
-        ans+=min(x,n-y+1)-1;
-        ans+=min(n-x+1,y)-1;
+        ll n;
+        cin>>n;
+        map<ll,ll>mp;
+        set<ll>st;
+        for(ll i=0;i<n;i++){
+            ll a;
+            cin>>a;
+            st.insert(a);
+            mp[a]++;
+        }
+        ll ans=0;
+        for(ll i:st){
+            ans=max(ans,(i+mp[i])-1);
+        }
         cout<<ans<<"\n";
     }
     return 0;
