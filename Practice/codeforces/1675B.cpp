@@ -31,18 +31,24 @@ int main()
         ll n,sum=0;
         cin>>n;
         vector<ll>V;
-        for(ll i=0;i<n;i++){
+        for(ll i=0; i<n; i++)
+        {
             ll a;
             cin>>a;
             V.PB(a);
         }
         ll ans=0;
-        for(ll i=n-2;i>=0;i--){
-            while(V[i]>=V[i+1]&&V[i]){
-                ans++;V[i]/=2;
+        for(ll i=n-2; i>=0; i--)
+        {
+            while(V[i]>=V[i+1]&&V[i])
+            {
+                ans++;
+                V[i]/=2;
             }
-            if(V[i]>=V[i+1]){
-                ans=-1;break;
+            if(V[i]>=V[i+1])
+            {
+                ans=-1;
+                break;
             }
         }
         cout<<ans<<"\n";
