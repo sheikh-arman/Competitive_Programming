@@ -2,9 +2,9 @@
     Sk arman Hossain
     University of Barisal
 
-    Problem :
-    Solution :
-    Date:
+    Problem : Codeforces 1676H2
+    Solution : Policy Based Data Structure
+    Date: 12-5-22
  */
 
 #include<bits/stdc++.h>
@@ -44,12 +44,22 @@ int main()
     for(ll test=1; test<=tcase; test++)
     {
         ll n,sum=0;
-
-
-
+        cin>>n;
+        policy_set V;
+        for(ll i=0;i<n;i++){
+            ll a;
+            cin>>a;
+            ll pos=V.order_of_key(a);
+            sum+=i-pos;
+            V.insert(a);
+            //cout<<i+1<<" "<<i-pos<<" "<<sum<<" x\n";
+            //VST(V);
+        }
+        cout<<sum<<"\n";
     }
     return 0;
 }
+
 
 
 
