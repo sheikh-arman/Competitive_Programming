@@ -120,7 +120,7 @@ int main()
 {
     //freopen("1input.txt","r",stdin);
     //freopen("1output.txt","w",stdout);
-    //fast;
+    fast;
     ll tcase=1;
     //cin>>tcase;
     for(ll test=1; test<=tcase; test++)
