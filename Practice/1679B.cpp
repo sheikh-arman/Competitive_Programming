@@ -4,7 +4,7 @@
 
     Problem :
     Solution :
-    Date:
+    Date: None
  */
 
 #include<bits/stdc++.h>
