@@ -22,7 +22,6 @@ int main(){
             val = A[i] - val;
             int idx = lower_bound(v.begin(), v.end(), val) - v.begin() + 1;
             dp[i][j] = max(dp[i -1][j], dp[idx][k - j] + (A[i] - A[idx] + 1));
-            cout << i <<"  "<< j <<" " << dp[i][j]<< endl;
         }
     }
     cout << p - dp[n][k] + 1<< endl;
