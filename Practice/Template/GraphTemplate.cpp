@@ -4,12 +4,12 @@ typedef long long ll;
 #define fast ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
 #define PB push_back
 //DFS
-#define max_array_size 200010
+
 ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
-
+#define max_array_size 200010
 vector<ll>edj[max_array_size];
 bitset<max_array_size>color;
 /// stack<ll>stk; //uncomment for top sort;
@@ -149,6 +149,69 @@ void floyed(ll node)
                     floyed_weight[i][j] = floyed_weight[i][k] + floyed_weight[k][j];
                 }
             }
+        }
+    }
+}
+/// Articulation Point
+vector<ll>edj[10010];
+ll start[10010];
+ll en[10010],cnt;
+bitset<10010>color,ap;
+void dfs_ap(ll node,ll parent)
+{
+    ll child=0;
+    start[node]=cnt;
+    en[node]=cnt++;
+    ll siz=edj[node].size();
+    color[node]=true;
+    for(ll i=0; i<siz; i++)
+    {
+        ll tm=edj[node][i];
+        if(color[tm]==false)
+        {
+            child++;
+            color[tm]=true;
+            dfs_ap(tm,node);
+            en[node]=min(en[tm],en[node]);
+            if (parent == -1 && child > 1)
+            {
+                ap[node] = true;
+            }
+            if(parent != -1&& start[node]<=en[tm])
+            {
+                ap[node]=true;
+            }
+        }
+        else if(tm!=parent)
+        {
+            en[node]=min(start[tm],en[node]);
+        }
+    }
+}
+/// bridge
+vector<ll>edj[100010];
+vector<pair<ll,ll>>V;
+bitset<100010>color;
+ll start[100010],en[100010];
+ll cnt;
+void bridge(ll node,ll parent){
+    color[node]=true;
+    start[node]=cnt;
+    en[node]=cnt++;
+    for(ll i:edj[node]){
+        if(color[i]==false){
+            color[i]=true;
+            bridge(i,node);
+            start[node]=min(start[node],start[i]);
+            if(en[node]<start[i]){
+                    ll a=node,b=i;
+            if(a>b)swap(a,b);
+                V.push_back({a,b});
+            }
+        }
+        else{
+            if(parent!=i)
+            start[node]=min(start[node],en[i]);
         }
     }
 }
