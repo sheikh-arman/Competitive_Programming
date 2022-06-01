@@ -36,7 +36,6 @@ ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
 int main()
 {
-    //cout<<LONG_LONG_MIN<<" x\n";
     //freopen("1input.txt","r",stdin);
     //freopen("1output.txt","w",stdout);
     fast;
@@ -44,43 +43,63 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n;
-        cin>>n;
-        vector<ll>V;
-        ll mx=LONG_LONG_MIN,ck=1;
+        ll n,k;
+        cin>>n>>k;
+        string s;
+        cin>>s;
+        ll start=-1,en=0,ck=1,res=0;
         for(ll i=0; i<n; i++)
         {
-            ll a;
-            cin>>a;
-            V.PB(a);
-        }
-        ll sum=0;
-        for(ll i:V)
-        {
-            sum+=i;
-            mx=max(i,mx);
-            if(sum<=0)
+            if(i<n-1)
             {
-                mx=LONG_LONG_MIN;
-                sum=0;
+                if(s[i]=='0'&&s[i+1]=='1')res+=1;
+                if(s[i]=='1'&&s[i+1]=='0')res+=10;
+                if(s[i]=='1'&&s[i+1]=='1')res+=11;
             }
-            else
+            if(s[i]=='1')
             {
-                if(sum>mx)
+                if(ck)
                 {
-                    ck=0;
-                    break;
+                    start=i;
                 }
+                else
+                {
+                    en=i;
+                }
+                ck=0;
             }
         }
-        if(ck)
+        if((s[0]=='1'&&s[n-1]=='1')||start==-1||k==0)
         {
-            YES;
+            cout<<res<<"\n";
+            continue;
         }
-        else
+       // cout<<res<<" x\n";
+        ll lagbe=0,check=1;
+        if(s[n-1]=='0')
         {
-            NO;
+            if(en==0)en=start;
+            lagbe=(n-1)-en;
+            if(lagbe<=k)
+            {
+                res-=10;
+                if(en==0)res+=1;
+                if(en==start)
+                {
+                    check=0;
+                }
+                k-=lagbe;
+            }
         }
+        if(s[0]=='0'&&check)
+        {
+            if(start<=k&&start<n-1)
+            {
+                res-=1;
+
+            }
+        }
+        cout<<res<<"\n";
     }
     return 0;
 }

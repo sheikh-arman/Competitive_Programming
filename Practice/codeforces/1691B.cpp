@@ -36,7 +36,6 @@ ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
 int main()
 {
-    //cout<<LONG_LONG_MIN<<" x\n";
     //freopen("1input.txt","r",stdin);
     //freopen("1output.txt","w",stdout);
     fast;
@@ -47,39 +46,54 @@ int main()
         ll n;
         cin>>n;
         vector<ll>V;
-        ll mx=LONG_LONG_MIN,ck=1;
         for(ll i=0; i<n; i++)
         {
             ll a;
             cin>>a;
             V.PB(a);
         }
-        ll sum=0;
-        for(ll i:V)
+        if(n==1){
+            cout<<"-1\n";continue;
+        }
+        ll ck=1;
+        ll ar[n+2];
+        for(ll i=0; i<n; i++)ar[i]=0;
+        for(ll i=0; i<n-1; i++)
         {
-            sum+=i;
-            mx=max(i,mx);
-            if(sum<=0)
+            ll current=i,jabo=i;
+            while(jabo<n&&V[jabo]==V[i])
             {
-                mx=LONG_LONG_MIN;
-                sum=0;
+                jabo++;
+            }
+            if(i==jabo-1)
+            {
+                ck=0;
+                break;
             }
             else
             {
-                if(sum>mx)
+                for(ll j=i; j<jabo; j++)
                 {
-                    ck=0;
-                    break;
+                    ar[j]=j+2;
                 }
+                ar[jabo-1]=i+1;
             }
+            i=jabo-1;
+        }
+        if(V[n-1]!=V[n-2]){
+            ck=0;
         }
         if(ck)
         {
-            YES;
+            for(ll i=0; i<n; i++)
+            {
+                cout<<ar[i]<<" ";
+            }
+            cout<<"\n";
         }
         else
         {
-            NO;
+            cout<<"-1\n";
         }
     }
     return 0;

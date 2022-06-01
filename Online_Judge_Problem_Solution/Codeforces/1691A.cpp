@@ -36,7 +36,6 @@ ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
 int main()
 {
-    //cout<<LONG_LONG_MIN<<" x\n";
     //freopen("1input.txt","r",stdin);
     //freopen("1output.txt","w",stdout);
     fast;
@@ -46,41 +45,18 @@ int main()
     {
         ll n;
         cin>>n;
-        vector<ll>V;
-        ll mx=LONG_LONG_MIN,ck=1;
-        for(ll i=0; i<n; i++)
-        {
+        ll odd=0;
+        for(ll i=0;i<n;i++){
             ll a;
             cin>>a;
-            V.PB(a);
-        }
-        ll sum=0;
-        for(ll i:V)
-        {
-            sum+=i;
-            mx=max(i,mx);
-            if(sum<=0)
-            {
-                mx=LONG_LONG_MIN;
-                sum=0;
-            }
-            else
-            {
-                if(sum>mx)
-                {
-                    ck=0;
-                    break;
-                }
+            if(a%2){
+                odd++;
             }
         }
-        if(ck)
-        {
-            YES;
-        }
-        else
-        {
-            NO;
-        }
+        cout<<(ll)min(odd,n-odd)<<"\n";
+
+
+
     }
     return 0;
 }
