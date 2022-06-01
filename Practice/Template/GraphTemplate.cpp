@@ -194,27 +194,88 @@ vector<pair<ll,ll>>V;
 bitset<100010>color;
 ll start[100010],en[100010];
 ll cnt;
-void bridge(ll node,ll parent){
+void bridge(ll node,ll parent)
+{
     color[node]=true;
     start[node]=cnt;
     en[node]=cnt++;
-    for(ll i:edj[node]){
-        if(color[i]==false){
+    for(ll i:edj[node])
+    {
+        if(color[i]==false)
+        {
             color[i]=true;
             bridge(i,node);
             start[node]=min(start[node],start[i]);
-            if(en[node]<start[i]){
-                    ll a=node,b=i;
-            if(a>b)swap(a,b);
+            if(en[node]<start[i])
+            {
+                ll a=node,b=i;
+                if(a>b)swap(a,b);
                 V.push_back({a,b});
             }
         }
-        else{
+        else
+        {
             if(parent!=i)
-            start[node]=min(start[node],en[i]);
+                start[node]=min(start[node],en[i]);
         }
     }
 }
+
+/*   Black Box    DMST*/
+struct Edge
+{
+    int x, y, w;
+};
+int dmst(int N, vector<Edge> E, int root)
+{
+    const int oo = 1e9;
+    vector<int> cost(N), Back(N), label(N), bio(N);
+    int ret = 0;
+
+    for (;;)
+    {
+        for(int i=0; i<N; i++) cost[i] = oo;
+        for (auto e : E)
+        {
+            if (e.x == e.y) continue;
+            if (e.w < cost[e.y]) cost[e.y] = e.w, Back[e.y] = e.x;
+        }
+        cost[root] = 0;
+        for(int i=0; i<N; i++) if (cost[i] == oo) return -1;
+        for(int i=0; i<N; i++) ret += cost[i];
+
+        int K = 0;
+        for(int i=0; i<N; i++) label[i] = -1;
+        for(int i=0; i<N; i++) bio[i] = -1;
+        for(int i=0; i<N; i++)
+        {
+            int x = i;
+            for (; x != root && bio[x] == -1; x = Back[x]) bio[x] = i;
+
+            if (x != root && bio[x] == i)
+            {
+                for (; label[x] == -1; x = Back[x]) label[x] = K;
+                ++K;
+            }
+        }
+        if (K == 0) break;
+
+        for(int i=0; i<N; i++) if (label[i] == -1) label[i] = K++;
+
+        for (auto &e : E)
+        {
+            int xx = label[e.x];
+            int yy = label[e.y];
+            if (xx != yy) e.w -= cost[e.y];
+            e.x = xx;
+            e.y = yy;
+        }
+        root = label[root];
+        N = K;
+    }
+    return ret;
+}
+
 int main()
 {
     //freopen("1input.txt","r",stdin);

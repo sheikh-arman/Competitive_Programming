@@ -1,4 +1,7 @@
+/// Merge Sort Tree
 merge(seg[left].begin(), seg[left].end(), seg[right].begin(), seg[right].end(),back_inserter(seg[n]));
+
+///LCA
 #define N 200100
 vector<ll>edj[N];
 bool color[N];
@@ -80,3 +83,53 @@ ll nth_parent(ll u,ll nth)
     }
     return u;
 }
+/// MOS
+#define maxn 31000
+int a[maxn],Q,cnt[2001000],k;
+struct query
+{
+    int l, r, id;
+} q[2001000];
+;
+bool cmp(query &a, query &b)
+{
+    int block_a = a.l / k, block_b = b.l / k;
+    if(block_a == block_b) return a.r < b.r;
+    return block_a < block_b;
+}
+int l = 0, r = -1, sum = 0, ans[2001000];
+void Add(int x)
+{
+    x = a[x];
+    cnt[x]++;
+    if(cnt[x] == 1) sum++;
+}
+void Remove(int x)
+{
+    x = a[x];
+    cnt[x]--;
+    if(cnt[x] == 0) sum--;
+}
+for(int i = 0; i < Q; i++)
+{
+    int x,y;
+    sff(x,y);
+    q[i].l=x-1;
+    q[i].r=y-1;
+    q[i].id = i;
+}
+sort(q, q+Q, cmp);
+for(int i = 0; i < Q; i++)
+{
+    while(l > q[i].l) Add(--l);
+    while(r < q[i].r) Add(++r);
+    while(l < q[i].l) Remove(l++);
+    while(r > q[i].r) Remove(r--);
+    ans[q[i].id] = sum;
+}
+for(int i=0; i<Q; i++)
+{
+    printf("%d\n",ans[i]);
+}
+
+
