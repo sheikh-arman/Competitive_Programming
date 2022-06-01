@@ -1,3 +1,4 @@
+
 /*
     Sk arman Hossain
     University of Barisal
@@ -43,16 +44,18 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,k;
-        cin>>n>>k;
-        if(n%2!=0&&k==0)
-        {
-            cout<<"No\n";
+        ll x,y;
+        cin>>x>>y;
+        ll ans=0;
+        if(x>y){
+            ll dif=abs(x-y);
+            ans+=dif/2;
+            if(dif%2!=0)ans+=2;
         }
-        else
-        {
-            cout<<"Yes\n";
+        else if(x<y){
+            ans=y-x;
         }
+        cout<<ans<<"\n";
     }
     return 0;
 }

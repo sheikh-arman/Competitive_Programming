@@ -2,8 +2,8 @@
     Sk arman Hossain
     University of Barisal
 
-    Problem :
-    Solution :
+    Problem : https://lightoj.com/problem/ant-network
+    Solution : BCC +  articulation point + bridge
     Date:
  */
 
@@ -43,16 +43,10 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,k;
-        cin>>n>>k;
-        if(n%2!=0&&k==0)
-        {
-            cout<<"No\n";
-        }
-        else
-        {
-            cout<<"Yes\n";
-        }
+        ll n,sum=0;
+
+
+
     }
     return 0;
 }

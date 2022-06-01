@@ -34,25 +34,73 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
+void ck(ll n,ll k)
+{
+    ll num=n;
+    ll ar[n+1];
+    for(ll i=0; i<=n; i++)ar[i]=0;
+    ll cnt=0;
+    for(ll i=0; n>1; i=(i+1)%num)
+    {
+        if(ar[i]==0)
+        {
+            cnt++;
+        }
+        if(cnt==k)
+        {
+            n--;
+            ar[i]=1;
+            cnt=0;
+        }
+    }
+    for(ll i=0;i<num;i++){
+        if(ar[i]==0){
+            cout<<i+1<<((i+1)%2?" ODD":" EVEN")<<"\n";
+        }
+    }
+}
 int main()
 {
+
     //freopen("1input.txt","r",stdin);
     //freopen("1output.txt","w",stdout);
-    fast;
+    //fast;
     ll tcase=1;
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
         ll n,k;
         cin>>n>>k;
-        if(n%2!=0&&k==0)
-        {
-            cout<<"No\n";
-        }
-        else
-        {
-            cout<<"Yes\n";
-        }
+        ck(n,k);
+//        if(k==1)
+//        {
+//            if(n%2==0)
+//            {
+//                cout<<"EVEN\n";
+//            }
+//            else
+//            {
+//                cout<<"ODD\n";
+//            }
+//        }
+//        else
+//        {
+//            if(n%2==0)
+//            {
+//                cout<<"ODD\n";
+//            }
+//            else
+//            {
+//                if(k%2==0)
+//                {
+//                    cout<<"ODD\n";
+//                }
+//                else
+//                {
+//                    cout<<"EVEN\n";
+//                }
+//            }
+//        }
     }
     return 0;
 }
