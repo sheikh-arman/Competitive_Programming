@@ -132,4 +132,70 @@ for(int i=0; i<Q; i++)
     printf("%d\n",ans[i]);
 }
 
+/// segment tree with lazy propagation lightoj multiple 3 problem
+struct tree
+{
+    ll mod0,mod1,mod2,prop;
+} s_tree[N*4];
+ll query(ll n,ll b,ll e,ll i,ll j,ll carry)
+{
+    if(b>j||e<i)
+    {
+        return 0;
+    }
+    if(b>=i&&e<=j)
+    {
+        carry=carry%3;
+        return carry;// dump
+    }
+    ll l=n*2;
+    ll r=(n*2) + 1;
+    ll mid=(e+b)/2;
+    ll p=query(l,b,mid,i,j,carry+s_tree[n].prop);
+    ll q=query(r,mid+1,e,i,j,carry+s_tree[n].prop);
+    return p+q;
+}
+ll update(ll n,ll b,ll e,ll x,ll y)
+{
+    if(b>y||e<x)
+    {
+        return 0;
+    }
+    if(b>=x&&e<=y)
+    {
+        ll tmp=s_tree[n].mod0;
+        s_tree[n].mod0=s_tree[n].mod2;
+        s_tree[n].mod2=s_tree[n].mod1;
+        s_tree[n].mod1=tmp;
+        s_tree[n].prop+=1;
+        //s_tree[n].prop=s_tree[n].prop%3;
+        return s_tree[n].mod0;
+    }
+    ll l=n*2;
+    ll r=n*2+1;
+    ll mid=(b+e)/2;
+    update(l,b,mid,x,y);
+    update(r,mid+1,e,x,y);
+    s_tree[n].mod0=s_tree[l].mod0+s_tree[r].mod0;
+    s_tree[n].mod1=s_tree[l].mod1+s_tree[r].mod1;
+    s_tree[n].mod2=s_tree[l].mod2+s_tree[r].mod2;
+    ll tm=s_tree[n].prop;
+    tm%=3;
+    if(tm==1)
+    {
+        ll tmp=s_tree[n].mod0;
+        s_tree[n].mod0=s_tree[n].mod2;
+        s_tree[n].mod2=s_tree[n].mod1;
+        s_tree[n].mod1=tmp;
+    }
+    else if(tm==2)
+    {
+        ll tmp=s_tree[n].mod0;
+        s_tree[n].mod0=s_tree[n].mod1;
+        s_tree[n].mod1=s_tree[n].mod2;
+        s_tree[n].mod2=tmp;
+    }
+    return s_tree[n].mod0;
+}
+
 
