@@ -45,13 +45,16 @@ int main()
     {
         ll n,k;
         cin>>n>>k;
-        if(n%2!=0&&k==0)
-        {
-            cout<<"No\n";
+        if(n%2==0){
+            YES;
         }
-        else
-        {
-            cout<<"Yes\n";
+        else{
+            if(k%2==0){
+                NO;
+            }
+            else{
+                YES;
+            }
         }
     }
     return 0;

@@ -1,4 +1,3 @@
-
 /*
     Sk arman Hossain
     University of Barisal
@@ -37,6 +36,7 @@ ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
 int main()
 {
+    //cout<<(20^21^22^23);
     //freopen("1input.txt","r",stdin);
     //freopen("1output.txt","w",stdout);
     fast;
@@ -44,21 +44,31 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll x,y;
-        cin>>x>>y;
-        ll ans=0;
-        if(x>y){
-            ll dif=abs(x-y);
-            ans+=dif/2;
-            if(dif%2!=0)ans+=2;
+        ll l,r;
+        cin>>l>>r;
+        ll ar[5];
+        ll ck=-1;
+        for(ll i=l;i<=min(l+10000,r-3);i++){
+            if((i^(i+1)^(i+2)^(i+3))==0){
+                ck=i;
+                break;
+            }
         }
-        else if(x<y){
-            ans=y-x;
+        if(ck!=-1){
+
+            for(ll i=ck;i<ck+4;i++){
+                    if(i!=ck)cout<<" ";
+                cout<<i;
+            }
+            cout<<"\n";
         }
-        cout<<ans<<"\n";
+        else{
+            cout<<ck<<"\n";
+        }
     }
     return 0;
 }
+
 
 
 

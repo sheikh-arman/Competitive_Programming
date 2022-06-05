@@ -34,43 +34,6 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
-ll ar[200010];
-vector<ll>V;
-ll sol(ll n)
-{
-    //set<ll>st;
-    for(ll i=0; i<=n; i++)ar[i]=0;
-    map<ll,ll>mp;
-    map<ll,ll>mp_pos;
-    ll left=0,right=0;
-    while(right<n){
-        if(mp[V[right]]==0){
-            mp[V[right]]=1;
-            mp_pos[V[right]]=right;
-            ar[right]=(right-left)+1;
-            right++;
-        }
-        else{
-            while(left<=mp_pos[V[right]]){
-                mp[V[left]]=0;
-                left++;
-            }
-            mp[V[right]]=1;
-            mp_pos[V[right]]=right;
-            ar[right]=(right-left)+1;
-            right++;
-        }
-    }
-    ll ans=LONG_LONG_MAX;
-    for(ll i=0; i<n; i++)
-    {
-        ll left=(i+1)-ar[i];
-        ll right=n-(i+1);
-        ll tm=min((left*2)+right,(right*2)+left);
-        ans=min(ans,tm);
-    }
-    return ans;
-}
 int main()
 {
     //freopen("1input.txt","r",stdin);
@@ -80,30 +43,15 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        V.clear();
-        ll n;
-        cin>>n;
-        for(ll i=0; i<n; i++)
-        {
-            ll a;
-            cin>>a;
-            V.PB(a);
-        }
-        ll ans=sol(n);
-        //reverse(V.begin(),V.end());
-        //ans=min(ans,sol(n));
-        cout<<ans<<"\n";
+        ll n,sum=0;
+
+
 
     }
     return 0;
 }
-/*// Special Case
-1
-9
-5 4 3 2 5 1 6 7 5
-res=3;
 
-*/
+
 
 
 
