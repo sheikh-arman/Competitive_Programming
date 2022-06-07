@@ -10,7 +10,7 @@ public:
         for(int j=0; j<m; j++)res[j]=points[0][j];
         for(int i=1; i<n; i++)
         {
-            for(int j=0; j=m; j++)ar[j]=0;
+            for(int j=0; j<m; j++)ar[j]=0;
             long long  ma=0;
             for(int j=0; j<m; j++)
             {
@@ -19,7 +19,7 @@ public:
                 ma--;
             }
             ma=0;
-            for(int j=m-1; j>=0; j++)
+            for(int j=m-1; j>=0; j--)
             {
                 ma=max(ma,res[j]);
                 ar[j]=max(ma,ar[j]);
@@ -27,7 +27,7 @@ public:
             }
             for(int j=0; j<m; j++)
             {
-                res[j]+=ar[j]+points[i][j];
+                res[j]=ar[j]+points[i][j];
             }
         }
         long long ans=0;
