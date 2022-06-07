@@ -28,7 +28,6 @@ public:
             sol(root->right);
         }
     }
-
     TreeNode* getTargetCopy(TreeNode* original, TreeNode* cloned, TreeNode* target)
     {
         return sol(orginal,target);

@@ -43,8 +43,57 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,sum=0;
-
+        ll n,k;
+        cin>>n>>k;
+        ll ar[1010];
+        for(ll i=0; i<=k; i++)
+        {
+            ar[i]=0;
+        }
+        ll ans=0;
+        for(ll i=0; i<n; i++)
+        {
+            ll a;
+            cin>>a;
+            ans+=a/k;
+            ar[a%k]++;
+        }
+        ll left=1,right=k-1;
+        while(left<=right)
+        {
+            if(ar[left]==0)
+            {
+                left++;
+                continue;
+            }
+            if(ar[right]==0)
+            {
+                right--;
+                continue;
+            }
+            if(left+right>=k)
+            {
+                if(left==right)
+                {
+                    ans+=ar[left]/2;
+                    ar[left]=0;
+                    left++;
+                    right--;
+                }
+                else
+                {
+                    ll mi=min(ar[left],ar[right]);
+                    ans+=mi;
+                    ar[left]-=mi;
+                    ar[right]-=mi;
+                }
+            }
+            else
+            {
+                left++;
+            }
+        }
+        cout<<ans<<"\n";
 
 
     }
