@@ -1,40 +1,47 @@
-class Solution
-{
+class Solution {
 public:
-    long long maxPoints(vector<vector<int>>& points)
-    {
-        int n=points.size();
-        int m=points[0].size();
-        long long ar[m+1];
-        long long res[m+1];
-        for(int j=0; j<m; j++)res[j]=points[0][j];
-        for(int i=1; i<n; i++)
-        {
-            for(int j=0; j=m; j++)ar[j]=0;
-            long long  ma=0;
-            for(int j=0; j<m; j++)
-            {
-                ma=max(ma,res[j]);
-                ar[j]=ma;
-                ma--;
-            }
-            ma=0;
-            for(int j=m-1; j>=0; j++)
-            {
-                ma=max(ma,res[j]);
-                ar[j]=max(ma,ar[j]);
-                ma--;
-            }
-            for(int j=0; j<m; j++)
-            {
-                res[j]+=ar[j]+points[i][j];
+    int mem[2010][2010],n,m,tm_m;
+    string str,pat;
+    int dp(int i,int j){
+        if(i>=n&&j>=tm_m){
+            return 1;
+        }
+        if(i>=n||j>tm_m){
+            return 0;
+        }
+        if(mem[i][j]!=-1){
+            return mem[i][j];
+        }
+        int ans=0;
+        if(str[i]==pat[j]||pat[j]=='?'){
+            ans=dp(i+1,j+1);
+        }
+        else if(pat[j]=='*'){
+            ans|=dp(i+1,j+1);
+            ans|=dp(i+1,j);
+            ans|=dp(i,j+1);
+        }
+        return mem[i][j]=ans;
+    }
+    bool isMatch(string s, string p) {
+        n=s.size();
+        m=p.size();
+        tm_m=m;
+        str=s;
+        pat=p;
+        while(tm_m>0){
+            if(pat[tm_m-1]=='*')tm_m--;
+            else break;
+        }
+        if(tm_m==0&&(int)pat.size()){
+            return 1;
+        }
+        for(int i=0;i<=n;i++){
+            for(int j=0;j<=m;j++){
+                mem[i][j]=-1;
             }
         }
-        long long ans=0;
-        for(int i=0; i<m; i++)
-        {
-            ans=max(ans,res[i]);
-        }
-        return ans;
+        int ans=dp(0,0);
+        return (ans>0);
     }
 };
