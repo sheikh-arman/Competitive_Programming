@@ -28,68 +28,90 @@ typedef tree<ll, null_type, less_equal<ll>, rb_tree_tag,tree_order_statistics_no
 #define  base2 137
 #define  MOD1  1479386893
 #define  MOD2  1928476349
-#define MAX 2000010
+#define MAX 300010
 #define T(n) printf("test : %d\n",n);
 ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
-bitset<100010>color;
-vector<ll>prime;
-void seive()
+ll mem[MAX+10];
+vector<ll>edj[MAX+10];
+vector<ll>edj2[MAX+10];
+ll cnt[MAX+10];
+bitset<MAX+10>color;
+ll dfs(ll node)
 {
-    prime.PB(2);
-    for(ll i=3; i<=40010; i+=2)
+    cnt[node]=1;
+    color[node]=true;
+    for(ll i:edj[node])
     {
-        if(color[i]==0)
+        if(color[i]==false)
         {
-            prime.PB(i);
-            for(ll j=i*i; j<=40010; j+=(i+i))
-            {
-                color[j]=1;
-            }
+            edj2[node].PB(i);
+            color[i]=true;
+            dfs(i);
+            cnt[node]+=cnt[i];
         }
     }
 }
-ll nod(ll n)
+ll dp(ll node)
 {
-    ll ans=1;
-    for(ll i:prime)
+    if(mem[node]!=-1)
     {
-        if(i*i>n)
-        {
-            break;
-        }
-        ll cnt=1;
-        while(n%i==0)
-        {
-            n/=i;
-            cnt++;
-        }
-        ans*=cnt;
+        return mem[node];
     }
-    if(n>1)ans*=2;
-    return ans;
+    ll siz=edj2[node].size();
+    ll ans=0;
+    if(siz==1)
+    {
+        ans=cnt[edj2[node][0]]-1;
+    }
+    else if(siz==2)
+    {
+        ans=(cnt[edj2[node][0]]-1)+dp(edj2[node][1]);
+        ll ans2=(cnt[edj2[node][1]]-1)+dp(edj2[node][0]);
+        ans=max(ans,ans2);
+    }
+    return mem[node]=ans;
+
 }
 int main()
 {
-    seive();
     //freopen("1input.txt","r",stdin);
     //freopen("1output.txt","w",stdout);
-    //fast;
+    fast;
     ll tcase=1;
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll a,b;
-        cin>>a>>b;
-        if(a<b)swap(a,b);
-        ll gcd=a-b;
-        ll ans=nod(gcd);
+        ll n;
+        cin>>n;
+        for(ll i=0; i<=n; i++)
+        {
+            edj[i].clear();
+            edj2[i].clear();
+            mem[i]=-1;
+            cnt[i]=0;
+            color[i]=false;
+        }
+        for(ll i=0; i<n-1; i++)
+        {
+            ll u,v;
+            cin>>u>>v;
+            edj[u].PB(v);
+            edj[v].PB(u);
+        }
+        dfs(1);
+        for(int i=0; i<=n; i++)
+        {
+            edj[i].clear();
+        }
+        ll ans=dp(1);
         cout<<ans<<"\n";
     }
     return 0;
 }
+
 
 
 

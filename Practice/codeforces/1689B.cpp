@@ -1,4 +1,3 @@
-
 /*
     Sk arman Hossain
     University of Barisal
@@ -46,31 +45,69 @@ int main()
     {
         ll n;
         cin>>n;
-        int left=1,right=n-1;
-        int ar[n+2];
-        int cnt=n-1;
-        ar[n]=n;
-        int ck=0;
-        while(cnt>=1){
-            if(ck){
-                ar[cnt]=right--;
-            }
-            else{
-                ar[cnt]=left++;
-            }
-            ck=1-ck;
-            cnt--;
+        vector<ll>V,ans;
+        V.PB(-1);
+        for(int i=0; i<n; i++)
+        {
+            ll a;
+            cin>>a;
+            V.PB(a);
         }
-        for(int i=1;i<=n;i++){
-            if(i>1){
-                cout<<" ";
+        if(n==1)
+        {
+            cout<<"-1\n";
+            continue;
+        }
+        ll ar[n+5];
+        for(int i=0; i<=n; i++)
+        {
+            ar[i]=0;
+        }
+        for(int i=1; i<=n; i++)
+        {
+            if(V[i]==i)
+            {
+                ll val=i;
+                for(int j=1; j<=n; j++)
+                {
+                    if(ar[j]==0&&j!=i)
+                    {
+                        val=j;
+                        break;
+                    }
+                }
+                ans.PB(val);
+                ar[val]=1;
             }
-            cout<<ar[i];
+            else
+            {
+                ll val=i;
+                for(int j=1; j<=n; j++)
+                {
+                    if(ar[j]==0)
+                    {
+                        val=j;
+                        break;
+                    }
+                }
+                ans.PB(val);
+                ar[val]=1;
+            }
+        }
+        if(ans[n-1]==V[n])
+        {
+            swap(ans[n-2],ans[n-1]);
+        }
+        for(ll i=0; i<n; i++)
+        {
+            cout<<ans[i]<<" ";
         }
         cout<<"\n";
-
-
-
     }
     return 0;
 }
+
+
+
+
+

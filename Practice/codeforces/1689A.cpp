@@ -43,21 +43,57 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n;
-        cin>>n;
-        string a,b;
+        string  a,b,c;
+        ll n,m,k;
+        cin>>n>>m>>k;
         cin>>a>>b;
-        set<char>st;
-        for(int i=0;i<n;i++){
-            if(a[i]!=b[i]){
-                st.insert(b[i]);
+        sort(a.begin(),a.end());
+        sort(b.begin(),b.end());
+        ll left=0,right=0,cnta=0,cntb=0;
+        while(left<n&&right<m)
+        {
+            if(a[left]<b[right])
+            {
+                if(cnta<k)
+                {
+                    c+=a[left];
+                    cnta++;
+                    cntb=0;
+                    left++;
+                }
+                else
+                {
+                    c+=b[right];
+                    right++;
+                    cntb++;
+                    cnta=0;
+                }
+
             }
+            else
+            {
+                if(cntb<k)
+                {
+                    c+=b[right];
+                    right++;
+                    cntb++;
+                    cnta=0;
+                }
+                else
+                {
+                    c+=a[left];
+                    cnta++;
+                    cntb=0;
+                    left++;
+                }
+
+            }
+
         }
-        cout<<st.size()<<"\n";
+        cout<<c<<"\n";
     }
     return 0;
 }
-
 
 
 

@@ -1,6 +1,21 @@
+/*
+    Sk arman Hossain
+    University of Barisal
+
+    Problem :
+    Solution :
+    Date:
+ */
+
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long int ll;
+
+#include <ext/pb_ds/assoc_container.hpp> // Common file
+#include <ext/pb_ds/tree_policy.hpp>
+using namespace __gnu_pbds;
+typedef tree<ll, null_type, less_equal<ll>, rb_tree_tag,tree_order_statistics_node_update> ordered_set;
+
 #define sf(n) scanf("%lld",&n);
 #define YES cout<<"YES\n";
 #define NO cout<<"NO\n";
@@ -19,8 +34,6 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
-
-
 int main()
 {
     //freopen("1input.txt","r",stdin);
@@ -30,32 +43,15 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,k;
-        cin>>n>>k;
-        if(k==0)
-        {
-            ll init=4;
-            init+=n;
-            init%=4;
-            if(init==0)
-            {
-                cout<<"Off\n";
-            }
-            else
-            {
-                cout<<"On\n";
-            }
+        ll a,b;
+        cin>>a>>b;
+        int dif=b-a;
+        if(dif%3==2){
+            NO;
         }
-        else
-        {
-            if(n%4==0){
-                cout<<"On\n";
-            }
-            else{
-                cout<<"Ambiguous\n";
-            }
+        else{
+            YES;
         }
-
     }
     return 0;
 }
