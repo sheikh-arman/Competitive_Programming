@@ -34,6 +34,39 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
+ll mod=1e9+7;
+ll big_mod(ll n,ll p)
+{
+    if(p==0)
+    {
+        return 1LL;
+    }
+    if(p==1)
+    {
+        return n;
+    }
+    if(p%2==0)
+    {
+        ll tm=big_mod(n,p/2);
+        ll val=((tm%mod)*(tm%mod))%mod;
+        return val;
+    }
+    else
+    {
+        ll val=((big_mod(n,p-1)%mod)*(n%mod))%mod;
+        return val;
+    }
+}
+ll sol(string s)
+{
+    ll ans=0;
+    for(ll i=0; s[i]!='\0'; i++)
+    {
+        ans=(ans*10)+(s[i]-'0');
+        ans%=mod;
+    }
+    return ans;
+}
 int main()
 {
     //freopen("1input.txt","r",stdin);
@@ -43,10 +76,21 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,sum=0;
-
-
-
+        string s;
+        cin>>s;
+        ll ans=0;
+        ll n=s.size();
+        for(ll i=0; i<n; i++)
+        {
+            ll right=big_mod(2,i);
+            ll left=big_mod(11,n-i-1)*(s[i]-'0');
+            left%=mod;
+            ans+=((right*left)%mod);
+            ans%=mod;
+        }
+        ans-=sol(s);
+        if(ans<0)ans+=mod;
+        cout<<ans<<"\n";
     }
     return 0;
 }
