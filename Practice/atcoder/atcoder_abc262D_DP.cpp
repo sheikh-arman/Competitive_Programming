@@ -34,78 +34,70 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
-/// ncr
+ll mem[110][110][110];
+vector<ll>V;
+ll n;
 ll mod=998244353;
-ll dp[200020];
-ll extended_euclidean(ll a,ll b,ll& x,ll& y)
+ll dp(ll i,ll k,ll sum,ll mo)
 {
-    if(b==0)
+    //cout<<i<<" "<<k<<" "<<sum<<" "<<mo<<" t\n";
+    if(i>=n)
     {
-        x=1;
-        y=0;
-        return a;
+        return (k==0&&sum==0);
     }
-    ll x1, y1;
-    ll d=extended_euclidean(b,a%b,x1,y1);
-    x=y1;
-    y=x1-y1*(a/b);
-    return d;
-}
-void init()
-{
-    dp[0]=1;
-    dp[1]=1;
-    for(ll i=2; i<=200000; i++)
+    if(mem[i][k][sum]!=-1)
     {
-        dp[i]=((dp[i-1]%mod)*i)%mod;
+        return mem[i][k][sum];
     }
+    ll ans=0;
+    if(k>0)
+        ans=dp(i+1,k-1,(sum+V[i])%mo,mo);
+    if(ans>=mod)ans%=mod;
+    ans+=dp(i+1,k,sum,mo);
+    if(ans>=mod)ans%=mod;
+    return mem[i][k][sum]=ans;
 }
-ll ncr(ll n,ll r)
-{
-    ll ans=dp[n];
-    ll div=((dp[r]%mod)*(dp[n-r]%mod))%mod;
-    ll x,y;
-    ll gcd=extended_euclidean(div,mod,x,y);
-    x=(x+mod)%mod;
-    ans=((ans%mod)*(x%mod))%mod;
-    return ans;
-}
-ll deg[200010];
 int main()
 {
-    init();
     //freopen("1input.txt","r",stdin);
     //freopen("1output.txt","w",stdout);
     fast;
     ll tcase=1;
-    // cin>>tcase;
+    //cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,m,k;
-        cin>>n>>m>>k;
-        for(ll i=1; i<=m; i++)
+        cin>>n;
+        for(ll i=0; i<n; i++)
         {
-            ll a,b;
-            cin>>a>>b;
-            deg[a]++;
-            deg[b]++;
+            ll a;
+            cin>>a;
+            V.PB(a);
         }
-        ll cnt=0;
-        for(ll i=1; i<=n; i++)
+        for(ll i=0; i<=n+1; i++)
         {
-            if(deg[i]%2)
+            for(ll j=0; j<=n+1; j++)
             {
-                cnt++;
+                for(ll k=0; k<=n+1; k++)
+                {
+                    mem[i][j][k]=-1;
+                }
             }
         }
         ll ans=0;
-        for(ll i=0; i<=k; i+=2)
+        for(ll i=1; i<=n; i++)
         {
-            if (i <= cnt && k - i <= n - cnt)
+            ans+=dp(0,i,0,i);
+            //cout<<ans<<" hi\n";
+            if(ans>=mod)ans%=mod;
+            for(ll j=0; j<=n+1; j++)
             {
-                ans+=(ncr(cnt,i)*ncr(n-cnt,k-i))%mod;
-                ans%=mod;
-                //cout<<i<<" "<<ans<<" "<<cnt<<"\n";
+                for(ll k=0; k<=i; k++)
+                {
+                    for(ll f=0; f<=i; f++)
+                    {
+                        mem[j][k][f]=-1;
+                    }
+                }
             }
         }
         cout<<ans<<"\n";
