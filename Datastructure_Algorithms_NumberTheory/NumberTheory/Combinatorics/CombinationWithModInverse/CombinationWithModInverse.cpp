@@ -70,7 +70,6 @@ ll ncr(ll n,ll r)
     ans=((ans%mod)*(x%mod))%mod;
     return ans;
 }
-ll deg[200010];
 int main()
 {
     init();
@@ -81,29 +80,14 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,m,k;
-        cin>>n>>m>>k;
-        for(ll i=1;i<=m;i++){
-            ll a,b;
-            cin>>a>>b;
-            deg[a]++;
-            deg[b]++;
-        }
-        ll cnt=0;
-        for(ll i=1;i<=n;i++){
-            if(deg[i]%2){
-                cnt++;
-            }
-        }
-        ll ans=0;
-        for(ll i=0;i<=cnt;i+=2){
-            if (i <= cnt and k - i <= n - cnt) {
+        ll n,sum=0;
 
-            }
-        }
+
+
     }
     return 0;
 }
+
 
 
 
