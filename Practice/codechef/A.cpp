@@ -14,7 +14,7 @@ typedef long long int ll;
 #include <ext/pb_ds/assoc_container.hpp> // Common file
 #include <ext/pb_ds/tree_policy.hpp>
 using namespace __gnu_pbds;
-typedef tree<ll, null_type, less_equal<ll>, rb_tree_tag,tree_order_statistics_node_update> policy_set;
+typedef tree<ll, null_type, less_equal<ll>, rb_tree_tag,tree_order_statistics_node_update> ordered_set;
 
 #define sf(n) scanf("%lld",&n);
 #define YES cout<<"YES\n";
@@ -36,7 +36,6 @@ ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
 int main()
 {
-    //cout<<(20^21^22^23);
     //freopen("1input.txt","r",stdin);
     //freopen("1output.txt","w",stdout);
     fast;
@@ -44,31 +43,33 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll l,r;
-        cin>>l>>r;
-        ll ar[5];
-        ll ck=-1;
-        for(ll i=l;i<=min(l+10000,r-3);i++){
-            if((i^(i+1)^(i+2)^(i+3))==0){
-                ck=i;
-                break;
-            }
+        ll n;
+        cin>>n;
+        string s;
+        cin>>s;
+        ll one=0,zero=0;
+        for(ll i=0;i<n;i++){
+        	if(s[i]=='1')one++;
+        	else zero++;
         }
-        if(ck!=-1){
-
-            for(ll i=ck;i<ck+4;i++){
-                    if(i!=ck)cout<<" ";
-                cout<<i;
-            }
-            cout<<"\n";
+        if(one>=zero){
+        	for(ll i=0;i<one;i++){
+        		cout<<"1";
+        	}
+        	cout<<"\n";
         }
         else{
-            cout<<ck<<"\n";
+        	for(ll i=0;i<zero;i++){
+        		cout<<"0";
+        	}
+        	cout<<"\n";
         }
+
+
+
     }
     return 0;
 }
-
 
 
 

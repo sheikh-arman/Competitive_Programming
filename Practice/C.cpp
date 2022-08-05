@@ -14,7 +14,7 @@ typedef long long int ll;
 #include <ext/pb_ds/assoc_container.hpp> // Common file
 #include <ext/pb_ds/tree_policy.hpp>
 using namespace __gnu_pbds;
-typedef tree<ll, null_type, less_equal<ll>, rb_tree_tag,tree_order_statistics_node_update> policy_set;
+typedef tree<ll, null_type, less_equal<ll>, rb_tree_tag,tree_order_statistics_node_update> ordered_set;
 
 #define sf(n) scanf("%lld",&n);
 #define YES cout<<"YES\n";
@@ -34,113 +34,44 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
-ll ar[12];
+vector<ll>edj[100010];
 int main()
 {
     //freopen("1input.txt","r",stdin);
     //freopen("1output.txt","w",stdout);
-    //fast;
+    fast;
     ll tcase=1;
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll sum=0,ma=0,ma_val=-1;
-        for(ll i=0; i<10; i++)
-        {
-            cin>>ar[i];
-            sum+=ar[i];
-            if(ar[i]>=ma)
-            {
-                ma=ar[i];
-                ma_val=i;
-            }
+        ll n;
+        cin>>n;
+        for(ll i=0;i<=n+1;i++){
+        	edj[i].clear();
         }
-        ll baki=(sum-ma);
-        if(ma>baki+1)
-        {
-            cout<<"-1\n";
-            continue;
+        vector<ll>V;
+        for(ll i=0;i<n;i++){
+        	ll a;
+        	cin>>a;
+        	V.PB(a);
         }
-        if(ma_val==0)
-        {
-            if(sum==1)
-            {
-                cout<<"0\n";
-                continue;
-            }
-            if(ma>baki)
-            {
-                cout<<"-1\n";
-                continue;
-            }
+        VST(V);
+        ll ans=0;
+        for(ll i=0;i<n;i++){
+        	ll left=1,right=ans;
+        	while(left<=right){
+        		ll mid=(left+right)/2;
+        		if(edj[mid].size()<V[i]){
+        			right=mid-1;
+        		}
+        		else{
+        			left=mid+1;
+        		}
+        	}
+        	if(left>ans)ans++;
+        	edj[left].PB(V[i]);
         }
-        string s;
-        ll ck=1;
-        ll first=1,pre=-1;
-        ll cnt=0;
-        while(cnt<sum+100)
-        {
-            cnt++;
-            if((ll)s.size()==sum)
-            {
-                break;
-            }
-            for(ll i=0+first; i<10; i++)
-            {
-                ll total=0,val=-1;
-                ma=0;
-                if(ar[i]>0&&i!=pre)
-                {
-                    for(ll j=0; j<10; j++)
-                    {
-
-                        if(i!=j)
-                        {
-                            total+=ar[j];
-                            if(ma<=ar[j])
-                            {
-                                ma=ar[j];
-                                val=j;
-                            }
-                        }
-                        else
-                        {
-                            total+=(ar[j]-1);
-                            if(ma<ar[j]-1)
-                            {
-                                ma=ar[j]-1;
-                                val=j;
-                            }
-                        }
-                    }
-                    ll baki=total-ma;
-                    if(val==i)
-                    {
-                        if(baki>=ma)
-                        {
-                            s+=(i+'0');
-                            pre=i;
-                            first=0;
-                            ar[i]--;
-                            break;
-                        }
-                    }
-                    else
-                    {
-                        if(baki>=ma-1)
-                        {
-                            s+=(i+'0');
-                            pre=i;
-                            first=0;
-                            ar[i]--;
-                            break;
-                        }
-                    }
-                }
-                //cout<<s<<" "<<i<<" x\n";
-            }
-        }
-        cout<<s<<"\n";
+        cout<<ans<<"\n";
     }
     return 0;
 }
