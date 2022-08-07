@@ -34,6 +34,13 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
+ll sol(ll a,ll b){
+    ll cnt=0;
+    while(a>=b){
+        cnt++;b*=2;
+    }
+    return cnt;
+}
 int main()
 {
     //freopen("1input.txt","r",stdin);
@@ -43,10 +50,31 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,sum=0;
-
-
-
+        ll n,k;
+        cin>>n>>k;
+        vector<ll>V;
+        for(ll i=0;i<n;i++){
+            ll a;
+            cin>>a;
+            V.PB(a);
+        }
+        ll ans=0,cnt=0;
+        for(ll i=1;i<n;i++){
+            ll val=sol(V[i-1],V[i]);
+            cout<<cnt<<" "<<val<<" h\n";
+            if(val<=cnt+1){
+                cnt++;
+            }
+            else{
+                cnt=0;
+            }
+            if(cnt==k){
+                cnt=k-1;
+                ans++;
+                cout<<val<<" "<<i<<" x\n";
+            }
+        }
+        cout<<ans<<"\n";
     }
     return 0;
 }
@@ -54,7 +82,3 @@ int main()
 
 
 
-<<<<<<< HEAD
-
-=======
->>>>>>> a91f394eba3eca8ad462a280d00c499976a5a6f5

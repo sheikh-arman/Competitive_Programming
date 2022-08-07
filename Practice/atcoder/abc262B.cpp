@@ -34,6 +34,7 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
+ll mat[110][110];
 int main()
 {
     //freopen("1input.txt","r",stdin);
@@ -43,7 +44,31 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,sum=0;
+        ll n,m,ans=0;;
+        cin>>n>>m;
+        ll ma=-1,mi=-1;
+        for(ll i=0; i<n; i++)
+        {
+            ll a;
+            cin>>a;
+            if(ma==-1)
+            {
+                ma=a;
+                mi=a;
+            }
+            else
+            {
+                ma=max(ma,a);
+                mi=min(mi,a);
+                if(abs(ma-mi)>m*2)
+                {
+                    ans++;
+                    ma=a;
+                    mi=a;
+                }
+            }
+        }
+        cout<<ans<<"\n";
 
 
 
@@ -54,7 +79,4 @@ int main()
 
 
 
-<<<<<<< HEAD
 
-=======
->>>>>>> a91f394eba3eca8ad462a280d00c499976a5a6f5

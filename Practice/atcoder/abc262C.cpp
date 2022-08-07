@@ -43,8 +43,53 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,sum=0;
-
+        ll n,m;
+        cin>>n>>m;
+        vector<ll>V;
+        for(ll i=0; i<m; i++)
+        {
+            ll a;
+            cin>>a;
+            V.PB(a);
+        }
+        VST(V);
+        vector<ll>dif;
+        for(ll i=0; i<m-1; i++)
+        {
+            dif.PB(abs(V[i]-V[(i+1)%m])-1);
+        }
+        ll x=V[0]-1;
+        x+=n-V[m-1];
+        dif.PB(x);
+        VST(dif);
+        reverse(dif.begin(),dif.end());
+        ll ans=0;
+        ll sum=0;
+        ll siz=dif.size();
+        for(ll i=0; i<siz; i++)
+        {
+            //cout<<dif[i]<<" ";
+            dif[i]-=sum;
+            //cout<<dif[i]<<"  x\n";
+            if(dif[i]>0)
+            {
+                if(dif[i]==1)
+                {
+                    ans+=1;
+                }
+                else
+                {
+                    ans+=dif[i]-1;
+                }
+            }
+            sum+=4;
+            //cout<<ans<<"\n";
+        }
+        cout<<n-ans<<"\n";
+//        for(ll i:dif)
+//        {
+//            cout<<i<<" \n";
+//        }
 
 
     }
@@ -54,7 +99,4 @@ int main()
 
 
 
-<<<<<<< HEAD
 
-=======
->>>>>>> a91f394eba3eca8ad462a280d00c499976a5a6f5

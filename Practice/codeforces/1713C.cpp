@@ -34,18 +34,66 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
+ll ar[100010];
+ll ans[100010];
 int main()
 {
     //freopen("1input.txt","r",stdin);
     //freopen("1output.txt","w",stdout);
-    fast;
+    //fast;
     ll tcase=1;
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,sum=0;
-
-
+        ll n;
+        cin>>n;
+        for(ll i=0; i<n; i++)
+        {
+            ar[i]=0;
+        }
+        vector<ll>V;
+        for(ll i=0; i<=n; i++)
+        {
+            if(i*i<=2*(n-1))
+            {
+                V.PB(i*i);
+            }
+            else{
+                break;
+            }
+        }
+        ll cnt=V.size()-1;
+        ll ck=1;
+        for(ll i=n-1; i>=0&&cnt>=0&&ck; i--)
+        {
+            if(V[cnt]-i>=0&&V[cnt]-i<n&&ar[V[cnt]-i]==0)
+            {
+                ar[V[cnt]-i]=1;
+                ans[i]=V[cnt]-i;
+            }
+            else
+            {
+                i++;
+                cnt--;
+            }
+            //cout<<i<<" "<<ans[i]<<" x\n";
+        }
+        for(ll i=0; i<n; i++)
+        {
+            if(ar[i]==0)ck=0;
+        }
+        if(ck)
+        {
+            for(ll i=0; i<n; i++)
+            {
+                cout<<ans[i]<<" ";
+            }
+            cout<<"\n";
+        }
+        else
+        {
+            cout<<"-1\n";
+        }
 
     }
     return 0;
@@ -54,7 +102,3 @@ int main()
 
 
 
-<<<<<<< HEAD
-
-=======
->>>>>>> a91f394eba3eca8ad462a280d00c499976a5a6f5

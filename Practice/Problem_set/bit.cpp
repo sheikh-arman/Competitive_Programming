@@ -34,27 +34,60 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
+ll ar[500010][32];
 int main()
 {
     //freopen("1input.txt","r",stdin);
     //freopen("1output.txt","w",stdout);
-    fast;
+    //fast;
     ll tcase=1;
     cin>>tcase;
+    for(ll i=0; i<tcase; i++)
+    {
+        for(ll j=0; j<30; j++)
+        {
+            ar[i][j]=0;
+        }
+    }
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,sum=0;
-
-
-
+        ll a;
+        cin>>a;
+        ll cnt=0;
+        while(a)
+        {
+            if(a%2)
+            {
+                ar[test-1][cnt]++;
+            }
+            cnt++;
+            a/=2;
+        }
+        if(test>1)
+        {
+            for(ll i=0; i<30; i++)
+            {
+                ar[test-1][i]+=ar[test-2][i];
+            }
+        }
     }
+    ll orr=0,andd=0;
+    ll pow=1;
+    ll n=tcase;
+    for(ll i=0; i<30; i++)
+    {
+        ll one=ar[n-1][i];
+        ll tm=one*(n-one);
+        tm+=(one*(one-1))/2;
+        orr+=tm*pow;
+        tm=(one*(one-1))/2;
+        andd+=tm*pow;
+        pow*=2;
+    }
+    cout<<abs(orr-andd)<<"\n";
     return 0;
 }
 
 
 
 
-<<<<<<< HEAD
-
-=======
->>>>>>> a91f394eba3eca8ad462a280d00c499976a5a6f5

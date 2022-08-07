@@ -36,6 +36,7 @@ ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
 int main()
 {
+{
     //freopen("1input.txt","r",stdin);
     //freopen("1output.txt","w",stdout);
     fast;
@@ -54,7 +55,3 @@ int main()
 
 
 
-<<<<<<< HEAD
-
-=======
->>>>>>> a91f394eba3eca8ad462a280d00c499976a5a6f5

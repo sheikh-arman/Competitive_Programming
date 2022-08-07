@@ -43,10 +43,23 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,sum=0;
-
-
-
+        ll n;
+        cin>>n;
+        deque<ll>V;
+        for(ll i=1; i<=n; i++)
+        {
+            V.PB(i);
+        }
+        if(n>3)
+        {
+            V.push_front(V[n-1]);
+            V.pop_back();
+            swap(V[1],V[n-3]);
+        }
+        for(ll i=0;i<n;i++){
+            cout<<V[i]<<" ";
+        }
+        cout<<"\n";
     }
     return 0;
 }
@@ -54,7 +67,3 @@ int main()
 
 
 
-<<<<<<< HEAD
-
-=======
->>>>>>> a91f394eba3eca8ad462a280d00c499976a5a6f5

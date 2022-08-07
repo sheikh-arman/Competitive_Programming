@@ -34,8 +34,45 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
+/// ncr
+ll mod=1e9+7;
+ll dp[1000020];
+ll extended_euclidean(ll a,ll b,ll& x,ll& y)
+{
+    if(b==0)
+    {
+        x=1;
+        y=0;
+        return a;
+    }
+    ll x1, y1;
+    ll d=extended_euclidean(b,a%b,x1,y1);
+    x=y1;
+    y=x1-y1*(a/b);
+    return d;
+}
+void init()
+{
+    dp[0]=1;
+    dp[1]=1;
+    for(ll i=2; i<=1000000; i++)
+    {
+        dp[i]=((dp[i-1]%mod)*i)%mod;
+    }
+}
+ll ncr(ll n,ll r)
+{
+    ll ans=dp[n];
+    ll div=((dp[r]%mod)*(dp[n-r]%mod))%mod;
+    ll x,y;
+    ll gcd=extended_euclidean(div,mod,x,y);
+    x=(x+mod)%mod;
+    ans=((ans%mod)*(x%mod))%mod;
+    return ans;
+}
 int main()
 {
+    init();
     //freopen("1input.txt","r",stdin);
     //freopen("1output.txt","w",stdout);
     fast;
@@ -54,7 +91,5 @@ int main()
 
 
 
-<<<<<<< HEAD
 
-=======
->>>>>>> a91f394eba3eca8ad462a280d00c499976a5a6f5
+

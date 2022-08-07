@@ -37,24 +37,20 @@ ll kny[]= {1,-1,2,2,1,-1,-2,-2};
 int main()
 {
     //freopen("1input.txt","r",stdin);
-    //freopen("1output.txt","w",stdout);
+    freopen("1input.txt","w",stdout);
     fast;
-    ll tcase=1;
-    cin>>tcase;
+    ll tcase=500000;
+    cout<<tcase<<"\n";
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,sum=0;
-
-
-
+        ll x;
+        x=(rand()+631)%100000;
+        cout<<x<<" ";
     }
+    cout<<"\n";
     return 0;
 }
 
 
 
 
-<<<<<<< HEAD
-
-=======
->>>>>>> a91f394eba3eca8ad462a280d00c499976a5a6f5

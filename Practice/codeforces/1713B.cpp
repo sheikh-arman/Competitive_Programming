@@ -43,10 +43,30 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,sum=0;
-
-
-
+        ll n;
+        cin>>n;
+        vector<ll>V;
+        ll pre=-1;
+        for(ll i=0;i<n;i++){
+            ll a;
+            cin>>a;
+            if(pre!=a)
+              V.PB(a);
+            pre=a;
+        }
+        n=V.size();
+        ll ck=1;
+        for(ll i=1;i<n-1;i++){
+            if(V[i]<V[i-1]&&V[i]<V[i+1]){
+                ck=0;break;
+            }
+        }
+        if(ck){
+            YES;
+        }
+        else{
+            NO;
+        }
     }
     return 0;
 }
@@ -54,7 +74,3 @@ int main()
 
 
 
-<<<<<<< HEAD
-
-=======
->>>>>>> a91f394eba3eca8ad462a280d00c499976a5a6f5

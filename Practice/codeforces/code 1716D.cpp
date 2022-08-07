@@ -34,19 +34,46 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
+ll ar[200010];
+ll ar_tm[200010];
+ll dp[200010];
+ll mod=998244353;
 int main()
 {
     //freopen("1input.txt","r",stdin);
     //freopen("1output.txt","w",stdout);
     fast;
     ll tcase=1;
-    cin>>tcase;
+    // cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,sum=0;
-
-
-
+        ll n,k;
+        cin>>n>>k;
+        ar[k]=1;
+        ll kk=k;
+        for(ll i=k; i<=450; i+=1)
+        {
+            for(ll j=0; j<=n; j++)
+            {
+                ar_tm[j]=0;
+            }
+            for(ll j=i; j<=n; j+=i)
+            {
+                ar_tm[j]=ar[j-i]+ar_tm[j-i];
+                ar_tm[j]%=mod;
+                dp[j]+=ar_tm[j];
+                dp[j]%=mod;
+            }
+            for(ll j=0; j<=n; j++)
+            {
+                ar[j]=ar_tm[j];
+            }
+        }
+        for(ll i=1; i<=n; i++)
+        {
+            cout<<dp[i]<<" ";
+        }
+        cout<<"\n";
     }
     return 0;
 }
@@ -54,7 +81,3 @@ int main()
 
 
 
-<<<<<<< HEAD
-
-=======
->>>>>>> a91f394eba3eca8ad462a280d00c499976a5a6f5

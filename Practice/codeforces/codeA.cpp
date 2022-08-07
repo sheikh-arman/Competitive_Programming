@@ -43,7 +43,26 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,sum=0;
+        ll n,x;
+        cin>>n>>x;
+        if(x<n)
+        {
+            cout<<"-1\n";
+        }
+        else
+        {
+            ll val=x-(n-1);
+            cout<<val<<" ";
+            for(ll i=1; i<=n; i++)
+            {
+                if(i!=val)
+                {
+                    cout<<i<<" ";
+                }
+
+            }
+            cout<<"\n";
+        }
 
 
 
@@ -54,7 +73,3 @@ int main()
 
 
 
-<<<<<<< HEAD
-
-=======
->>>>>>> a91f394eba3eca8ad462a280d00c499976a5a6f5

@@ -14,7 +14,7 @@ typedef long long int ll;
 #include <ext/pb_ds/assoc_container.hpp> // Common file
 #include <ext/pb_ds/tree_policy.hpp>
 using namespace __gnu_pbds;
-typedef tree<ll, null_type, less_equal<ll>, rb_tree_tag,tree_order_statistics_node_update> ordered_set;
+typedef tree<ll, null_type, less_equal<ll>, rb_tree_tag,tree_order_statistics_node_update> policy_set;
 
 #define sf(n) scanf("%lld",&n);
 #define YES cout<<"YES\n";
@@ -43,18 +43,19 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,sum=0;
-
-
-
+        ll n;
+        cin>>n;
+        if(n<4||n%2!=0){
+            cout<<"-1\n";
+        }
+        else{
+            cout<<(n/6+(n%6!=0))<<" "<<n/4<<"\n";
+        }
     }
     return 0;
 }
+//
 
 
 
 
-<<<<<<< HEAD
-
-=======
->>>>>>> a91f394eba3eca8ad462a280d00c499976a5a6f5

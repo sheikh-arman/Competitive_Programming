@@ -34,6 +34,22 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
+vector<ll>V;
+ll n,x,y;
+ll cmp()
+{
+    vector<ll>new_v=V;
+    ll cnt=0;
+    for(ll i=n-1; i>=0; i--)
+    {
+        V[i]-=(cnt*y);
+        if(V[i]<=0)continue;
+        cnt+=(V[i]/x)+(V[i]%x!=0);
+        //cout<<cnt<<" x\n";
+    }
+    return cnt;
+    //return 0;
+}
 int main()
 {
     //freopen("1input.txt","r",stdin);
@@ -43,10 +59,46 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,sum=0;
 
-
-
+        cin>>n>>x>>y;
+        V.clear();
+        ll ma=0;
+        for(ll i=0; i<n; i++)
+        {
+            ll a;
+            cin>>a;
+            V.PB(a);
+            ma=max(ma,a);
+        }
+        if(ma==0)
+        {
+            cout<<"0\n";
+            continue;
+        }
+        ll ans=((ma+(y-1))/y);
+        if(x<=y)
+        {
+            cout<<ans<<"\n";
+        }
+        else
+        {
+//            ll left=1,right=ans;
+//            while(left<=right)
+//            {
+//                ll mid=(left+right)/2;
+//                if(cmp(mid))
+//                {
+//                    ans=mid;
+//                    right=mid-1;
+//                }
+//                else
+//                {
+//                    left=mid+1;
+//                }
+//            }
+            ans=cmp();
+            cout<<ans<<"\n";
+        }
     }
     return 0;
 }
@@ -54,7 +106,3 @@ int main()
 
 
 
-<<<<<<< HEAD
-
-=======
->>>>>>> a91f394eba3eca8ad462a280d00c499976a5a6f5

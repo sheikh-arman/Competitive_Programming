@@ -43,10 +43,43 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,sum=0;
-
-
-
+        ll a,b;
+        cin>>a>>b;
+        ll sq=sqrt(b+1);
+        ll ck=1;
+        for(ll i=1; i<=sq&&ck; i++)
+        {
+            ll tm=b/i;
+            if(i<=tm&&b%i==0)
+            {
+                if(a<=(2*(i-1)))
+                {
+                    if(a>=(i-1))
+                    {
+                        cout<<a-(i-1)<<" "<<(i-1)<<"\n";
+                    }
+                    else
+                    {
+                        cout<<"0 "<<a<<"\n";
+                    }
+                    cout<<i<<" "<<tm<<"\n";
+                    ck=0;
+                    break;
+                }
+                ll ne=tm+1;
+                if(a>=ne+ne)
+                {
+                    cout<<ne<<" "<<a-ne<<"\n";
+                    cout<<i<<" "<<tm<<"\n";
+                    ck=0;
+                    break;
+                }
+            }
+        }
+        if(ck)
+        {
+            cout<<"-1\n";
+        }
     }
     return 0;
 }
@@ -54,7 +87,3 @@ int main()
 
 
 
-<<<<<<< HEAD
-
-=======
->>>>>>> a91f394eba3eca8ad462a280d00c499976a5a6f5

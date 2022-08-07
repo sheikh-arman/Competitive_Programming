@@ -43,7 +43,42 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,sum=0;
+        ll n,k;
+        ll ck=1;
+        cin>>n>>k;
+        string s1,s2;
+        cin>>s1>>s2;
+        for(ll i=k-1,j=n-1; i>0; i--)
+        {
+            if(s1[j]!=s2[i])
+            {
+                ck=0;
+                break;
+            }
+            j--;
+        }
+        ll t=n-(k-1);
+        ll cc=0;
+        for(ll i=0; i<t; i++)
+        {
+            if(s1[i]==s2[0])
+            {
+                cc=1;
+                break;
+            }
+        }
+        if(cc==0)
+        {
+            ck=0;
+        }
+        if(ck)
+        {
+            YES;
+        }
+        else
+        {
+            NO;
+        }
 
 
 
@@ -54,7 +89,4 @@ int main()
 
 
 
-<<<<<<< HEAD
 
-=======
->>>>>>> a91f394eba3eca8ad462a280d00c499976a5a6f5

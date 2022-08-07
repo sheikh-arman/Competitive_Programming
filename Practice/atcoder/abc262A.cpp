@@ -40,10 +40,17 @@ int main()
     //freopen("1output.txt","w",stdout);
     fast;
     ll tcase=1;
-    cin>>tcase;
+   // cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,sum=0;
+        ll n;
+        cin>>n;
+        while(n){
+            if(n%4==2){
+                cout<<n<<"\n";return 0;
+            }
+            n++;
+        }
 
 
 
@@ -54,7 +61,4 @@ int main()
 
 
 
-<<<<<<< HEAD
 
-=======
->>>>>>> a91f394eba3eca8ad462a280d00c499976a5a6f5

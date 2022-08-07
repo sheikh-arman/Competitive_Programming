@@ -44,9 +44,28 @@ int main()
     for(ll test=1; test<=tcase; test++)
     {
         ll n,sum=0;
-
-
-
+        cin>>n;
+        ll left=0,right=0,up=0,down=0;
+        for(ll i=0; i<n; i++)
+        {
+            ll a,b;
+            cin>>a>>b;
+            if(a==0)
+            {
+                up=max(up,b);
+                down=min(down,b);
+            }
+            if(b==0)
+            {
+                left=min(left,a);
+                right=max(right,a);
+            }
+        }
+        ll ans=2*right;
+        ans+=2*up;
+        ans+=abs(left)*2;
+        ans+=abs(down)*2;
+        cout<<ans<<"\n";
     }
     return 0;
 }
@@ -54,7 +73,3 @@ int main()
 
 
 
-<<<<<<< HEAD
-
-=======
->>>>>>> a91f394eba3eca8ad462a280d00c499976a5a6f5
