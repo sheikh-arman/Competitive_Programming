@@ -34,98 +34,68 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
-ll mem[33][33];
-ll mem2[33][33];
-ll n,m;
-string s,p;
+ll mem[70][70];
+string s;
+ll n;
 ll dp(ll i,ll j)
 {
-    if(i>=n||j>=m)
+    if(i<0||j>=n)
     {
-        return mem[i][j]=0;
+        return 0;
     }
     if(mem[i][j]!=-1)
     {
         return mem[i][j];
     }
     ll ans=0;
-    if(s[i]==p[j])
+    if(s[i]==s[j])
     {
-        ans=dp(i+1,j+1)+1;
+        ans=1;
     }
-    else
-    {
-        ans=dp(i+1,j);
-        ans=max(ans,dp(i,j+1));
-    }
+    ans+=dp(i-1,j+1);
+    ans+=dp(i-1,j);
+    ans+=dp(i,j+1);
     return mem[i][j]=ans;
-}
-ll dp2(ll i,ll j)
-{
-    if(i>=n||j>=m)
-    {
-        return mem2[i][j]=1;
-    }
-    if(mem2[i][j]!=-1)
-    {
-        return mem2[i][j];
-    }
-    ll ans=0;
-    if(s[i]==p[j])
-    {
-        ans=dp2(i+1,j+1);
-    }
-    else
-    {
-        if(mem[i+1][j]==mem[i][j+1])
-        {
-            ans=dp2(i+1,j);
-            ans+=dp2(i,j+1);
-        }
-        else if(mem[i+1][j]>mem[i][j+1])
-        {
-            ans=dp2(i+1,j);
-        }
-        else
-        {
-            ans=dp2(i,j+1);
-        }
-    }
-    return mem2[i][j]=ans;
 }
 int main()
 {
-    //freopen("1input.txt","r",stdin);
-    //freopen("1output.txt","w",stdout);
+    freopen("1input.txt","r",stdin);
+   // freopen("1output.txt","w",stdout);
     fast;
     ll tcase=1;
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        cin>>s>>p;
+        cin>>s;
         n=s.size();
-        m=p.size();
         for(ll i=0; i<=n; i++)
         {
-            for(ll j=0; j<=m; j++)
+            for(ll j=0; j<=n; j++)
             {
                 mem[i][j]=-1;
             }
         }
-        ll ans=dp(0,0);
-        ll mi=(n+m)-ans;
-        for(ll i=0; i<=n; i++)
+        ll ans=0;
+        for(ll i=0; i<n; i++)
         {
-            for(ll j=0; j<=m; j++)
+            ll res=dp(i-1,i+1);
+            ans+=res;
+            ans+=1;
+            cout<<i<<" "<<res+1<<"\n";
+        }
+        for(ll i=0; i<n-1; i++)
+        {
+            for(ll j=i+1; j<n; j++)
             {
-                mem2[i][j]=-1;
+                if(s[i]==s[j])
+                {
+                    ll res=dp(i-1,j+1);
+                    ans+=res;
+                    ans+=1;
+                }
             }
         }
-        ll way=0;
-        way=dp2(0,0);
-        cout<<"Case "<<test<<": "<<mi<<" "<<way<<"\n";
-
-
+        cout<<"Case "<<test<<": "<<ans<<"\n";
     }
     return 0;
 }
