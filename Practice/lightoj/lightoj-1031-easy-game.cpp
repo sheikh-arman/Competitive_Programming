@@ -34,6 +34,15 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
+ll mem[110][110];
+ll dp(ll i,ll j){
+    if(i>j){
+        return 0;
+    }
+    if(mem[i][j]!=-1000000){
+
+    }
+}
 int main()
 {
     //freopen("1input.txt","r",stdin);
@@ -43,14 +52,7 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n;
-        cin>>n;
-        ll cnt=0;
-        while(n){
-            if(n%2!=0)cnt++;
-            n/=2;
-        }
-        cout<<cnt-1<<"\n";
+        ll n,sum=0;
 
 
 

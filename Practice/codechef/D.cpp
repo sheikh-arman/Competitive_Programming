@@ -34,52 +34,9 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
-ll rep[100010];
-ll rep_rev[100010];
-ll Find(ll node)
-{
-    return (rep[node]==node)?node:rep[node]=Find(rep[node]);
-}
-ll Find_rev(ll node)
-{
-    return (rep_rev[node]==node)?node:rep_rev[node]=Find_rev(rep_rev[node]);
-}
-ll ar_ck[100010];
-ll ar[100010];
-bool cmp(ll x,ll y)
-{
-    if(ar_ck[x]==0&&ar_ck[y]==0)
-    {
-        return x<y;
-    }
-    else
-    {
-        if(ar_ck[x]>0&&ar_ck[y]>0){
-            if(ar_ck[x]>=ar[y]&&ar_ck[y]>=ar[x]){
-                return x<y;
-            }
-            else{
-                return false;
-            }
-        }
-        if(ar_ck[x]==0){
-            if(ar_ck[y]>=ar[x]){
-                return y<x;
-            }
-            else{
-                return false;
-            }
-        }
-        if(ar_ck[y]==0){
-            if(ar_ck[x]>=ar[y]){
-                return y>x;
-            }
-            else{
-                return false;
-            }
-        }
-    }
-}
+ll mem[100010][4];
+ll n,x;
+vector<ll>V;
 int main()
 {
     //freopen("1input.txt","r",stdin);
@@ -89,87 +46,30 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,m;
-        cin>>n>>m;
-        vector<ll>ans_v;
-        for(ll i=0; i<=n+1; i++)
+        V.clear();
+        cin>>n>>x;
+        for(ll i=0; i<n; i++)
         {
-            ar_ck[i]=0;
-            rep[i]=i;
-            rep_rev[i]=i;
-            ans_v.PB(0);
-            ar[i]=0;
+            ll a;
+            cin>>a;
+            V.PB(a);
         }
-        vector< pair<ll,ll> >V;
-        for(ll i=0; i<m; i++)
+        mem[n-1][0]=mem[n-1][1]=0;
+        ll ans=0;
+        for(ll i=n-2; i>=0; i--)
         {
-            ll x,y;
-            cin>>x>>y;
-            V.PB({y,x});
-            ar_ck[x]=y;
+            ll tm1=mem[i+1][0]+(V[i]^V[i+1]);
+            ll tm2=mem[i+1][1]+(V[i]^(V[i+1]+x));
+            ll tm3=mem[i+1][0]+((V[i]+x)^V[i+1]);
+            ll tm4=mem[i+1][1]+((V[i]+x)^(V[i+1]+x));
+            mem[i][0]=max(tm1,tm2);
+            mem[i][1]=max(tm3,tm4);
+
         }
-        VST(V);
-        ll ck=1;
-        for(ll i=0; i<m; i++)
-        {
-            ll y=V[i].first;
-            ll x=V[i].second;
-            ll cur=x;
-            while(cur!=Find(cur))
-            {
-                cur=Find(cur);
-            }
-            if(cur>y)
-            {
-                ll cur=y;
-                while(cur!=Find_rev(cur))
-                {
-                    cur=Find_rev(cur);
-                }
-                if(cur<1)
-                {
-                    ck=0;
-                    break;
-                }
-                ans_v[cur]=x;
-                ar[x]=cur;
-                rep_rev[cur]=Find_rev(cur-1);
-                rep[cur]=Find(cur+1);
-            }
-            else
-            {
-                ans_v[cur]=x;
-                ar[x]=cur;
-                rep[cur]=Find(cur+1);
-                rep_rev[cur]=Find_rev(cur-1);
-            }
-        }
-        for(ll i=1; i<=n; i++)
-        {
-            if(ar[i]==0)
-            {
-                ll cur=1;
-                while(cur!=Find(cur))
-                {
-                    cur=Find(cur);
-                }
-                ans_v[cur]=i;
-                rep[cur]=Find(cur+1);
-            }
-        }
-        if(ck==0)
-        {
-            cout<<"-1\n";
-        }
-        else
-        {
-            sort(ans_v.begin(),ans_v.end(),cmp);
-            for(ll i=1; i<=n; i++)
-            {
-                cout<<ans_v[i]<<" ";
-            }
-            cout<<"\n";
-        }
+        ans=max(mem[0][0],mem[0][1]);
+        cout<<ans<<"\n";
+
+
     }
     return 0;
 }

@@ -34,7 +34,6 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
-ll ar[200010];
 int main()
 {
     //freopen("1input.txt","r",stdin);
@@ -44,31 +43,37 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n;;
+        ll n;
         cin>>n;
-        for(ll i=0;i<=n;i++){
-            ar[i]=0;
-        }
         vector<ll>V;
-        ll sum=0;;
-        for(ll i=0; i<n; i++)
-        {
+        ll pre=0;
+        for(ll i=0;i<n;i++){
             ll a;
             cin>>a;
-            V.PB(a);
+            if(a>0)pre=1;
+            if(pre){
+                V.PB(a);
+            }
         }
-        VST(V);
-        for(ll i=n-1;i>=0;i--){
-            sum+=V[i];
-            ar[i]=sum;
+        n=V.size();
+        if((ll)V.size()==1){
+            cout<<"Cook\n";
         }
-        sum=0;
-        ll ans=0;
-        for(ll i=0;i<n-1;i++){
-            sum+=(1000-V[i]);
-            ans=max(ans,sum*ar[i+1]);
+        else{
+            ll cnt=0;
+            for(ll i=0;i<n-1;i++){
+                if(V[i]%2)cnt=1;
+            }
+            if(cnt%2){
+                cout<<"Chef\n";
+            }
+            else{
+                cout<<"Cook\n";
+            }
         }
-        cout<<ans<<"\n";
+
+
+
     }
     return 0;
 }
