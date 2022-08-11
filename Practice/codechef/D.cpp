@@ -14,7 +14,7 @@ typedef long long int ll;
 #include <ext/pb_ds/assoc_container.hpp> // Common file
 #include <ext/pb_ds/tree_policy.hpp>
 using namespace __gnu_pbds;
-typedef tree<ll, null_type, less_equal<ll>, rb_tree_tag,tree_order_statistics_node_update> policy_set;
+typedef tree<ll, null_type, less_equal<ll>, rb_tree_tag,tree_order_statistics_node_update> ordered_set;
 
 #define sf(n) scanf("%lld",&n);
 #define YES cout<<"YES\n";
@@ -34,6 +34,9 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
+ll mem[100010][4];
+ll n,x;
+vector<ll>V;
 int main()
 {
     //freopen("1input.txt","r",stdin);
@@ -43,8 +46,28 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,sum=0;
+        V.clear();
+        cin>>n>>x;
+        for(ll i=0; i<n; i++)
+        {
+            ll a;
+            cin>>a;
+            V.PB(a);
+        }
+        mem[n-1][0]=mem[n-1][1]=0;
+        ll ans=0;
+        for(ll i=n-2; i>=0; i--)
+        {
+            ll tm1=mem[i+1][0]+(V[i]^V[i+1]);
+            ll tm2=mem[i+1][1]+(V[i]^(V[i+1]+x));
+            ll tm3=mem[i+1][0]+((V[i]+x)^V[i+1]);
+            ll tm4=mem[i+1][1]+((V[i]+x)^(V[i+1]+x));
+            mem[i][0]=max(tm1,tm2);
+            mem[i][1]=max(tm3,tm4);
 
+        }
+        ans=max(mem[0][0],mem[0][1]);
+        cout<<ans<<"\n";
 
 
     }

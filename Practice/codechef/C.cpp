@@ -14,7 +14,7 @@ typedef long long int ll;
 #include <ext/pb_ds/assoc_container.hpp> // Common file
 #include <ext/pb_ds/tree_policy.hpp>
 using namespace __gnu_pbds;
-typedef tree<ll, null_type, less_equal<ll>, rb_tree_tag,tree_order_statistics_node_update> policy_set;
+typedef tree<ll, null_type, less_equal<ll>, rb_tree_tag,tree_order_statistics_node_update> ordered_set;
 
 #define sf(n) scanf("%lld",&n);
 #define YES cout<<"YES\n";
@@ -43,32 +43,43 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n;
-        cin>>n;
-        ll ans=0;
-        if(n%2==0)
-        {
-            ll tm=n/2;
-            ll tm2=tm;
-            tm--;
-            tm2++;
-            if(tm%2==0)
-            {
-                tm--;
-                tm2++;
+        ll n,m;
+        cin>>n>>m;
+        string s;
+        cin>>s;
+        ll cnt=0;
+        for(ll i=0;i<n;i++){
+            cnt+=s[i]-'0';
+        }
+        if((cnt*m)%2){
+            cout<<"0\n";
+        }
+        else if(cnt==0){
+            cout<<(n*m)<<"\n";
+        }
+        else{
+            ll res=0,ans=0;
+            if(m%2==0){
+                for(ll i=0;i<n;i++){
+                    if(s[i]=='0')ans++;
+                    else break;
+                }
+                for(ll i=n-1;i>=0;i--){
+                    if(s[i]=='0')ans++;
+                    else break;
+                }
+                ans++;
             }
-            ans=(tm*tm2);
-
-            ans--;
+            else{
+                for(ll i=0;i<n;i++){
+                    res+=s[i]-'0';
+                    if(res==(cnt-res)){
+                        ans++;
+                    }
+                }
+            }
+            cout<<ans<<"\n";
         }
-        else
-        {
-            ll tm=n/2;
-            ans=(tm+1)*tm;
-            ans-=1;
-        }
-        ans=max(ans,n-2);
-        cout<<ans<<"\n";
     }
     return 0;
 }
