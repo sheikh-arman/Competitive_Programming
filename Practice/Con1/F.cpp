@@ -15,7 +15,6 @@ typedef long long int ll;
 #include <ext/pb_ds/tree_policy.hpp>
 using namespace __gnu_pbds;
 typedef tree<ll, null_type, less_equal<ll>, rb_tree_tag,tree_order_statistics_node_update> ordered_set;
-///V.order_of_key(a);
 
 #define sf(n) scanf("%lld",&n);
 #define YES cout<<"YES\n";
@@ -44,48 +43,50 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,q;
-        cin>>n>>q;
-        map<ll,ll>mp;
-        vector<ll>V;
+        ll n;
+        cin>>n;
+        string s,t;
+        cin>>s>>t;
+        ll only_p=0,only_e=0,both=0,both_not=0;
         for(ll i=0; i<n; i++)
         {
-            ll a;
-            cin>>a;
-            V.PB(a);
-            mp[a]++;
-        }
-        string s;
-        for(ll i=0; i<n; i++)
-        {
-            if(q==0)
+            if(s[i]=='1'&&t[i]=='1')
             {
-                s+='0';
-                continue;
+                both++;
             }
-            if(V[i]>q)
+            else if(s[i]=='0'&&t[i]=='0')
             {
-                if(mp[q]>0)
-                {
-                    s+='0';
-                }
-                else
-                {
-                    s+='1';
-                    mp[V[i]]--;
-                    q--;
-                }
+                both_not++;
+            }
+            else if(s[i]=='1')
+            {
+                only_p++;
             }
             else
             {
-                s+='1';
-                mp[V[i]]--;
+                only_e++;
             }
         }
-        cout<<s<<"\n";
+        ll ans=0;
+        ans=min(both,both_not);
+        both-=ans;
+
+        ll tm2=min(only_e,only_p);
+        ans+=tm2;
+        only_e-=tm2;
+        only_p-=tm2;
+
+        only_e+=only_p;
+        tm2=min(only_e,both);
+        ans+=tm2;
+
+        both-=tm2;
+        ans+=(both/2);
+        cout<<ans<<"\n";
     }
     return 0;
 }
+
 
 
 

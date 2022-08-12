@@ -15,7 +15,6 @@ typedef long long int ll;
 #include <ext/pb_ds/tree_policy.hpp>
 using namespace __gnu_pbds;
 typedef tree<ll, null_type, less_equal<ll>, rb_tree_tag,tree_order_statistics_node_update> ordered_set;
-///V.order_of_key(a);
 
 #define sf(n) scanf("%lld",&n);
 #define YES cout<<"YES\n";
@@ -44,45 +43,10 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,q;
-        cin>>n>>q;
-        map<ll,ll>mp;
-        vector<ll>V;
-        for(ll i=0; i<n; i++)
-        {
-            ll a;
-            cin>>a;
-            V.PB(a);
-            mp[a]++;
-        }
-        string s;
-        for(ll i=0; i<n; i++)
-        {
-            if(q==0)
-            {
-                s+='0';
-                continue;
-            }
-            if(V[i]>q)
-            {
-                if(mp[q]>0)
-                {
-                    s+='0';
-                }
-                else
-                {
-                    s+='1';
-                    mp[V[i]]--;
-                    q--;
-                }
-            }
-            else
-            {
-                s+='1';
-                mp[V[i]]--;
-            }
-        }
-        cout<<s<<"\n";
+        ll n,sum=0;
+
+
+
     }
     return 0;
 }

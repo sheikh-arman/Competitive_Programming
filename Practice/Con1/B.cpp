@@ -15,7 +15,6 @@ typedef long long int ll;
 #include <ext/pb_ds/tree_policy.hpp>
 using namespace __gnu_pbds;
 typedef tree<ll, null_type, less_equal<ll>, rb_tree_tag,tree_order_statistics_node_update> ordered_set;
-///V.order_of_key(a);
 
 #define sf(n) scanf("%lld",&n);
 #define YES cout<<"YES\n";
@@ -41,51 +40,80 @@ int main()
     //freopen("1output.txt","w",stdout);
     fast;
     ll tcase=1;
-    cin>>tcase;
+    //cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,q;
-        cin>>n>>q;
-        map<ll,ll>mp;
-        vector<ll>V;
-        for(ll i=0; i<n; i++)
+        ll n,m,ck=1;
+        cin>>n>>m;
+        vector<pair<pair<ll,ll>,ll>>V;
+        for(ll i=0; i<m; i++)
         {
-            ll a;
-            cin>>a;
-            V.PB(a);
-            mp[a]++;
-        }
-        string s;
-        for(ll i=0; i<n; i++)
-        {
-            if(q==0)
-            {
-                s+='0';
-                continue;
+            ll a,b,w;
+            cin>>a>>b>>w;
+            if(a>b){
+                swap(a,b);
+                w*=-1;
             }
-            if(V[i]>q)
+            V.PB({{a,b},w});
+        }
+        VST(V);
+        map<ll,ll>mp;
+        for(ll i=0; i<m; i++)
+        {
+            ll a=V[i].first.first;
+            ll b=V[i].first.second;
+            ll c=V[i].second;
+            if(mp.count(a)||mp.count(b))
             {
-                if(mp[q]>0)
+                if(mp.count(a)&&mp.count(b))
                 {
-                    s+='0';
+                    ll dif=mp[b]-mp[a];
+                    if(dif!=c)
+                    {
+                        ck=0;
+                        break;
+                    }
                 }
                 else
                 {
-                    s+='1';
-                    mp[V[i]]--;
-                    q--;
+                    if(mp.count(a))
+                    {
+                        mp[b]=mp[a]+c;
+                    }
+                    else
+                    {
+                        mp[a]=mp[b]-c;
+                    }
                 }
             }
             else
             {
-                s+='1';
-                mp[V[i]]--;
+                mp[a]=0;
+                mp[b]=c;
             }
         }
-        cout<<s<<"\n";
+        if(ck)
+        {
+            cout<<"Yes\n";
+        }
+        else
+        {
+            cout<<"No\n";
+        }
+
     }
     return 0;
 }
+/*
+4
+3
+1 2 5
+3 4 5
+3 2 3
+
+
+*/
+
 
 
 

@@ -1,3 +1,5 @@
+
+
 /*
     Sk arman Hossain
     University of Barisal
@@ -15,7 +17,6 @@ typedef long long int ll;
 #include <ext/pb_ds/tree_policy.hpp>
 using namespace __gnu_pbds;
 typedef tree<ll, null_type, less_equal<ll>, rb_tree_tag,tree_order_statistics_node_update> ordered_set;
-///V.order_of_key(a);
 
 #define sf(n) scanf("%lld",&n);
 #define YES cout<<"YES\n";
@@ -35,57 +36,38 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
+ll sol(ll n){
+    ll ans=0;
+    while(n){
+        ans+=(n%10);
+        n/=10;
+    }
+    return ans;
+}
 int main()
 {
     //freopen("1input.txt","r",stdin);
     //freopen("1output.txt","w",stdout);
     fast;
     ll tcase=1;
-    cin>>tcase;
+   // cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,q;
-        cin>>n>>q;
-        map<ll,ll>mp;
-        vector<ll>V;
-        for(ll i=0; i<n; i++)
-        {
-            ll a;
-            cin>>a;
-            V.PB(a);
-            mp[a]++;
+        ll n,sum=0;
+        for(ll i=100;i<=200;i++){
+            double ans=((double)i/sol(i));
+            cout<<i<<" "<<ans<<" "<<sol(i)<<" x\n";
         }
-        string s;
-        for(ll i=0; i<n; i++)
-        {
-            if(q==0)
-            {
-                s+='0';
-                continue;
-            }
-            if(V[i]>q)
-            {
-                if(mp[q]>0)
-                {
-                    s+='0';
-                }
-                else
-                {
-                    s+='1';
-                    mp[V[i]]--;
-                    q--;
-                }
-            }
-            else
-            {
-                s+='1';
-                mp[V[i]]--;
-            }
-        }
-        cout<<s<<"\n";
+
+
+
     }
     return 0;
 }
+
+
+
+
 
 
 

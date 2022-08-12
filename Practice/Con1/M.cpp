@@ -15,7 +15,6 @@ typedef long long int ll;
 #include <ext/pb_ds/tree_policy.hpp>
 using namespace __gnu_pbds;
 typedef tree<ll, null_type, less_equal<ll>, rb_tree_tag,tree_order_statistics_node_update> ordered_set;
-///V.order_of_key(a);
 
 #define sf(n) scanf("%lld",&n);
 #define YES cout<<"YES\n";
@@ -41,48 +40,79 @@ int main()
     //freopen("1output.txt","w",stdout);
     fast;
     ll tcase=1;
-    cin>>tcase;
+    // cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,q;
-        cin>>n>>q;
-        map<ll,ll>mp;
+        ll n,m;
+        cin>>n>>m;
+
         vector<ll>V;
         for(ll i=0; i<n; i++)
         {
             ll a;
             cin>>a;
             V.PB(a);
-            mp[a]++;
         }
-        string s;
-        for(ll i=0; i<n; i++)
+        if(n==1)
         {
-            if(q==0)
+            cout<<(V[0]+V[0])<<"\n";
+            continue;
+        }
+        VST(V);
+        reverse(V.begin(),V.end());
+        ll pos=0,value=0;
+        for(ll i=1; i<n; i++)
+        {
+            ll val=i+1;
+            ll x=(val*(val-1))/2;
+            x*=2;
+            x+=val;
+            if(x>m)
             {
-                s+='0';
-                continue;
+                break;
             }
-            if(V[i]>q)
+            value=x;
+            pos=i;
+        }
+        ll ans=0;
+        for(ll i=0; i<=pos; i++)
+        {
+            ans+=(pos+1)*V[i];
+        }
+        m-=value;
+        if(m)
+        {
+            ll left=0,right=pos+1,tm_ans=0;
+            while(m--)
             {
-                if(mp[q]>0)
+                tm_ans+=(V[left]+V[right]);
+                if(right+1<n)
                 {
-                    s+='0';
+                    if(left+1<=pos)
+                    {
+                        if(V[left]+V[right+1]>= V[left+1]+V[right])
+                        {
+                            right++;
+                        }
+                        else
+                        {
+                            left++;
+                        }
+                    }
+                    else
+                    {
+                        right++;
+                    }
                 }
                 else
                 {
-                    s+='1';
-                    mp[V[i]]--;
-                    q--;
+                    right=pos+1;
+                    left++;
                 }
             }
-            else
-            {
-                s+='1';
-                mp[V[i]]--;
-            }
+            ans+=tm_ans;
         }
-        cout<<s<<"\n";
+        cout<<ans<<"\n";
     }
     return 0;
 }
