@@ -34,45 +34,36 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
+ll ar[3000010];
 int main()
 {
     //freopen("1input.txt","r",stdin);
     //freopen("1output.txt","w",stdout);
-    fast;
-    ll tcase=1;
-    cin>>tcase;
+    //fast;
+    ll tcase=100;
+    //cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n;
-        cin>>n;
-        if(n==1)
-        {
-            cout<<"1\n";
-            continue;
-        }
-        if(n%2==0)
-        {
-            for(ll i=1;i<=n;i+=2){
-                cout<<i+1<<" "<<i<<" ";
+        ll n,ans=1,m;
+        cin>>n>>m;
+        cout<<"0 "<<ans<<"\n";
+        for(ll i=1;i<=n;i++){
+            if(i%m==0){
+                cout<<i<<" "<<ans<<"\n";
             }
-            cout<<"\n";
-        }
-        else
-        {
-            cout<<"1 ";
-            for(ll i=2;i<=n-1;i+=2){
-                cout<<i+1<<" "<<i<<" ";
+            else{
+                ans*=i;
+                ans%=m;
+                cout<<i<<" "<<ans<<"\n";
             }
-            cout<<"\n";
         }
+
 
 
 
     }
     return 0;
 }
-
-
 
 
 

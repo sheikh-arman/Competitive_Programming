@@ -34,50 +34,10 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
-ll fac[100010];
-ll mod=1e9+7;
-ll ar[100010];
-ll extended_euclidean(ll a, ll b, ll& x, ll& y)
-{
-    if (b == 0)
-    {
-        x = 1;
-        y = 0;
-        return a;
-    }
-    ll x1, y1;
-    ll d = extended_euclidean(b, a % b, x1, y1);
-    x = y1;
-    y = x1 - y1 * (a / b);
-    return d;
-}
-ll npr(ll n,ll r)
-{
-    ll ans=1;
-    if(r==0)
-    {
-        return fac[n];
-    }
-    else
-    {
-        ll x,y;
-        ll gcd=extended_euclidean(r,mod,x,y);
-        x=(x+mod)%mod;
-        ans=fac[n]*x;
-        ans%=mod;
-    }
-    return ans;
-}
+ll ar[200010];
 int main()
 {
-    ll ans=1;
-    for(ll i=1; i<=100000; i++)
-    {
-        ans*=i;
-        ans%=mod;
-        fac[i]=ans;
-    }
-    freopen("1input.txt","r",stdin);
+    //freopen("1input.txt","r",stdin);
     //freopen("1output.txt","w",stdout);
     fast;
     ll tcase=1;
@@ -86,49 +46,59 @@ int main()
     {
         ll n;
         cin>>n;
-        vector<pair<ll,ll> >V;
+        vector<ll>V;
         for(ll i=0; i<n; i++)
         {
             ll a;
             cin>>a;
-            V.PB({a,i});
-            ar[a]=i;
+            V.PB(a);
         }
-        if(n==1)
+        ll ans=0;
+        ll pre=LONG_LONG_MAX;
+        for(ll i=n-1; i>=0; i--)
         {
-            cout<<"1\n";
-            continue;
-        }
-        //ar[n]=n+1;
-        VST(V);
-        ll mx=2;
-        ll l=V[0].second,r=V[1].second;
-        if(l>r)
-        {
-            swap(l,r);
-        }
-        ans=1;
-        while(r-l<n-1&&mx<n)
-        {
-            ll num=0;
-            while(ar[mx]>=l&&ar[mx]<=r&&mx<n)
+            if(V[i]<=pre)
             {
-                mx++;
-                num++;
+                pre=V[i];
             }
-            ll total=(r-l)+1;
-            ll baki=total-mx;
-            cout<<l<<" "<<r<<" "<<baki<<" "<<num<<" \n";
-            ans*=npr(baki,num);
-            if(mx>=n)break;
-            l=min(l,ar[mx]);
-            r=max(r,ar[mx]);
-            //T(1);
+            else
+            {
+
+                if(ar[V[i]]==0)
+                {
+                    ar[V[i]]=1;
+                    ans++;
+                    pre=0;
+                }
+                //cout<<i<<" "<<V[i]<<" "<<ans<<" \n";
+            }
+        }
+        pre=V[n-1];
+        for(ll i=n-1; i>=0; i--)
+        {
+            if(ar[V[i]]==1){
+                pre=0;
+            }
+            else{
+                if(V[i]<=pre){
+                    pre=V[i];
+                }
+                else{
+                    ans++;
+                    ar[V[i]]=1;
+                }
+            }
         }
         cout<<ans<<"\n";
+        for(ll i=0; i<n; i++)
+        {
+            ar[V[i]]=0;
+        }
     }
     return 0;
 }
+
+
 
 
 

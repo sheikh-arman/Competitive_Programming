@@ -43,35 +43,37 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n;
-        cin>>n;
-        if(n==1)
+        ll n,k;
+        cin>>n>>k;
+        vector<ll>V;
+        ll ans=1e9;
+        for(ll i=0; i<n; i++)
         {
-            cout<<"1\n";
-            continue;
+            ll a;
+            cin>>a;
+            V.PB(a);
         }
-        if(n%2==0)
+        VST(V);
+        if(n>2)
         {
-            for(ll i=1;i<=n;i+=2){
-                cout<<i+1<<" "<<i<<" ";
+            if(k<n)
+            {
+                if(k+1!=n)
+                    ans=min(V[n-1],ans);
+                ans=min(2*V[k],ans);
             }
-            cout<<"\n";
         }
         else
         {
-            cout<<"1 ";
-            for(ll i=2;i<=n-1;i+=2){
-                cout<<i+1<<" "<<i<<" ";
+            if(k<n)
+            {
+                ans=min(V[n-1],ans);
             }
-            cout<<"\n";
         }
-
-
-
+        cout<<ans<<"\n";
     }
     return 0;
 }
-
 
 
 

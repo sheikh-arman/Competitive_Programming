@@ -43,20 +43,31 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n;;
-        cin>>n;
-        if(n%2==0){
-        	cout<<"0 "<<n/2<<" "<<n/2<<"\n";
+        ll n,k;
+        cin>>n>>k;
+        vector<ll>V;
+        for(ll i=0; i<n; i++)
+        {
+            ll a;
+            cin>>a;
+            if(i<k)
+            {
+                V.PB(a);
+            }
         }
-        else{
-        	cout<<"-1\n";
+        VST(V);
+        ll ans=0;
+        for(ll i:V){
+            if(i>k)ans++;
         }
-
+        cout<<ans<<"\n";
 
 
     }
     return 0;
 }
+
+
 
 
 
