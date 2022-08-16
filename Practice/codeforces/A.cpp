@@ -43,30 +43,30 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,k;
-        cin>>n>>k;
-        vector<ll>V;
-        for(ll i=0; i<n; i++)
+        ll n;
+        cin>>n;
+        ll sq=sqrt(n);
+        ll ck=0;
+        for(ll i=1; i<=sq; i++)
         {
-            ll a;
-            cin>>a;
-            if(i<k)
+            if((n-(2*i))>0&&(n-(2*i))%(i+2)==0)
             {
-                V.PB(a);
+                ck=1;
+                //cout<<i<<" "<<(n-(2*i))%(i+2)
+                break;
             }
         }
-        VST(V);
-        ll ans=0;
-        for(ll i:V){
-            if(i>k)ans++;
+        if(ck)
+        {
+            YES;
         }
-        cout<<ans<<"\n";
-
-
+        else
+        {
+            NO;
+        }
     }
     return 0;
 }
-
 
 
 
