@@ -45,33 +45,20 @@ int main()
     {
         ll n;
         cin>>n;
-        if(n==1)
-        {
-            cout<<"1\n";
-            continue;
+        vector<ll>V;
+        for(ll i=0;i<n;i++){
+            ll a;
+            cin>>a;
+            V.PB(a);
         }
-        if(n%2==0)
-        {
-            for(ll i=1;i<=n;i+=2){
-                cout<<i+1<<" "<<i<<" ";
-            }
-            cout<<"\n";
-        }
-        else
-        {
-            cout<<"1 ";
-            for(ll i=2;i<=n-1;i+=2){
-                cout<<i+1<<" "<<i<<" ";
-            }
-            cout<<"\n";
-        }
+        VST(V);
+        cout<<(ll)((V[n-1]+V[n-2])-(V[0]+V[1]))<<"\n";
 
 
 
     }
     return 0;
 }
-
 
 
 

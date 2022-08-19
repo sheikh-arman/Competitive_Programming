@@ -34,41 +34,67 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
+ll mod=1e9+7;
+ll extended_euclidean(ll a,ll b,ll& x,ll& y)
+{
+    if(b==0)
+    {
+        x=1;
+        y=0;
+        return a;
+    }
+    ll x1, y1;
+    ll d=extended_euclidean(b,a%b,x1,y1);
+    x=y1;
+    y=x1-y1*(a/b);
+    return d;
+}
+ll ncr(ll n,ll r)
+{
+    ll ans=dp[n];
+    ll div=((dp[r]%mod)*(dp[n-r]%mod))%mod;
+    ll x,y;
+    ll gcd=extended_euclidean(div,mod,x,y);
+    x=(x+mod)%mod;
+    ans=((ans%mod)*(x%mod))%mod;
+    return ans;
+}
 int main()
 {
     //freopen("1input.txt","r",stdin);
     //freopen("1output.txt","w",stdout);
     fast;
     ll tcase=1;
-    cin>>tcase;
+    //cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll a,b,c,d;
-        cin>>a>>b>>c>>d;
-        if(c==0&&a==0){
-            cout<<"0\n";continue;
+        ll n,x,m;
+        cin>>n>>x>>m;
+        vector<ll>V;
+        for(ll i=0;i<n;i++){
+            ll a;
+            cin>>a;
+            V.PB(a);
         }
-        if(c==0||a==0){
-            cout<<"1\n";continue;
-        }
-        ll gcd=__gcd(a,b);
-        a/=gcd;
-        b/=gcd;
-
-        gcd=__gcd(c,d);
-        c/=gcd;
-        d/=gcd;
-
-        if(a==c&&b==d){
-            cout<<"0\n";
-        }
-        else if(max(a,c)%min(a,c)==0&&max(b,d)%min(b,d)==0){
-            cout<<"1\n";
+        ll ans=0;
+        if(m==1){
+            ans=0;
+            for(ll i=0;i<x;i++){
+                ans+=V[i];
+            }
+            ans%=mod;
         }
         else{
-
-            cout<<"2\n";
+            m++;
+            ll cnt=1;
+            for(ll i=x-1;i>=0;i--){
+                ans+=(ncr(m,cnt)*V[i]);
+                if(ans>=mod)ans%=mod;
+                m++;
+                cnt++;
+            }
         }
+        cout<<ans<<"\n";
 
 
 

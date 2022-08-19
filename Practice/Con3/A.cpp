@@ -43,35 +43,41 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll a,b,c,d;
-        cin>>a>>b>>c>>d;
-        if(c==0&&a==0){
-            cout<<"0\n";continue;
+        ll n,sum=0;
+        vector<ll>V1,V2;
+        cin>>n;
+        for(ll i=0; i<n; i++)
+        {
+            ll a;
+            cin>>a;
+            V1.PB(a);
         }
-        if(c==0||a==0){
-            cout<<"1\n";continue;
+        for(ll i=0; i<n; i++)
+        {
+            ll a;
+            cin>>a;
+            V2.PB(a);
         }
-        ll gcd=__gcd(a,b);
-        a/=gcd;
-        b/=gcd;
-
-        gcd=__gcd(c,d);
-        c/=gcd;
-        d/=gcd;
-
-        if(a==c&&b==d){
-            cout<<"0\n";
+        ll ans=0,pos=0,val=0;
+        for(ll i=n-1; i>=0; i--)
+        {
+            ll tm=V1[i]*V2[i];
+            if(tm>ans)
+            {
+                ans=tm;
+                pos=i;
+                val=V2[i];
+            }
+            else if(tm==ans)
+            {
+                if(val<=V2[i])
+                {
+                    val=V2[i];
+                    pos=i;
+                }
+            }
         }
-        else if(max(a,c)%min(a,c)==0&&max(b,d)%min(b,d)==0){
-            cout<<"1\n";
-        }
-        else{
-
-            cout<<"2\n";
-        }
-
-
-
+        cout<<pos+1<<"\n";
     }
     return 0;
 }

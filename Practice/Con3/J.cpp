@@ -43,35 +43,46 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll a,b,c,d;
-        cin>>a>>b>>c>>d;
-        if(c==0&&a==0){
-            cout<<"0\n";continue;
+        ll n,p,q;
+        cin>>n>>p>>q;
+        vector<ll>V;
+        for(ll i=0; i<n; i++)
+        {
+            ll a;
+            cin>>a;
+            V.PB(a);
         }
-        if(c==0||a==0){
-            cout<<"1\n";continue;
+        VST(V);
+        ll ans=0;
+        for(ll i=0; i<n; i++)
+        {
+            ll total=(2*q)+p;
+            if(V[i]>total)break;
+            ll need2=V[i]/2;
+            ll need1=(V[i]%2!=0);
+            if(p<need1)
+            {
+                continue;
+            }
+            if(q>=need2)
+            {
+                ans++;
+                q-=need2;
+                p-=need1;
+            }
+            else
+            {
+                ll baki=(need2-q);
+                baki*=2;
+                baki+=need1;
+                if(baki<=p){
+                    p-=baki;
+                    q=0;
+                    ans++;
+                }
+            }
         }
-        ll gcd=__gcd(a,b);
-        a/=gcd;
-        b/=gcd;
-
-        gcd=__gcd(c,d);
-        c/=gcd;
-        d/=gcd;
-
-        if(a==c&&b==d){
-            cout<<"0\n";
-        }
-        else if(max(a,c)%min(a,c)==0&&max(b,d)%min(b,d)==0){
-            cout<<"1\n";
-        }
-        else{
-
-            cout<<"2\n";
-        }
-
-
-
+        cout<<ans<<"\n";
     }
     return 0;
 }

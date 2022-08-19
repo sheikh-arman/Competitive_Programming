@@ -40,37 +40,30 @@ int main()
     //freopen("1output.txt","w",stdout);
     fast;
     ll tcase=1;
-    cin>>tcase;
+    // cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll a,b,c,d;
-        cin>>a>>b>>c>>d;
-        if(c==0&&a==0){
-            cout<<"0\n";continue;
+        ll n;
+        cin>>n;
+        //vector<ll>A,B;
+        ll sum=0,ma=LONG_LONG_MAX;
+        for(ll i=0; i<n; i++)
+        {
+            ll a,b;
+            cin>>a>>b;
+            sum+=b;
+            if(a>b)
+            {
+                ma=min(b,ma);
+            }
         }
-        if(c==0||a==0){
-            cout<<"1\n";continue;
-        }
-        ll gcd=__gcd(a,b);
-        a/=gcd;
-        b/=gcd;
-
-        gcd=__gcd(c,d);
-        c/=gcd;
-        d/=gcd;
-
-        if(a==c&&b==d){
+        if(ma==LONG_LONG_MAX)
+        {
             cout<<"0\n";
+            continue;
         }
-        else if(max(a,c)%min(a,c)==0&&max(b,d)%min(b,d)==0){
-            cout<<"1\n";
-        }
-        else{
-
-            cout<<"2\n";
-        }
-
-
+        ll res=sum-ma;
+        cout<<res<<"\n";
 
     }
     return 0;

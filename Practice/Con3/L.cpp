@@ -34,44 +34,54 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
+ll mem[101010][18],n;
+string s;
+ll mod=1e9+7;
+ll dp(ll pos,ll val){
+    if(pos>=n){
+        if(val==5){
+            return 1;
+        }
+        else{
+            return 0;
+        }
+    }
+    if(mem[pos][val]!=-1){
+        return mem[pos][val];
+    }
+    ll ans=0;
+    if(s[pos]=='?'){
+        for(ll i=0;i<10;i++){
+            ans+=dp(pos+1,((val*10)+i)%13);
+            if(ans>=mod)ans%=mod;
+        }
+    }
+    else{
+        ll va=(val*10)+(s[pos]-'0');
+        ans+=dp(pos+1,va%13);
+    }
+    if(ans>=mod)ans%=mod;
+    return mem[pos][val]=ans;
+
+}
 int main()
 {
     //freopen("1input.txt","r",stdin);
     //freopen("1output.txt","w",stdout);
     fast;
     ll tcase=1;
-    cin>>tcase;
+   // cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll a,b,c,d;
-        cin>>a>>b>>c>>d;
-        if(c==0&&a==0){
-            cout<<"0\n";continue;
+        cin>>s;
+        n=s.size();
+        for(ll i=0;i<=n;i++){
+            for(ll j=0;j<=13;j++){
+                mem[i][j]=-1;
+            }
         }
-        if(c==0||a==0){
-            cout<<"1\n";continue;
-        }
-        ll gcd=__gcd(a,b);
-        a/=gcd;
-        b/=gcd;
-
-        gcd=__gcd(c,d);
-        c/=gcd;
-        d/=gcd;
-
-        if(a==c&&b==d){
-            cout<<"0\n";
-        }
-        else if(max(a,c)%min(a,c)==0&&max(b,d)%min(b,d)==0){
-            cout<<"1\n";
-        }
-        else{
-
-            cout<<"2\n";
-        }
-
-
-
+        ll ans=dp(0,0);
+        cout<<ans<<"\n";
     }
     return 0;
 }

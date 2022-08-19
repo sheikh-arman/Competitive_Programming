@@ -43,35 +43,36 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll a,b,c,d;
-        cin>>a>>b>>c>>d;
-        if(c==0&&a==0){
-            cout<<"0\n";continue;
+        ll n;
+        cin>>n;
+        map<ll,ll>mp;
+        ll ma=0;
+        for(ll i=0; i<n; i++)
+        {
+            ll a;
+            cin>>a;
+            ll cn=++mp[a];
+            ma=max(ma,cn);
         }
-        if(c==0||a==0){
-            cout<<"1\n";continue;
+        if(n==1)
+        {
+            cout<<n<<"\n";
+            continue;
         }
-        ll gcd=__gcd(a,b);
-        a/=gcd;
-        b/=gcd;
+        ll mi=n-ma;
+        ll ans;
+        if(mi>=ma)
+        {
+            ans=n/2+(n%2!=0);
 
-        gcd=__gcd(c,d);
-        c/=gcd;
-        d/=gcd;
-
-        if(a==c&&b==d){
-            cout<<"0\n";
         }
-        else if(max(a,c)%min(a,c)==0&&max(b,d)%min(b,d)==0){
-            cout<<"1\n";
+        else
+        {
+            ans=mi;
+            ma-=mi;
+            ans+=ma;
         }
-        else{
-
-            cout<<"2\n";
-        }
-
-
-
+        cout<<ans<<"\n";
     }
     return 0;
 }

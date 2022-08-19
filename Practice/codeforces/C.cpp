@@ -34,7 +34,6 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
-ll ar[200010];
 int main()
 {
     //freopen("1input.txt","r",stdin);
@@ -44,60 +43,35 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n;
-        cin>>n;
-        vector<ll>V;
-        for(ll i=0; i<n; i++)
-        {
-            ll a;
-            cin>>a;
-            V.PB(a);
+        ll n,m;
+        cin>>n>>m;
+        string s[510];
+        for(ll i=0;i<n;i++){
+            cin>>s[i];
         }
-        ll ans=0;
-        ll pre=LONG_LONG_MAX;
-        for(ll i=n-1; i>=0; i--)
-        {
-            if(V[i]<=pre)
-            {
-                pre=V[i];
-            }
-            else
-            {
-
-                if(ar[V[i]]==0)
-                {
-                    ar[V[i]]=1;
-                    ans++;
-                    pre=0;
-                }
-                //cout<<i<<" "<<V[i]<<" "<<ans<<" \n";
+        ll total=0,mi=4;
+        for(ll i=0;i<n-1;i++){
+            for(ll j=0;j<m-1;j++){
+                ll cnt=0;
+                cnt+=s[i][j]-'0';
+                cnt+=s[i][j+1]-'0';
+                cnt+=s[i+1][j]-'0';
+                cnt+=s[i+1][j+1]-'0';
+                mi=min(mi,max(0LL,cnt-2));
             }
         }
-        pre=V[n-1];
-        for(ll i=n-1; i>=0; i--)
-        {
-            if(ar[V[i]]==1){
-                pre=0;
-            }
-            else{
-                if(V[i]<=pre){
-                    pre=V[i];
-                }
-                else{
-                    ans++;
-                    ar[V[i]]=1;
-                }
+        for(ll i=0;i<n;i++){
+            for(ll j=0;j<m;j++){
+                ll cnt=0;
+                cnt+=s[i][j]-'0';
+                total+=cnt;
             }
         }
-        cout<<ans<<"\n";
-        for(ll i=0; i<n; i++)
-        {
-            ar[V[i]]=0;
-        }
+        total-=mi;
+        cout<<total<<"\n";
     }
     return 0;
 }
-
 
 
 

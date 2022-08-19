@@ -43,32 +43,47 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll a,b,c,d;
-        cin>>a>>b>>c>>d;
-        if(c==0&&a==0){
-            cout<<"0\n";continue;
-        }
-        if(c==0||a==0){
-            cout<<"1\n";continue;
-        }
-        ll gcd=__gcd(a,b);
-        a/=gcd;
-        b/=gcd;
+        ll c,A,cnt=0;
+        cin>>c>>A;
+        double save=c;
+        c*=c;
+        A*=2;
+        double left=0,right=sqrt((double)(A+1));
+        double a=-1,b;
+        while(left<=right&&cnt<800)
+        {
+            cnt++;
+            double mid=(left+right)/2;
+            double scnd=A/mid;
+            if(scnd<mid){
+                right=mid;continue;
+            }
+            double val=(mid*mid)+(scnd*scnd);
+            if(val>c)
+            {
+                left=mid;
+            }
+            else
+            {
+                right=mid;
+            }
+            if(abs(val-(double)c)<0.001)
+            {
+                a=mid;
+                b=scnd;
+            }
 
-        gcd=__gcd(c,d);
-        c/=gcd;
-        d/=gcd;
+        }
+        if(a==-1)
+        {
+            cout<<"-1\n";
+        }
+        else
+        {
+            cout<<fixed<<setprecision(6)<<a<<" "<<b<<" "<<save<<"\n";
+        }
 
-        if(a==c&&b==d){
-            cout<<"0\n";
-        }
-        else if(max(a,c)%min(a,c)==0&&max(b,d)%min(b,d)==0){
-            cout<<"1\n";
-        }
-        else{
 
-            cout<<"2\n";
-        }
 
 
 
