@@ -44,9 +44,20 @@ int main()
     for(ll test=1; test<=tcase; test++)
     {
         ll n,sum=0;
-
-
-
+        vector<ll>V;
+        cin>>n;
+        for(ll i=0;i<n;i++){
+            ll a;
+            cin>>a;
+            V.PB(a);
+        }
+        VST(V);
+        ll ans=0;
+        ans+=V[n-1]-V[0];
+        if(n>3){
+            ans+=V[n-2]-V[1];
+        }
+        cout<<ans<<"\n";
     }
     return 0;
 }
@@ -54,7 +65,3 @@ int main()
 
 
 
-<<<<<<< HEAD
-
-=======
->>>>>>> a91f394eba3eca8ad462a280d00c499976a5a6f5
