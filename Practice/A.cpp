@@ -43,24 +43,42 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,sum=0;
-        vector<ll>V;
+        ll n;
         cin>>n;
+        ll sum1=0,sum2=0;
+        vector<ll>V1,V2;
         for(ll i=0;i<n;i++){
             ll a;
             cin>>a;
-            V.PB(a);
+            sum1+=a;
+            V1.PB(a);
         }
-        VST(V);
-        ll ans=0;
-        ans+=V[n-1]-V[0];
-        if(n>3){
-            ans+=V[n-2]-V[1];
+        for(ll i=0;i<n;i++){
+            ll a;
+            cin>>a;
+            sum2+=a;
+            V2.PB(a);
         }
-        cout<<ans<<"\n";
+
+        if(sum1==sum2){
+
+
+            ll ans=0;
+            for(ll i=0;i<n;i++){
+                ans+=abs(V1[i]-V2[i]);
+            }
+            cout<<ans/2<<"\n";
+        }
+        else{
+            cout<<"-1\n";
+        }
+
+
+
     }
     return 0;
 }
+
 
 
 
