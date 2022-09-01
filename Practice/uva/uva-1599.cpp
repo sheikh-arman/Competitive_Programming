@@ -59,7 +59,6 @@ void bfs(ll node)
         }
     }
 }
-
 int main()
 {
     //freopen("1input.txt","r",stdin);
@@ -99,36 +98,6 @@ int main()
                 {
                     color[i]=true;
                 }
-            }
-            for(ll i=1; i<=n; i++)
-            {
-                if(color[i]==false)
-                {
-                    edj[i].clear();
-                    continue;
-                }
-                sort(edj[i].begin(),edj[i].end());
-                vector<pair<ll,ll>>VV;
-                ll si=edj[i].size();
-                for(ll j=0; j<si; j++)
-                {
-                    pair<ll,ll>x=edj[i][j];
-                    if((ll)VV.size()==0)
-                    {
-                        if(color[x.first]==true&&label_save[i]+1==label_save[x.first])
-                            VV.push_back(x);
-                    }
-                    else
-                    {
-                        ll siz=VV.size();
-                        if(VV[siz-1].first!=x.first&&color[x.first]==true&&label_save[i]+1==label_save[x.first])
-                        {
-                            VV.push_back(x);
-                        }
-                    }
-                }
-                edj[i].clear();
-                edj[i]=VV;
             }
             vector<ll>ans,V_1st,V_2nd;
             V_1st.PB(1);
