@@ -34,6 +34,7 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
+vector<ll> edj[100010],rev_edj[100010];
 int main()
 {
     //freopen("1input.txt","r",stdin);
@@ -45,14 +46,42 @@ int main()
     {
         ll m,n;
         cin>>m>>n;
-        for(ll i=0;i<m;i++){
+        for(ll i=0; i<m; i++)
+        {
             string s1,s2;
             cin>>s1>>s2;
+            if(s1[0]=='+')
+            {
+                s1.erase(s1.begin());
+                ll val1=stoi(s1);
+                if(s2[0]=='-')
+                {
+                    s2.erase(s1.begin());
+                    ll val2=stoi(s2);
+
+                }
+                else
+                {
+                    s2.erase(s1.begin());
+                    ll val2=stoi(s2);
+                }
+            }
+            else
+            {
+                s1.erase(s1.begin());
+                if(s2[0]=='-')
+                {
+                    s2.erase(s1.begin());
+                    ll val2=stoi(s2);
+                }
+                else
+                {
+                    s2.erase(s1.begin());
+                    ll val2=stoi(s2);
+                }
+            }
+
         }
-
-
-
-
     }
     return 0;
 }
