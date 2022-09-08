@@ -43,7 +43,13 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,sum=0;
+        ll m,n;
+        cin>>m>>n;
+        for(ll i=0;i<m;i++){
+            string s1,s2;
+            cin>>s1>>s2;
+        }
+
 
 
 
