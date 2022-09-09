@@ -34,50 +34,44 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
-ll ar[30];
-
 int main()
 {
     //freopen("1input.txt","r",stdin);
     //freopen("1output.txt","w",stdout);
     fast;
     ll tcase=1;
-    cin>>tcase;
+    //cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n;
-        cin>>n;
-        string s;
-        cin>>s;
-        for(ll i=0;i<=27;i++){
-        	ar[i]=0;
+        string s,t;
+        cin>>s>>t;
+        ll n=s.size();
+        ll m=t.size();
+        sort(s.begin(),s.end());
+        sort(t.begin(),t.end());
+        reverse(t.begin(),t.end());
+        ll ck=1;
+        for(ll i=0;i<min(n,m);i++){
+            if(t[i]>s[i]){
+                cout<<"Yes\n";return 0;
+            }
+            if(t[i]<s[i]){
+                cout<<"No\n";return 0;
+            }
         }
-        for(ll i=0;i<n;i++){
-        	ar[s[i]-'a']++;
-        }
-        vector<pair<ll,ll>>V;
-        for(ll i=0;i<26;i++){
-        	if(ar[i])
-        	V.PB({ar[i],i});
-        }
-        ll sum=0;
-        Vst(V);
-        ll siz=V.size();
-        for(ll i=0;i<siz;i++){
-        	sum+=V[i].first;
-        }
-        if(V[siz-1].first>sum-V[siz-1].first){
-        	cout<<"NO\n";
+        if(n<m){
+            cout<<"Yes\n";
         }
         else{
-        	cout<<"YES\n";
-        }
 
+            cout<<"No\n";
+        }
 
 
     }
     return 0;
 }
+
 
 
 
