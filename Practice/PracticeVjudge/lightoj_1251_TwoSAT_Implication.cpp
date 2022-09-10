@@ -191,16 +191,22 @@ int main()
 }
 /*
 Implication Rule
-a v !b  =  !a -> !b
-           b -> a
+
 a v b   =  !a -> b
            !b -> a
-!a v !b =  a -> !b
-           b -> !a
+
+a v !b  =  !a -> !b
+           b -> a
+
 !a v b  =  a -> b
            !b -> !a
 
+!a v !b =  a -> !b
+           b -> !a
+
 */
+
+
 
 
 
