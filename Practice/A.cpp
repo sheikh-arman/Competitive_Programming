@@ -43,38 +43,27 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
+        string s;
         ll n;
-        cin>>n;
-        ll sum1=0,sum2=0;
-        vector<ll>V1,V2;
-        for(ll i=0;i<n;i++){
-            ll a;
-            cin>>a;
-            sum1+=a;
-            V1.PB(a);
-        }
-        for(ll i=0;i<n;i++){
-            ll a;
-            cin>>a;
-            sum2+=a;
-            V2.PB(a);
-        }
-
-        if(sum1==sum2){
-
-
-            ll ans=0;
-            for(ll i=0;i<n;i++){
-                ans+=abs(V1[i]-V2[i]);
+        cin>>s;
+        n=s.size();
+        ll ck=1;
+        for(ll i=0; i<n/2; i++)
+        {
+            if(s[i]!=s[n-i-1])
+            {
+                ck=0;
+                break;
             }
-            cout<<ans/2<<"\n";
         }
-        else{
-            cout<<"-1\n";
+        if(!ck)
+        {
+            cout<<"Alice\n";
         }
-
-
-
+        else
+        {
+            cout<<"Draw\n";
+        }
     }
     return 0;
 }
