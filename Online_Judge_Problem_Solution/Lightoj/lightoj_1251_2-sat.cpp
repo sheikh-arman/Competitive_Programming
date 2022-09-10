@@ -140,6 +140,62 @@ int main()
         while(!stk.empty())stk.pop();
         for(ll i=0; i<m; i++)
         {
+
+//            string s1,s2;
+//            cin>>s1>>s2;
+            // cout<<s1<<" "<<s2<<" \n";
+//            if(s1[0]=='+')
+//            {
+//                s1.erase(s1.begin());
+//                ll a=stoi(s1);
+//                if(s2[0]=='-')
+//                {
+//                    s2.erase(s2.begin());
+//                    ll b=stoi(s2);
+//
+//                    edj[a+n].PB(b+n);
+//                    edj[b].PB(a);
+//
+//                    rev_edj[b+n].PB(a+n);
+//                    rev_edj[a].PB(b);
+//                }
+//                else
+//                {
+//                    s2.erase(s2.begin());
+//                    ll b=stoi(s2);
+//
+//                    edj[a+n].PB(b);
+//                    edj[b+n].PB(a);
+//
+//                    rev_edj[b].PB(a+n);
+//                    rev_edj[a].PB(b+n);
+//                }
+//            }
+//            else
+//            {
+//                s1.erase(s1.begin());
+//                ll a=stoi(s1);
+//                if(s2[0]=='-')
+//                {
+//                    s2.erase(s2.begin());
+//                    ll b=stoi(s2);
+//                    edj[a].PB(b+n);
+//                    edj[b].PB(a+n);
+//
+//                    rev_edj[b+n].PB(a);
+//                    rev_edj[a+n].PB(b);
+//                }
+//                else
+//                {
+//                    s2.erase(s2.begin());
+//                    ll b=stoi(s2);
+//                    edj[a].PB(b);
+//                    edj[b+n].PB(a+n);
+//
+//                    rev_edj[b].PB(a);
+//                    rev_edj[a].PB(b+n);
+//                }
+//            }
             ll x,y;
             cin>>x>>y;
             x=value(x);
