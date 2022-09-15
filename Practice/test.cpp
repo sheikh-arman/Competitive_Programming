@@ -1,125 +1,81 @@
+/* C++ program to find a prime factor of composite using
+   Pollard's Rho algorithm */
 #include<bits/stdc++.h>
 using namespace std;
 
-const int N = 3e5 + 9;
-
-/*
-zero Indexed
-we have vars variables
-F=(x_0 XXX y_0) and (x_1 XXX y_1) and ... (x_{vars-1} XXX y_{vars-1})
-here {x_i,y_i} are variables
-and XXX belongs to {OR,XOR}
-is there any assignment of variables such that F=true
-*/
-struct twosat
+/* Function to calculate (base^exponent)%modulus */
+long long int modular_pow(long long int base, int exponent,
+                          long long int modulus)
 {
-    int n;  // total size combining +, -. must be even.
-    vector< vector<int> > g, gt;
-    vector<bool> vis, res;
-    vector<int> comp;
-    stack<int> ts;
-    twosat(int vars = 0)
+    /* initialize result */
+    long long int result = 1;
+
+    while (exponent > 0)
     {
-        n = vars << 1;
-        g.resize(n);
-        gt.resize(n);
+        /* if y is odd, multiply base with result */
+        if (exponent & 1)
+            result = (result * base) % modulus;
+
+        /* exponent = exponent/2 */
+        exponent = exponent >> 1;
+
+        /* base = base * base */
+        base = (base * base) % modulus;
+    }
+    return result;
+}
+
+/* method to return prime divisor for n */
+long long int PollardRho(long long int n)
+{
+    /* initialize random seed */
+    srand (time(NULL));
+
+    /* no prime divisor for 1 */
+    if (n==1) return n;
+
+    /* even number means one of the divisors is 2 */
+    if (n % 2 == 0) return 2;
+
+    /* we will pick from the range [2, N) */
+    long long int x = (rand()%(n-2))+2;
+    long long int y = x;
+
+    /* the constant in f(x).
+     * Algorithm can be re-run with a different c
+     * if it throws failure for a composite. */
+    long long int c = (rand()%(n-1))+1;
+
+    /* Initialize candidate divisor (or result) */
+    long long int d = 1;
+
+    /* until the prime factor isn't obtained.
+       If n is prime, return n */
+    while (d==1)
+    {
+        /* Tortoise Move: x(i+1) = f(x(i)) */
+        x = (modular_pow(x, 2, n) + c + n)%n;
+
+        /* Hare Move: y(i+1) = f(f(y(i))) */
+        y = (modular_pow(y, 2, n) + c + n)%n;
+        y = (modular_pow(y, 2, n) + c + n)%n;
+
+        /* check gcd of |x-y| and n */
+        d = __gcd(abs(x-y), n);
+
+        /* retry if the algorithm fails to find prime factor
+         * with chosen x and c */
+        if (d==n) return PollardRho(n);
     }
 
-    //zero indexed, be careful
-    //if you want to force variable a to be true in OR or XOR combination
-    //add addOR (a,1,a,1);
-    //if you want to force variable a to be false in OR or XOR combination
-    //add addOR (a,0,a,0);
+    return d;
+}
 
-    //(x_a or (not x_b))-> af=1,bf=0
-    void addOR(int a, bool af, int b, bool bf)
-    {
-        a += a + (af ^ 1);
-        b += b + (bf ^ 1);
-        g[a ^ 1].push_back(b);  // !a => b
-        g[b ^ 1].push_back(a);  // !b => a
-        gt[b].push_back(a ^ 1);
-        gt[a].push_back(b ^ 1);
-    }
-    //(!x_a xor !x_b)-> af=0, bf=0
-    void addXOR(int a, bool af, int b, bool bf)
-    {
-        addOR(a, af, b, bf);
-        addOR(a, !af, b, !bf);
-    }
-    //add this type of condition->
-    //add(a,af,b,bf) means if a is af then b must need to be bf
-    void add(int a,bool af,int b,bool bf)
-    {
-        a += a + (af ^ 1);
-        b += b + (bf ^ 1);
-        g[a].push_back(b);
-        gt[b].push_back(a);
-    }
-    void dfs1(int u)
-    {
-        vis[u] = true;
-        for(int v : g[u]) if(!vis[v]) dfs1(v);
-        ts.push(u);
-    }
-    void dfs2(int u, int c)
-    {
-        comp[u] = c;
-        for(int v : gt[u]) if(comp[v] == -1) dfs2(v, c);
-    }
-    bool ok()
-    {
-        vis.resize(n, false);
-        for(int i = 0; i < n; ++i) if(!vis[i]) dfs1(i);
-        int scc = 0;
-        comp.resize(n, -1);
-        while(!ts.empty())
-        {
-            int u = ts.top();
-            ts.pop();
-            if(comp[u] == -1) dfs2(u, scc++);
-        }
-        res.resize(n / 2);
-        for(int i = 0; i < n; i += 2)
-        {
-            if(comp[i] == comp[i + 1]) return false;
-            res[i / 2] = (comp[i] > comp[i + 1]);
-        }
-        return true;
-    }
-};
-
+/* driver function */
 int main()
 {
-    int tcase;
-    cin>>tcase;
-    for(int test=1; test<=tcase; test++)
-    {
-        int n, m;
-        cin >> m >> n;
-        twosat ts(n);
-        for(int i = 0; i < m; i++)
-        {
-            int u, v, k;
-            cin >> u >> v >> k;
-            --u;
-            --v;
-            if(k) ts.add(u, 0, v, 0), ts.add(u, 1, v, 1), ts.add(v, 0, u, 0), ts.add(v, 1, u, 1);
-            else ts.add(u, 0, v, 1), ts.add(u, 1, v, 0), ts.add(v, 0, u, 1), ts.add(v, 1, u, 0);
-        }
-        int k = ts.ok();
-        if(!k) cout<<"Case "<<test<<": No\n";
-        else
-        {
-            cout<<"Case "<<test<<": Yes\n";
-            vector<int> v;
-            for(int i = 0; i < n; i++) if(ts.res[i]) v.push_back(i);
-            cout << (int)v.size() << '\n';
-            for(auto x: v) cout<<" " << x + 1;
-            cout << '\n';
-        }
-    }
-
-
+    long long int n = 290;
+    printf("One of the divisors for %lld is %lld.",
+           n, PollardRho(n));
     return 0;
 }
