@@ -53,7 +53,6 @@ void build_LCP_array(void)
             }
         // cout << arr[i - 1].indx << ' ' << arr[i].indx << ' ' << LCP[i] << endl;
     }
-
 }
 
 int main()

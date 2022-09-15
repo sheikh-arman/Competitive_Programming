@@ -10,22 +10,16 @@ struct info
     }
 } arr[MAX];
 int Rank[18][MAX], LCP[MAX], step;
-string text1,text2;
+string text;
 
 void build_suffix_array(void)
 {
-    int n = text1.size(), jump;
+    int n = text.size(), jump;
     for(int j = 0; j < n; j++)
     {
-        Rank[0][j] = text1[j]; ///rank suffixes according to 1st char
+        Rank[0][j] = text[j]; ///rank suffixes according to 1st char
         memset(arr[j].tup, 0,sizeof(arr[j].tup));
     }
-    for(int j = n; j < 2*n; j++)
-    {
-        Rank[0][j] = text2[j-n]; ///rank suffixes according to 1st char
-        memset(arr[j].tup, 0,sizeof(arr[j].tup));
-    }
-    n*=2;
     for(step = 1, jump = 1; jump <= n; step++, jump <<= 1)
     {
         for(int j = 0; j <=n; j++)
@@ -40,16 +34,15 @@ void build_suffix_array(void)
             Rank[step][arr[j].indx] = arr[j].tup[0] == arr[j - 1].tup[0] &&
                                       arr[j].tup[1] == arr[j - 1].tup[1] ? Rank[step][arr[j - 1].indx] : j;
     }
-
-    cout << "Suffix Array : "<<text<<" \n\n";
-    for(int i = 0; i < n; i++)
-       // cout<<arr[i].indx<<' '<<text.substr(arr[i].indx)<<endl;
+//    cout << "Suffix Array : "<<text<<" \n\n";
+//    for(int i = 0; i < n; i++)
+//        cout<<arr[i].indx<<' '<<text.substr(arr[i].indx)<<endl;
 }
+int pos,ma;
 void build_LCP_array(void)
 {
     LCP[0] = 0;
     int n = text.size(), i, j, id1, id2;
-    n*=2;
     for(i = 1; i < n; i++)
     {
         id1 = arr[i - 1].indx;
@@ -64,17 +57,44 @@ void build_LCP_array(void)
             }
         //cout << arr[i - 1].indx << ' ' << arr[i].indx << ' ' << LCP[i] << endl;
     }
-    for(i = 0; i < n; i++)
-        cout << i << ' ' << LCP[i] << endl;
+    ma=0;
+    for(i = 1; i < n; i++)
+    {
+        if(LCP[i]>ma)
+        {
+            if((arr[i-1].indx>=n/2&&arr[i].indx>=n/2)||(arr[i-1].indx<(n/2)-1&&arr[i].indx<(n/2)-1))
+            {
+
+            }
+            else
+            {
+                ma=LCP[i];
+                pos=min(arr[i-1].indx,arr[i].indx);
+            }
+        }
+        //ma=max(ma,LCP[i]);
+    }
+    //cout << i << ' ' << LCP[i] << endl;
 }
 
 int main()
 {
     int n;
     cin>>n;
-    cin>>text1>>text2;
+    pos=100000000;
+    string s1,s2;
+    cin>>s1>>s2;
+    text=s1;
+    text+='$';
+    text+=s2;
+    text+='#';
     build_suffix_array();
     build_LCP_array();
+    s2.clear();
+    for(int i=pos; i<(pos+ma)&&i<n; i++)s2+=s1[i];
+    if(s2.size()==0)cout<<"\n";
+    else
+        cout<<s2<<"\n";
     return 0;
 }
 
