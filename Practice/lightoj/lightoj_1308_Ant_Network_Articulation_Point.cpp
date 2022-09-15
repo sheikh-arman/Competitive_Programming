@@ -3,7 +3,7 @@
     University of Barisal
 
     Problem : https://lightoj.com/problem/ant-network
-    Solution : BCC +  articulation point + bridge
+    Solution :
     Date:
  */
 
