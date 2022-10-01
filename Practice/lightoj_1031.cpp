@@ -35,21 +35,44 @@ ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
 ll mem[110][110];
-ll dp(ll l, ll r,ll st){
+vector<ll>V;
+ll dp(ll l, ll r,ll st)
+{
     if(l>r)return 0;
     if(mem[l][r]!=-1)return mem[l][r];
     ll ans=0,sum=0;
-    for(ll i=l;i<=r;i++){
-        sum+=V[i];
-        ll tm=sum-dp(i+1,r);
-        ans=max(ans,tm);
+    if(st==0)
+    {
+        for(ll i=l; i<=r; i++)
+        {
+            sum+=V[i];
+            ll tm=sum-dp(i+1,r,0);
+            ans=max(ans,tm);
+        }
+        sum=0;
+        for(ll i=l; i>=r; i--)
+        {
+            sum+=V[i];
+            ll tm=sum-dp(l,i-1,0);
+            ans=max(ans,tm);
+        }
     }
-    sum=0;
-    for(ll i=l;i>=r;i--){
-        sum+=V[i];
-        ll tm=sum-dp(l,i-1);
-        ans=max(ans,tm);
-    }
+//    else
+//    {
+//        for(ll i=l; i<=r; i++)
+//        {
+//            sum+=V[i];
+//            ll tm=sum-dp(i+1,r,0);
+//            ans=max(ans,tm);
+//        }
+//        sum=0;
+//        for(ll i=l; i>=r; i--)
+//        {
+//            sum+=V[i];
+//            ll tm=sum-dp(l,i-1,0);
+//            ans=max(ans,tm);
+//        }
+//    }
     return mem[l][r]=ans;
 }
 int main()
@@ -63,23 +86,26 @@ int main()
     {
         ll n,sum=0;
         cin>>n;
-        vector<ll>V;
-        for(ll i=0;i<n;i++){
+        V.clear();
+        for(ll i=0; i<n; i++)
+        {
             ll a;
             cin>>a;
             V.PB(a);
         }
-        for(ll i=0;i<=n;i++){
-            for(ll j=0;j<=n;j++){
+        for(ll i=0; i<=n; i++)
+        {
+            for(ll j=0; j<=n; j++)
+            {
                 mem[i][j]=-1;
             }
         }
-
-
-
+        ll ans=dp(0,n-1,0);
+        cout<<ans<<"\n";
     }
     return 0;
 }
+
 
 
 

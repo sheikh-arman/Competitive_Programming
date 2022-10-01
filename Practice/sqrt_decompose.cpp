@@ -34,23 +34,45 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
-ll mem[110][110];
-ll dp(ll l, ll r,ll st){
-    if(l>r)return 0;
-    if(mem[l][r]!=-1)return mem[l][r];
-    ll ans=0,sum=0;
-    for(ll i=l;i<=r;i++){
-        sum+=V[i];
-        ll tm=sum-dp(i+1,r);
-        ans=max(ans,tm);
+#define N 200010
+vector<ll>block;
+ll ar[N],len;
+void sqrt_decompose(ll n)
+{
+    len = (ll) sqrt (n + .0) + 1;
+    block.resize(len);
+    for (int i=0; i<n; ++i)
+    {
+        block[i / len] += ar[i];
     }
-    sum=0;
-    for(ll i=l;i>=r;i--){
-        sum+=V[i];
-        ll tm=sum-dp(l,i-1);
-        ans=max(ans,tm);
+}
+ll sqrt_query(ll l,ll r)
+{
+    ll sum = 0;
+    int c_l = l / len,   c_r = r / len;
+    if (c_l == c_r)
+    {
+        for (int i=l; i<=r; ++i)
+        {
+            sum += ar[i];
+        }
     }
-    return mem[l][r]=ans;
+    else
+    {
+        for (int i=l, ending=(c_l+1)*len-1; i<=ending; ++i)
+        {
+            sum += ar[i];
+        }
+        for (int i=c_l+1; i<=c_r-1; ++i)
+        {
+            sum += block[i];
+        }
+        for (int i=c_r*len; i<=r; ++i)
+        {
+            sum += ar[i];
+        }
+    }
+    return sum;
 }
 int main()
 {
@@ -62,18 +84,6 @@ int main()
     for(ll test=1; test<=tcase; test++)
     {
         ll n,sum=0;
-        cin>>n;
-        vector<ll>V;
-        for(ll i=0;i<n;i++){
-            ll a;
-            cin>>a;
-            V.PB(a);
-        }
-        for(ll i=0;i<=n;i++){
-            for(ll j=0;j<=n;j++){
-                mem[i][j]=-1;
-            }
-        }
 
 
 
