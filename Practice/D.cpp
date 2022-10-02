@@ -40,37 +40,17 @@ int main()
     //freopen("1output.txt","w",stdout);
     fast;
     ll tcase=1;
-    //cin>>tcase;
+    cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        string s,t;
-        cin>>s>>t;
-        ll n=s.size();
-        ll m=t.size();
-        sort(s.begin(),s.end());
-        sort(t.begin(),t.end());
-        reverse(t.begin(),t.end());
-        ll ck=1;
-        for(ll i=0;i<min(n,m);i++){
-            if(t[i]>s[i]){
-                cout<<"Yes\n";return 0;
-            }
-            if(t[i]<s[i]){
-                cout<<"No\n";return 0;
-            }
-        }
-        if(n<m){
-            cout<<"Yes\n";
-        }
-        else{
+        ll n,sum=0;
 
-            cout<<"No\n";
-        }
 
 
     }
     return 0;
 }
+
 
 
 

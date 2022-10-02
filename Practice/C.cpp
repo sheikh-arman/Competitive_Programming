@@ -34,23 +34,21 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
-ll mem[210][210];
-ll mod=998244353;
-ll dp(ll n,ll k)
+ll ck;
+ll child[30];
+ll cnt=0;
+void dfs(ll node,ll srch)
 {
-    if(k>n)
+    cnt++;
+    if(node==srch)
     {
-        return 0;
+        ck=0;
+        return;
     }
-    if(k==n||k==0)
+    if(child[node]!=-1)
     {
-        return 1;
+        dfs(child[node],srch);
     }
-    if(mem[n][k]>0)
-    {
-        return mem[n][k]%mod;
-    }
-    return mem[n][k]=(dp(n-1,k)+dp(n-1,k-1))%mod;
 }
 int main()
 {
@@ -61,48 +59,51 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
+
         ll n;
         cin>>n;
-        if(n==2)
+        string t,s;
+        cin>>t;
+        map<ll,ll>mp;
+        ll ar[30];
+        for(ll i=0; i<=26; i++)
         {
-            cout<<"1 0 1\n";
-            continue;
+            ar[i]=0;
+            child[i]=-1;
         }
-        if(n==4)
+        for(ll i=0; i<n; i++)
         {
-            cout<<"3 2 1\n";
-            continue;
-        }
-        ll val=dp(n,n/2);
-        // cout<<val<<" x\n";
+            if(mp.count(t[i]-'a'))
+            {
+                s+=(char)(mp[t[i]-'a']+'a');
+            }
+            else
+            {
+                ll val=t[i]-'a';
+                for(ll j=0; j<26; j++)
+                {
+                    ck=1;
+                    cnt=0;
+                    if(ar[j]==0)
+                    {
+                        dfs(val,j);
+                        //cout<<ck<<" "<<val<<" "<<j<<" x\n";
+                        if(ck||cnt>25)
+                        {
+                            mp[val]=j;
+                            child[j]=val;
+                            ar[j]=1;
+                            break;
+                        }
+                    }
 
-        if((n/2)%2==0)
-        {
-            ll po=pow(2,(n/2)-1);
-            po%=mod;
-            //val-=po;
-            //if(val<0)val+=mod;
-            ll alex=(val/2)+po;
-            alex-=1;
-            if(alex<0)alex+=mod;
-            alex%=mod;
-            ll bob=(val/2)-po;
-            cout<<alex<<" "<<bob<<" 1\n";
+                }
+                s+=mp[val]+'a';
+            }
         }
-        if(1)
-        {
-            ll po=pow(2,(n/2)-1);
-            po%=mod;
-            val-=po;
-            if(val<0)val+=mod;
+        cout<<s<<"\n";
 
 
-            ll alex=(val/2)+po;
-            alex%=mod;
-            ll bob=(val/2)-1;
-            if(bob<0)bob+=mod;
-            cout<<alex<<" "<<bob<<" 1\n";
-        }
     }
     return 0;
 }

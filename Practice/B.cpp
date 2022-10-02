@@ -45,45 +45,37 @@ int main()
     {
         ll n;
         cin>>n;
-        vector<ll>V;
+        set<ll>st;
+        map<ll,ll>mp;
         for(ll i=0; i<n; i++)
         {
             ll a;
             cin>>a;
-            V.PB(a);
+            st.insert(a);
+            mp[a]++;
         }
-        ll ck=1;
-        for(ll i=1; i<n; i++)
+        ll val=*st.begin();
+        ll ans=0;
+        while(1)
         {
-            ll val1=V[i-1]+V[i];
-            ll val2=V[i-1]-V[i];
-            if((val1>=0&&val2>=0&&val1!=val2))
+            auto it=st.end();
+            it--;
+            ll val2=*it;
+           // cout<<val<<" "<<val2<<" x\n";
+            if(val*2<=val2)
             {
-                //cout<<val1<<" "<<val2<<" t\n";
-                ck=0;
-                break;
-            }
-            if(val1>=0)
-            {
-                V[i]=val1;
+                ll cnt=mp[val2];
+                mp[val2/2]+=cnt;
+                mp[(val2+1)/2]+=cnt;
+                ans+=cnt;
+                st.erase(it);
             }
             else
             {
-                V[i]=val2;
+                break;
             }
         }
-        if(ck)
-        {
-            for(ll i:V)
-            {
-                cout<<i<<" ";
-            }
-            cout<<"\n";
-        }
-        else
-        {
-            cout<<"-1\n";
-        }
+        cout<<ans<<"\n";
     }
     return 0;
 }

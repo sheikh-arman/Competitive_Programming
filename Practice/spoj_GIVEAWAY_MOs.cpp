@@ -43,27 +43,15 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n;
+        ll n,sum=0;
         cin>>n;
-        vector<ll>V;
-        for(ll i=0;i<n;i++){
-            ll a;
-            cin>>a;
-            V.PB(a);
-        }
-        VST(V);
-        ll ans=0;
-        for(ll i=1;i<n;i++){
-            ll val=V[0]*2;
-            val--;
-            if(V[i]<=val)continue;
-            ans+=((V[i]+(val-1))/val)-1;
-        }
-        cout<<ans<<"\n";
+
+
+
+
     }
     return 0;
 }
-
 
 
 
