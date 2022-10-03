@@ -35,18 +35,29 @@ ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
 ll weight[1010];
-ll parent[1010],last;
 vector<pair<ll,pair<ll,ll>> >V;
-vector<pair<ll,ll>>edj[1010];
+vector<ll>edj[1010];
 bitset<1010>color;
 vector<ll>node_list;
-bool bellman(ll source,ll n,ll m)
+void go(ll node)
 {
-    for(ll i=0; i<n; i++)
+    node_list.PB(node);
+    color[node]=true;
+    for(ll i:edj[node])
     {
-        weight[node_list[i]]=INT_MAX;
+        if(color[i]==false)
+        {
+            color[i]=true;
+            go(i);
+        }
     }
-    weight[source]=0;
+}
+bool bellman(ll n,ll m)
+{
+    for(ll i=0; i<=n; i++)
+    {
+        weight[i]=INT_MAX;
+    }
     bool ck=0;
     for(ll i=0; i<n; i++)
     {
@@ -57,14 +68,10 @@ bool bellman(ll source,ll n,ll m)
             ll w=pa.first;
             ll u=pa.second.first;
             ll v=pa.second.second;
-            if(weight[u]<INT_MAX)
+            if(weight[v]+w<weight[u])
             {
-                if(weight[u]+w<weight[v])
-                {
-                    weight[v]=weight[u]+w;
-                    parent[v]=u;
-                    cc=0;
-                }
+                weight[u]=weight[v]+w;
+                cc=0;
             }
         }
         if(cc==1)
@@ -72,40 +79,28 @@ bool bellman(ll source,ll n,ll m)
             return 1;
         }
     }
+    node_list.clear();
+    for(ll j=0; j<m; j++)
+    {
+        pair<ll,pair<ll,ll>> pa=V[j];
+        ll w=pa.first;
+        ll u=pa.second.first;
+        ll v=pa.second.second;
+        if(weight[v]+w<weight[u])
+        {
+            weight[u]=weight[v]+w;
+            if(color[u]==false)
+            {
+                go(u);
+            }
+        }
+    }
     return 0;
-}
-stack<ll>stk;
-void dfs(ll node)
-{
-    color[node]=true;
-    for(auto i:edj[node])
-    {
-        if(color[i.first]==false)
-        {
-            color[i.first]=true;
-            dfs(i.first);
-        }
-    }
-    stk.push(node);
-}
-void go(ll node)
-{
-    node_list.PB(node);
-    color[node]=true;
-    for(auto i:edj[node])
-    {
-        if(color[i.first]==false)
-        {
-            color[i.first]=true;
-            go(i.first);
-        }
-    }
-
 }
 int main()
 {
-    freopen("1input.txt","r",stdin);
-    freopen("1output.txt","w",stdout);
+    //freopen("1input.txt","r",stdin);
+    //freopen("1output.txt","w",stdout);
     fast;
     ll tcase=1;
     cin>>tcase;
@@ -123,66 +118,25 @@ int main()
         {
             ll u,v,w;
             cin>>u>>v>>w;
-            edj[u].PB({v,w});
+            edj[v].PB(u);
+            V.PB({w,{u,v}});
         }
-        for(ll i=0; i<n; i++)
-        {
-            if(color[i]==false)
-            {
-                dfs(i);
-            }
-        }
-        for(ll i=0; i<n; i++)
-        {
-            color[i]=0;
-        }
-        ll ans=1;
-        while(!stk.empty())
-        {
-            ll i=stk.top();
-            stk.pop();
-            if(color[i]==false)
-            {
-                node_list.clear();
-                go(i);
-                V.clear();
-                for(ll j:node_list)
-                {
-                    ll siz=edj[j].size();
-                    for(ll k=0; k<siz; k++)
-                    {
-                        V.PB({edj[j][k].second,{j,edj[j][k].first}});
-                    }
-                }
-                ll siz=node_list.size();
-                if(siz>1)
-                {
-                    bool hi=bellman(i,siz,V.size());
-                   // cout<<siz<<" : "<<hi<<" "<<i<<" t\n";
-//                    for(ll j:node_list){
-//                        cout<<j<<" ";
-//                    }
-//                    cout<<" fu\n";
-                    if(hi==0)
-                    {
-                        cout<<"Case "<<test<<": ";
-                        VST(node_list);
-                        for(ll x=0; x<siz; x++)
-                        {
-                            if(x>0)cout<<" ";
-                            cout<<node_list[x];
-                        }
-                        cout<<"\n";
-                        ans=0;
-                        break;
-                    }
-                }
-
-            }
-        }
+        ll ans=bellman(n,m);
         if(ans)
         {
             cout<<"Case "<<test<<": impossible\n";
+        }
+        else
+        {
+            cout<<"Case "<<test<<": ";
+            VST(node_list);
+            ll siz=node_list.size();
+            for(ll i=0; i<siz; i++)
+            {
+                if(i>0)cout<<" ";
+                cout<<node_list[i];
+            }
+            cout<<"\n";
         }
     }
     return 0;
