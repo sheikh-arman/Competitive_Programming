@@ -1,71 +1,142 @@
-/*
-    Sk arman Hossain
-    University of Barisal
-
-    Problem :
-    Solution :
-    Date:
- */
-
 #include<bits/stdc++.h>
+#define pb push_back
 using namespace std;
-typedef long long int ll;
-
-#include <ext/pb_ds/assoc_container.hpp> // Common file
-#include <ext/pb_ds/tree_policy.hpp>
-using namespace __gnu_pbds;
-typedef tree<ll, null_type, less_equal<ll>, rb_tree_tag,tree_order_statistics_node_update> ordered_set;
-
-#define sf(n) scanf("%lld",&n);
-#define YES cout<<"YES\n";
-#define NO cout<<"NO\n";
-#define nl cout<<"\n";
-#define PB push_back
-#define VST(V) sort(V.begin(),V.end())
-#define VSTrev(V) sort(V.begin(),V.end(),greater<long long int>())
-#define fast ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
-#define  base1 129
-#define  base2 137
-#define  MOD1  1479386893
-#define  MOD2  1928476349
-#define MAX 2000010
-#define T(n) printf("test : %d\n",n);
-ll dx[]= {1,-1,0,0,1,-1,-1,1};
-ll dy[]= {0,0,1,-1,1,1,-1,-1};
-ll knx[]= {2,2,1,-1,-2,-2,1,-1};
-ll kny[]= {1,-1,2,2,1,-1,-2,-2};
-int main()
+stack <int> stk;
+vector<int>adj[10005],Radj[10005],component[10005];
+// Radj means to reverse the edges of the graph
+int vis[10005],in_which[10005],mark,cnt;
+void dfs(int u)
 {
-    //freopen("1input.txt","r",stdin);
-    //freopen("1output.txt","w",stdout);
-    fast;
-    ll tcase=1;
-    cin>>tcase;
-    for(ll test=1; test<=tcase; test++)
+    vis[u] = 1;
+    for(int i=0; i<adj[u].size(); i++)
     {
-        ll n;
-        cin>>n;
-        vector<ll>V;
-        for(ll i=0;i<n;i++){
-            ll a;
-            cin>>a;
-            V.PB(a);
-        }
-        VST(V);
-        ll ans=0;
-        for(ll i=1;i<n;i++){
-            ll val=V[0]*2;
-            val--;
-            if(V[i]<=val)continue;
-            ans+=((V[i]+(val-1))/val)-1;
-        }
-        cout<<ans<<"\n";
+        int v = adj[u][i];
+        if(vis[v]==0) dfs(v);
     }
-    return 0;
+    stk.push(u);
 }
 
+void dfs2(int u,int mark)
+{
+    component[mark].pb(u);
+    in_which[u] = mark;
+    vis[u] = 1;
+
+    for(int i=0; i<Radj[u].size(); i++)
+    {
+        int v = Radj[u][i];
+        if(vis[v]==0) dfs2(v,mark);
+    }
+}
+
+void Count(int u)
+{
+    vis[u] = 1;
+    cnt++;
+    for(int i=0; i<adj[u].size(); i++)
+    {
+        int v = adj[u][i];
+        if(vis[v]==0) Count(v);
+    }
+}
+
+int main()
+{
+    int t;
+    scanf("%d",&t);
+    for(int tt=1; tt<=t; tt++)
+    {
+
+        for(int i=0; i<=10000; i++)
+        {
+            adj[i].clear();
+            Radj[i].clear();
+            component[i].clear();
+        }
+        memset(vis,0,sizeof(vis));
+        cnt = mark = 0;
+        int child,e;
+        scanf("%d",&child);
+        map<int,int>mp;
+        while(child--)
+        {
+            int e;
+            scanf("%d",&e);
+            for(int i=1; i<=e; i++)
+            {
+                int u,v;
+                scanf("%d %d",&u,&v);
+                adj[u].pb(v);
+                Radj[v].pb(u);
+                mp[u]=1,mp[v]=1;
+            }
+        }
+        printf("Case %d: ",tt);
 
 
+        /* if the graph is not connected */
+        Count(0);
+        if(cnt!=mp.size())
+        {
+            printf("NO\n");
+            continue;
+        }
 
 
+        //       topsort
+        memset(vis,0,sizeof(vis));
+        for(int i=0; i<1000; i++)
+        {
+            if(vis[i]==0) dfs(i);
+        }
 
+        memset(vis,0,sizeof(vis));
+        while (!stk.empty())
+        {
+            int u = stk.top();
+            stk.pop();
+            if (vis[u]==0)
+            {
+                mark = mark+1;
+                dfs2(u,mark);
+            }
+        }
+        int ck = 1;
+        for(int i=1; i<=mark; i++)
+        {
+            int outgoing_edge = 0;
+            for(int j=0; j<component[i].size(); j++)
+            {
+                int node = component[i][j];
+                for(int k=0; k<adj[node].size(); k++)
+                {
+                    if(in_which[adj[node][k]]!=i) outgoing_edge++;
+                }
+            }
+            if(outgoing_edge>=2)
+            {
+                printf("NO\n");
+                ck = 0 ;
+                break;
+            }
+        }
+        if(ck==1) printf("YES\n");
+    }
+}
+
+//5
+//3
+//3 2
+//2 0
+//2 0
+//3
+//0 1
+//0 2
+//0 2
+//2
+//3 0
+//0 3
+//1
+//3 1
+//1
+//0 1
