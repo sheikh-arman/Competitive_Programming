@@ -36,7 +36,7 @@ ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
 ll n,d;
 ll dis[10010][12];
-vector<pair<pair<ll,ll>,ll>>edj[1010];
+vector<pair<pair<ll,ll>,ll>>edj[10010];
 void dijkstra(ll source)
 {
     for(ll i=0; i<=10000; i++)
