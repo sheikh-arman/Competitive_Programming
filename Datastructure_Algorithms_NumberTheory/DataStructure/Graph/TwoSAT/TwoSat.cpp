@@ -123,7 +123,6 @@ int value(int x)
     }
     x--;
     return ((x)<<1);
-
 }
 int main()
 {
