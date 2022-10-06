@@ -34,39 +34,30 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
+ll dis[1010];
+vector<pair<ll,ll>>V;
+ll mat[1010][1010];
+void dijkstra(ll source){
+    for(ll i=0;i<=1000;i++){
+        dis[i]=INT_MIN;
+    }
+
+}
 int main()
 {
     //freopen("1input.txt","r",stdin);
     //freopen("1output.txt","w",stdout);
     fast;
     ll tcase=1;
-    //cin>>tcase;
+    cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
         ll n;
-        cin>>n;
-        vector<ll>V;
-        for(ll i=0;i<n;i++){
-            ll a;
-            cin>>a;
-            V.PB(a);
-        }
-        VST(V);
-        reverse(V.begin(),V.end());
-        ll ans=0;
-        map<ll,ll>mp;
-        for(ll i:V){
-            if(mp[i]>0){
-                mp[i]--;
-                ans++;
-                continue;
-            }
-            ll lg=log2(i);
-            ll val=pow(2,lg+1);
-            ll need=val-i;
-            mp[need]++;
-        }
-        cout<<ans<<"\n";
+        cin>>n>>m;
+
+
+
+
     }
     return 0;
 }
