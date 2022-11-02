@@ -34,22 +34,6 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
-ll ck;
-ll child[30];
-ll cnt=0;
-void dfs(ll node,ll srch)
-{
-    cnt++;
-    if(node==srch)
-    {
-        ck=0;
-        return;
-    }
-    if(child[node]!=-1)
-    {
-        dfs(child[node],srch);
-    }
-}
 int main()
 {
     //freopen("1input.txt","r",stdin);
@@ -59,51 +43,45 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-
         ll n;
         cin>>n;
-        string t,s;
-        cin>>t;
-        map<ll,ll>mp;
-        ll ar[30];
-        for(ll i=0; i<=26; i++)
-        {
-            ar[i]=0;
-            child[i]=-1;
-        }
+        vector<ll>V,V2;
         for(ll i=0; i<n; i++)
         {
-            if(mp.count(t[i]-'a'))
+            ll a;
+            cin>>a;
+            V2.PB(a);
+        }
+        VST(V2);
+        ll ans=0;
+        for(ll i=100; i>=1; i--)
+        {
+            ll k=i,ck=1;
+            V=V2;
+            for(ll j=1; j<=k; j++)
             {
-                s+=(char)(mp[t[i]-'a']+'a');
-            }
-            else
-            {
-                ll val=t[i]-'a';
-                for(ll j=0; j<26; j++)
+                ll pos=upper_bound(V.begin(),V.end(),(k-j)+1)-V.begin();
+                pos--;
+                if(pos>=0)
                 {
-                    ck=1;
-                    cnt=0;
-                    if(ar[j]==0)
-                    {
-                        dfs(val,j);
-                        //cout<<ck<<" "<<val<<" "<<j<<" x\n";
-                        if(ck||cnt>25)
-                        {
-                            mp[val]=j;
-                            child[j]=val;
-                            ar[j]=1;
-                            break;
-                        }
-                    }
-
+                    V[pos]+=10000;
+                    V[0]+=(k-j)+1;
                 }
-                s+=mp[val]+'a';
+                else
+                {
+                    ck=0;
+                    break;
+                }
+                VST(V);
+                V.pop_back();
+            }
+            if(ck)
+            {
+                ans=i;
+                break;
             }
         }
-        cout<<s<<"\n";
-
-
+        cout<<ans<<"\n";
     }
     return 0;
 }

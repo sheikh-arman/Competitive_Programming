@@ -45,37 +45,24 @@ int main()
     {
         ll n;
         cin>>n;
-        set<ll>st;
-        map<ll,ll>mp;
-        for(ll i=0; i<n; i++)
-        {
+        ll sum=0;
+        ll ma=0;
+        for(ll i=0;i<n;i++){
             ll a;
             cin>>a;
-            st.insert(a);
-            mp[a]++;
+            sum+=a;
         }
-        ll val=*st.begin();
-        ll ans=0;
-        while(1)
-        {
-            auto it=st.end();
-            it--;
-            ll val2=*it;
-           // cout<<val<<" "<<val2<<" x\n";
-            if(val*2<=val2)
-            {
-                ll cnt=mp[val2];
-                mp[val2/2]+=cnt;
-                mp[(val2+1)/2]+=cnt;
-                ans+=cnt;
-                st.erase(it);
-            }
-            else
-            {
-                break;
-            }
+        for(ll i=0;i<n;i++){
+            ll a;
+            cin>>a;
+            ma=max(ma,a);
+            sum+=a;
         }
+        ll ans=sum-ma;
         cout<<ans<<"\n";
+
+
+
     }
     return 0;
 }

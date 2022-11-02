@@ -46,7 +46,8 @@ int main()
         ll n;
         cin>>n;
         vector<ll>V;
-        for(ll i=0;i<n;i++){
+        for(ll i=0; i<n; i++)
+        {
             ll a;
             cin>>a;
             V.PB(a);
@@ -55,8 +56,10 @@ int main()
         reverse(V.begin(),V.end());
         ll ans=0;
         map<ll,ll>mp;
-        for(ll i:V){
-            if(mp[i]>0){
+        for(ll i:V)
+        {
+            if(mp[i]>0)
+            {
                 mp[i]--;
                 ans++;
                 continue;

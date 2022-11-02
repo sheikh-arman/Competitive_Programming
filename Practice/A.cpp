@@ -38,33 +38,23 @@ int main()
 {
     //freopen("1input.txt","r",stdin);
     //freopen("1output.txt","w",stdout);
-    //fast;
+    fast;
     ll tcase=1;
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n;
-        cin>>n;
-        n-=4;
-        ll dif=n/3;
-        vector<ll>V;
-        V.PB(1);
-        V.PB(dif);
-        V.PB(2*dif);
-        ll ex=n%3;
-        ll di=ex/2;
-        V[1]+=di;
-        V[2]+=di;
-        ll mi=99999999999999999;
-        for(ll i=0;i<2;i++){
-            for(ll j=i+1;j<3;j++){
-                mi=min(mi,abs(V[i]-V[j]));
-            }
+        ll n,m;
+        cin>>n>>m;
+        for(ll i=0;i<m;i++){
+            ll u,v;
+            cin>>u>>v;
         }
-        cout<<mi<<"\n";
-
-
-
+        if(n!=m){
+            YES;
+        }
+        else{
+            NO;
+        }
     }
     return 0;
 }
