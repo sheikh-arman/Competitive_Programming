@@ -43,45 +43,10 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n;
-        cin>>n;
-        vector<ll>V,V2;
-        for(ll i=0; i<n; i++)
-        {
-            ll a;
-            cin>>a;
-            V2.PB(a);
-        }
-        VST(V2);
-        ll ans=0;
-        for(ll i=100; i>=1; i--)
-        {
-            ll k=i,ck=1;
-            V=V2;
-            for(ll j=1; j<=k; j++)
-            {
-                ll pos=upper_bound(V.begin(),V.end(),(k-j)+1)-V.begin();
-                pos--;
-                if(pos>=0)
-                {
-                    V[pos]+=10000;
-                    V[0]+=(k-j)+1;
-                }
-                else
-                {
-                    ck=0;
-                    break;
-                }
-                VST(V);
-                V.pop_back();
-            }
-            if(ck)
-            {
-                ans=i;
-                break;
-            }
-        }
-        cout<<ans<<"\n";
+        ll n,sum=0;
+
+
+
     }
     return 0;
 }

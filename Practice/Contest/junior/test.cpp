@@ -34,19 +34,57 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
+ll rep[100010];
+ll Find(ll node)
+{
+    return (rep[node]==node)?node:rep[node]=Find(rep[node]);
+}
 int main()
 {
     //freopen("1input.txt","r",stdin);
     //freopen("1output.txt","w",stdout);
     fast;
     ll tcase=1;
-    cin>>tcase;
+    //cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,sum=0;
-
-
-
+        ll n,q;
+        cin>>n>>q;
+        for(ll i=0; i<=n; i++)rep[i]=i;
+        assert(1<=n&&n<=100000&&1<=q&&q<=100000);
+        for(ll i=0; i<n; i++)
+        {
+            ll a;
+            cin>>a;
+            assert(1<=a&&a<=1000000000);
+        }
+        for(ll i=2; i<=n; i++)
+        {
+            ll a;
+            cin>>a;
+            assert(a>=1&&a<=n);
+            assert(Find(a)!=Find(i));
+            rep[Find(i)]=Find(a);
+        }
+        for(ll i=0; i<q; i++)
+        {
+            ll a;
+            cin>>a;
+            assert(a>=1&&a<=2);
+            if(a==1)
+            {
+                ll x,y;
+                cin>>x>>y;
+                assert(x>=1&&x<=n&&y>=1&&y<=1000000000);
+            }
+            else
+            {
+                ll u,v;
+                cin>>u>>v;
+                assert(u>=1&&u<=n&&v>=1&&v<=n);
+                cout<<"3\n";
+            }
+        }
     }
     return 0;
 }

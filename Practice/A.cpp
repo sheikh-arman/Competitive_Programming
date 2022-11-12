@@ -43,21 +43,14 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,m;
-        cin>>n>>m;
-        for(ll i=0;i<m;i++){
-            ll u,v;
-            cin>>u>>v;
-        }
-        if(n!=m){
-            YES;
-        }
-        else{
-            NO;
-        }
+        ll n,sum=0;
+
+
+
     }
     return 0;
 }
+
 
 
 

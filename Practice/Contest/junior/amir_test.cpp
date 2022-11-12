@@ -40,19 +40,40 @@ int main()
     //freopen("1output.txt","w",stdout);
     fast;
     ll tcase=1;
-    cin>>tcase;
+    //cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,sum=0;
+        string s;
+        ll n,q;
+        cin>>s;
+        cin>>q;
+        n=s.size();
+        vector<ll>V[30];
+        for(ll i=0; i<n; i++)
+        {
+            V[s[i]-'a'].PB(i+1);
+        }
+        for(ll i=0; i<q; i++)
+        {
+            string s2;
+            ll pos;
+            cin>>s2;
+            cin>>pos;
+            assert(pos>0&&pos<=100000);
+            assert(s2[0]>='a'&&s2[0]<='z');
+            if((ll)V[s2[0]-'a'].size()>=pos)
+            {
+                cout<<V[s2[0]-'a'][pos-1]<<"\n";
+            }
+            else
+            {
+                cout<<"-1\n";
+            }
+        }
+        assert(1<=100000&&n<=100000&&1<=q&&q<=100000);
 
 
 
     }
     return 0;
 }
-
-
-
-
-
-

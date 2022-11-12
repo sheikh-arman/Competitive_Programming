@@ -34,23 +34,41 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
+ll ar[100010];
 int main()
 {
-    //freopen("1input.txt","r",stdin);
-    //freopen("1output.txt","w",stdout);
+    //freopen("input6.txt","r",stdin);
+    //freopen("output6.txt","w",stdout);
     fast;
     ll tcase=1;
-    cin>>tcase;
+    // cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,sum=0;
-
-
-
+        ll n;
+        cin>>n;
+        assert(1<=n&&n<=100000);
+        for(ll i=1; i<=n; i++)
+        {
+            cin>>ar[i];
+            assert(-100000<=ar[i]&&ar[i]<=100000);
+            ar[i]+=ar[i-1];
+        }
+        ll q;
+        cin>>q;
+        assert(1<=q&&q<=100000);
+        for(ll i=0; i<q; i++)
+        {
+            ll l,r,x,sum=0;
+            cin>>l>>r>>x;
+            assert(1<=l&&l<=r&&r>=l&&r<=n&&x>=-100000&&x<=100000);
+            ll total=(r-l)+1;
+            total*=x;
+            sum=total-(ar[r]-ar[l-1]);
+            cout<<sum<<"\n";
+        }
     }
     return 0;
 }
-
 
 
 

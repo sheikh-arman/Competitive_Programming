@@ -37,20 +37,60 @@ ll kny[]= {1,-1,2,2,1,-1,-2,-2};
 int main()
 {
     //freopen("1input.txt","r",stdin);
-    //freopen("1output.txt","w",stdout);
+    freopen("input5.txt","w",stdout);
     fast;
     ll tcase=1;
-    cin>>tcase;
+    //cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,sum=0;
-
-
-
+        ll n=100000;
+        cout<<n<<"\n";
+        ll val1=131;
+        ll val2=1233;
+        ll val3=1133;
+        ll val4=1231;
+        for(ll i=0; i<n; i++)
+        {
+            ll val=(rand()+val1)%100000;
+            ll ck=(rand()+val4)%2;
+            if(ck)
+            {
+                val-=100000;
+            }
+            cout<<val<<" ";
+            val1*=27;
+            val1%=100000;
+        }
+        cout<<"\n";
+        ll q=100000;
+        cout<<q<<"\n";
+        for(ll i=0; i<q; i++)
+        {
+            ll l,r,x;
+            l=(rand()+val2)%n;
+            r=(rand()+val3)%n;
+            l++;
+            r++;
+            if(l>r)swap(l,r);
+            x=rand()%100000;
+            ll ck=(rand()+val4)%2;
+            if(ck)
+            {
+                x-=100000;
+            }
+            val2*=113;
+            val3*=223;
+            val4*=31;
+            val2%=10000;
+            val3%=10000;
+            val4%=10000;
+//            l=abs(l);
+//            r=abs(r);
+            cout<<l<<" "<<r<<" "<<x<<"\n";
+        }
     }
     return 0;
 }
-
 
 
 

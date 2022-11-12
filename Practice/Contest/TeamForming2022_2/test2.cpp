@@ -34,25 +34,60 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
+ll rep[100010];
+ll Find(ll node)
+{
+    return (node==rep[node]?node:rep[node]=Find(rep[node]));
+}
 int main()
 {
     //freopen("1input.txt","r",stdin);
-    //freopen("1output.txt","w",stdout);
-    fast;
+    freopen("input12.txt","w",stdout);
+    //fast;
     ll tcase=1;
-    cin>>tcase;
+    // cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,sum=0;
-
-
-
+        ll n=100000,q=100000;
+        cout<<n<<"\n";
+        for(ll i=0; i<n; i++)
+        {
+            ll a=(rand()+125)%100000;
+            a++;
+            cout<<a<<" ";
+        }
+        cout<<"\n";
+        vector<ll>V;
+        V.PB(1);
+        ll cnt=0;
+        for(ll i=2; i<=n ; i++)
+        {
+            ll x=V[cnt];
+            ll y=i;
+            cout<<x<<" "<<y<<"\n";
+            V.PB(i);
+            if(i+1<=n)
+            {
+                x=V[cnt];
+                y=i+1;
+                cout<<x<<" "<<y<<"\n";
+                V.PB(i+1);
+            }
+            i++;
+            cnt++;
+        }
+        cout<<q<<"\n";
+        for(ll i=0; i<q; i++)
+        {
+            ll a=(rand())%n;
+            ll b=(rand())%n;
+            a++;
+            b++;
+            ll x=(rand()+4312)%100000;
+            x++;
+            cout<<a<<" "<<n<<" "<<x<<"\n";
+        }
     }
     return 0;
 }
-
-
-
-
-
 

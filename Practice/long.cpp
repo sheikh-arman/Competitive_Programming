@@ -37,24 +37,11 @@ ll kny[]= {1,-1,2,2,1,-1,-2,-2};
 ll label[100010];
 ll parent[100010];
 vector<ll>edj[100010];
-stack<ll>stk;
-void dfs(ll node)
-{
-    for(ll i:edj[node])
-    {
-        if(label[i]==-1)
-        {
-            label[i]=label[node]+1;
-            dfs(i);
-        }
-    }
-    stk.push(node);
-}
 bitset<100010>color;
-void last_go(ll node, ll paren)
+void last_go(ll node)
 {
     color[node]=true;
-    if(edj[node].size()==1)
+    if((ll)edj[node].size()==0)
     {
         label[node]=0;
         return;
@@ -64,26 +51,14 @@ void last_go(ll node, ll paren)
         if(color[i]==false)
         {
             color[i]=true;
-            last_go(i,node);
-            if(label[i]+1>label[node])
-            {
-                label[node]=label[i]+1;
-                parent[node]=i;
-            }
+            last_go(i);
         }
-        else
+        if(label[i]+1>label[node])
         {
-            if(i!=paren)
-            {
-                if(label[i]+1>label[node])
-                {
-                    label[node]=label[i]+1;
-                    parent[node]=i;
-                }
-            }
+            label[node]=label[i]+1;
+            parent[node]=i;
         }
     }
-    cout<<node<<" "<<paren<<" xxx\n";
 }
 int main()
 {
@@ -106,36 +81,26 @@ int main()
         {
             label[i]=-1;
             color[i]=false;
+            parent[i]=-1;
         }
         for(ll i=1; i<=n; i++)
         {
-            if(label[i]==-1)
+
+            if(color[i]==false)
             {
-                label[i]=0;
-                dfs(i);
+                last_go(i);
             }
         }
-        for(ll i=0; i<=n; i++)label[i]=-1;
-//        while(!stk.empty())
-//        {
-//            ll node=stk.top();
-//            stk.pop();
-//            if(color[node]==false)
-//            {
-//                last_go(node,-1);
-//            }
-//        }
         vector<ll>V;
-        ll ma=0,node;
+        ll ma=0,node=1;
         for(ll i=1; i<=n; i++)
         {
-            if(label[node]>ma)
+            if(label[i]>ma)
             {
-                ma=label[node];
+                ma=label[i];
                 node=i;
             }
         }
-        cout<<node<<" x\n";
         vector<ll>ans;
         while(parent[node]!=-1)
         {
@@ -143,7 +108,6 @@ int main()
             node=parent[node];
         }
         ans.PB(node);
-        reverse(ans.begin(),ans.end());
         cout<<ans.size()<<"\n";
         ll ck=0;
         for(ll i:ans)

@@ -34,6 +34,10 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
+ll Find(ll node)
+{
+    return (node==rep[node]?node:rep[node]=Find(rep[node]));
+}
 int main()
 {
     //freopen("1input.txt","r",stdin);
@@ -43,16 +47,11 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,sum=0;
+        ll n;
+        cin>>n;
 
 
 
     }
     return 0;
 }
-
-
-
-
-
-

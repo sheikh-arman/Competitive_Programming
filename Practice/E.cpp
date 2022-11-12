@@ -34,7 +34,6 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
-ll cum[200010];
 int main()
 {
     //freopen("1input.txt","r",stdin);
@@ -44,34 +43,16 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,q;
-        cin>>n>>q;
-        for(ll i=0; i<=n; i++)
-        {
-            cum[i]=0;
-        }
-        vector<ll>V,ans;
-        ll ma=0,sum=0;
-        V.PB(-1);
-        ans.PB(0);
-        for(ll i=0; i<n; i++)
-        {
-            ll a;
-            cin>>a;
-            sum+=a;
-            ma=max(ma,a);
-            V.PB(ma);
-            ans.PB(sum);
-        }
-        for(ll i=0; i<q; i++)
-        {
-            ll a;
-            cin>>a;
-            ll pos=upper_bound(V.begin(),V.end(),a)-V.begin();
-            pos--;
-            cout<<ans[pos]<<" ";
-        }
-        cout<<"\n";
+        ll n,sum=0;
+
+
+
     }
     return 0;
 }
+
+
+
+
+
+
