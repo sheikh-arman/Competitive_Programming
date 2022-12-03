@@ -43,13 +43,31 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n;;
-        cin>>n;
-        if(n%2==0){
-        	cout<<"0 "<<n/2<<" "<<n/2<<"\n";
+        ll a,b,c,d;
+        cin>>a>>b>>c>>d;
+        if(c==0&&a==0){
+            cout<<"0\n";continue;
+        }
+        if(c==0||a==0){
+            cout<<"1\n";continue;
+        }
+        ll gcd=__gcd(a,b);
+        a/=gcd;
+        b/=gcd;
+
+        gcd=__gcd(c,d);
+        c/=gcd;
+        d/=gcd;
+
+        if(a==c&&b==d){
+            cout<<"0\n";
+        }
+        else if(max(a,c)%min(a,c)==0&&max(b,d)%min(b,d)==0){
+            cout<<"1\n";
         }
         else{
-        	cout<<"-1\n";
+
+            cout<<"2\n";
         }
 
 
@@ -57,6 +75,7 @@ int main()
     }
     return 0;
 }
+
 
 
 

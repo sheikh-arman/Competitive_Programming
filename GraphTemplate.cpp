@@ -163,9 +163,7 @@ int main()
 
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,sum=0;
-
-
+        ll n,sum=0,ans;
 
     }
     return 0;

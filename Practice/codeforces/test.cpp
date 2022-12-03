@@ -1,3 +1,29 @@
+<<<<<<< HEAD
+#include<stdio.h>
+int main(){
+    int n;
+    scanf("%d", &n);
+    for( int i=1; i<=n; i++){
+        int num;
+        int c = 0;
+        scanf("%d", &num);
+        if(num==1){
+            c=c+2;
+        }
+        else if(num%3==0){
+            c = c+(num/3);
+        }
+        else if(num%3==1){
+            int c1,c2;
+            c=c+(num/3)+1;
+        }
+        else if(num%3==2){
+            c=c+(num/3)+1;
+        }
+        printf("%d\n",c);
+    }
+    return 0;
+=======
 
 // Problem: B. Difference of GCDs
 // Contest: Codeforces - Codeforces Round #808 (Div. 2)
@@ -79,4 +105,5 @@ int main ()
     */
 
     return (0 - 0 + 1 -  1 * 1);
+>>>>>>> ea08c2e9a570a0887441ce116fbde38a45332ad6
 }

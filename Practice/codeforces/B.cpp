@@ -34,58 +34,32 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
-ll ar[55][55];
 int main()
 {
     //freopen("1input.txt","r",stdin);
     //freopen("1output.txt","w",stdout);
-    //fast;
+    fast;
     ll tcase=1;
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,m;
-        cin>>n>>m;
-        ll cnt=1,ck=1;
-        for(ll i=0;i<m;i++){
-        	if(ck){
-        		ar[0][i]=1;
-        		cnt++;
-        	}
-        	else{
-        		ar[0][i]=0;cnt++;
-        	}
-        	if(cnt==2){
-        		cnt=0;ck=1-ck;
-        	}
-        }
-        cnt=0;
-        for(ll i=1;i<n;i++){
-        	if(cnt==0){
-        		for(ll j=0;j<m;j++){
-        			ar[i][j]=1-ar[i-1][j];
-        		}
-        	}
-        	else{
-        		for(ll j=0;j<m;j++){
-        			ar[i][j]=ar[i-1][j];
-        		}
-        	}
-        	cnt++;
-        	cnt%=2;
-        }
+        ll n;
+        cin>>n;
+        vector<ll>V;
         for(ll i=0;i<n;i++){
-        	for(ll j=0;j<m;j++){
-        		cout<<ar[i][j]<<" ";
-        	}
-        	cout<<"\n";
+            ll a;
+            cin>>a;
+            V.PB(a);
         }
+        VST(V);
+        cout<<(ll)((V[n-1]+V[n-2])-(V[0]+V[1]))<<"\n";
 
 
 
     }
     return 0;
 }
+
 
 
 
