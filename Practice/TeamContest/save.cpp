@@ -40,83 +40,80 @@ int main()
     //freopen("1output.txt","w",stdout);
     fast;
     ll tcase=1;
-    cin>>tcase;
+    //cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
         ll n;
         cin>>n;
-        ll zero=0,one=0;
-        deque<ll>V;
-        set<ll>st;
+        ll dir=-1;
+        ll curr_pos=0;
         for(ll i=0; i<n; i++)
         {
-            ll a;
-            cin>>a;
-            V.PB(a);
-            st.insert(a);
-        }
-        if((ll)st.size()==1)
-        {
-            cout<<"Bob\n";
-        }
-        else
-        {
-            while(V[0]==1)
+            ll a,b;
+            cin>>a>>b;
+            if(dir==-1)
             {
-                V.PB(1);
-                V.pop_front();
+                dir=b;
+                ll ab=abs(a-curr_pos);
+                curr_pos+=ab+10;
             }
-            ll sum=0,tot=0;
-            for(ll i=0; i<n; i++)
+            else if(dir==0)
             {
-                if(V[i]==1)
+                if(b==0)
                 {
-                    sum++;
+                    if(curr_pos<a)
+                    {
+                        curr_pos+=(a-curr_pos)+10;
+                    }
+                    else
+                    {
+                        curr_pos=a+10;
+                    }
                 }
                 else
                 {
-                    one+=max(0LL,sum-1);
-                    sum=0;
+                    if(curr_pos<=a)
+                    {
+                        curr_pos=a+10;
+                    }
+                    else
+                    {
+                        curr_pos+=10;
+                    }
+                    dir=1;
                 }
-            }
-            one+=max(0LL,sum-1);
-            sum=0;
-
-            while(V[0]==0)
-            {
-                V.PB(0);
-                V.pop_front();
-            }
-            sum=0;
-            for(ll i=0; i<n; i++)
-            {
-                if(V[i]==0)
-                {
-                    sum++;
-                }
-                else
-                {
-                    zero+=max(0LL,sum-1);
-                    sum=0;
-                }
-            }
-            zero+=max(0LL,sum-1);
-            sum=0;
-            ll mi=min(one,zero);
-            //cout<<mi<<" t\n";
-            if(mi%2==0)
-            {
-                cout<<"Bob\n";
             }
             else
             {
-                cout<<"Alice\n";
+                if(b==0)
+                {
+                    if(curr_pos<a)
+                    {
+                        curr_pos+=(a-curr_pos)+10;
+                    }
+                    else
+                    {
+                        curr_pos=a+10;
+                    }
+                }
+                else
+                {
+                    if(curr_pos<=a)
+                    {
+                        curr_pos=a+10;
+                    }
+                    else
+                    {
+                        curr_pos+=10;
+                    }
+                    dir=0;
+                }
             }
         }
+        cout<<curr_pos<<"\n";
     }
     return 0;
 }
-
 
 
 

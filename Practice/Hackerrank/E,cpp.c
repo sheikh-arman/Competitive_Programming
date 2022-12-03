@@ -34,37 +34,34 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
-vector<ll>di[100010];
-
-void divisor()
+vector<ll>prime_list;
+bool prime_ck[1000001];
+void seive()
 {
-    for(ll i=1; i<=100000; i++)
+    prime_ck[0]=prime_ck[1]=true;
+    prime_list.push_back(2);
+    for(ll i=4; i<=MAX; i+=2)
     {
-        for(ll j=i; j<=100000; j+=i)
+        prime_ck[i]=true;
+    }
+    for(ll i=3; i<=MAX; i+=2)
+    {
+        if(prime_ck[i]==0)
         {
-            di[j].PB(i);
+            prime_list.push_back(i);
+            for(ll j=i*i; j<=MAX; j+=(i+i))
+            {
+                prime_ck[j]=1;
+            }
         }
     }
+    //Here prime_list vector indicate list of all prime number
+    //prime_ck array indicate a number is prime ? or not ?
+    //if prime_ck[n]=0 then number is prime else not a prime
 }
-double dp[100010];
 int main()
 {
-    divisor();
-    dp[1]=0;
-    for(ll i=2; i<=100000; i++)
-    {
-        double tm=1;
-        ll siz=di[i].size();
-        double frac=(1.0/(double)siz);
-        for(ll j:di[i])
-        {
-            if(i!=j)
-                tm+=frac*dp[j];
-        }
-        double mul=(siz-1);
-        tm*=((double)siz/mul);
-        dp[i]=tm;
-    }
+    seive();
     //freopen("1input.txt","r",stdin);
     //freopen("1output.txt","w",stdout);
     fast;
@@ -72,12 +69,16 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n;
-        cin>>n;
-        cout<<"Case "<<test<<": "<<fixed<<setprecision(8)<<dp[n]<<"\n";
+        ll n,m;
+        cin>>n>>m;
+        ll pos=lower_bound(prime_list.begin())
+
+
+
     }
-    return 0;0.57721566490153286060651209008240243
+    return 0;
 }
+
 
 
 

@@ -34,49 +34,62 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
-vector<ll>di[100010];
-
-void divisor()
-{
-    for(ll i=1; i<=100000; i++)
-    {
-        for(ll j=i; j<=100000; j+=i)
-        {
-            di[j].PB(i);
-        }
-    }
-}
-double dp[100010];
 int main()
 {
-    divisor();
-    dp[1]=0;
-    for(ll i=2; i<=100000; i++)
-    {
-        double tm=1;
-        ll siz=di[i].size();
-        double frac=(1.0/(double)siz);
-        for(ll j:di[i])
-        {
-            if(i!=j)
-                tm+=frac*dp[j];
-        }
-        double mul=(siz-1);
-        tm*=((double)siz/mul);
-        dp[i]=tm;
-    }
     //freopen("1input.txt","r",stdin);
     //freopen("1output.txt","w",stdout);
     fast;
     ll tcase=1;
-    cin>>tcase;
+    //cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n;
-        cin>>n;
-        cout<<"Case "<<test<<": "<<fixed<<setprecision(8)<<dp[n]<<"\n";
+        ll n,k;
+        cin>>n>>k;
+        ll ma=0;
+        ll gcd=-1;
+        vector<ll>V;
+        ll ck=0;
+        for(ll i=0;i<n;i++){
+            ll a;
+            cin>>a;
+            if(gcd==-1){
+                gcd=a;
+            }
+            else{
+                gcd=__gcd(gcd,a);
+            }
+            ma=max(ma,a);
+            if(a>=k)
+            V.PB(a);
+            if(a==k)ck=1;
+        }
+
+        if(ma<k){
+             cout<<"IMPOSSIBLE\n";
+        }
+        else{
+
+            ll siz=V.size();
+            for(ll i=0;i<siz;i++){
+                ll dif=abs(k-V[i]);
+                if(dif%gcd==0){
+                    ck=1;break;
+                }
+            }
+            if(ck){
+                cout<<"POSSIBLE\n";
+            }
+            else{
+                cout<<"IMPOSSIBLE\n";
+            }
+
+
+        }
+
+
+
     }
-    return 0;0.57721566490153286060651209008240243
+    return 0;
 }
 
 

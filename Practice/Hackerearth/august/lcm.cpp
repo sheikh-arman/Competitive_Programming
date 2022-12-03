@@ -34,36 +34,38 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
-vector<ll>di[100010];
-
-void divisor()
+map<pair<ll,ll>,vector<ll>>mp;
+ll ma=1e17;
+ll lc(ll a,ll b)
 {
-    for(ll i=1; i<=100000; i++)
-    {
-        for(ll j=i; j<=100000; j+=i)
-        {
-            di[j].PB(i);
-        }
-    }
+    ll gcd=__gcd(a,b);
+    a/=gcd;
+    b/=gcd;
+    ll res=a*b*gcd;
+    return res;
 }
-double dp[100010];
 int main()
 {
-    divisor();
-    dp[1]=0;
-    for(ll i=2; i<=100000; i++)
+    for(ll i=3; i<=42; i++)
     {
-        double tm=1;
-        ll siz=di[i].size();
-        double frac=(1.0/(double)siz);
-        for(ll j:di[i])
+        ll ck=1;
+        for(ll j=1; ck; j++)
         {
-            if(i!=j)
-                tm+=frac*dp[j];
+            ll lcm=1;
+            for(ll k=j; k<j+i; k++)
+            {
+                lcm=lc(lcm,k);
+            }
+            if(lcm>ma)
+            {
+                ck=0;
+                break;
+            }
+            else
+            {
+                mp[ {i,lcm}].PB((j+i)-1);
+            }
         }
-        double mul=(siz-1);
-        tm*=((double)siz/mul);
-        dp[i]=tm;
     }
     //freopen("1input.txt","r",stdin);
     //freopen("1output.txt","w",stdout);
@@ -72,11 +74,23 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n;
-        cin>>n;
-        cout<<"Case "<<test<<": "<<fixed<<setprecision(8)<<dp[n]<<"\n";
+        ll x,r,ans=0;
+        cin>>x>>r;
+        for(ll i=3; i<=42; i++)
+        {
+            vector<ll>V=mp[ {i,x}];
+            ll siz=V.size();
+            for(ll j=0; j<siz; j++)
+            {
+                if(V[j]<=r)ans++;
+            }
+            //if(cn>0&&cn<=r)ans++;
+        }
+        ll sq=sqrt(x);
+        if(sq*(sq+1)==x&&(sq+1)<=r)ans++;
+        cout<<ans<<"\n";
     }
-    return 0;0.57721566490153286060651209008240243
+    return 0;
 }
 
 

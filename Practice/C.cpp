@@ -34,7 +34,6 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
-vector<ll>edj[100010];
 int main()
 {
     //freopen("1input.txt","r",stdin);
@@ -44,34 +43,10 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n;
-        cin>>n;
-        for(ll i=0;i<=n+1;i++){
-        	edj[i].clear();
-        }
-        vector<ll>V;
-        for(ll i=0;i<n;i++){
-        	ll a;
-        	cin>>a;
-        	V.PB(a);
-        }
-        VST(V);
-        ll ans=0;
-        for(ll i=0;i<n;i++){
-        	ll left=1,right=ans;
-        	while(left<=right){
-        		ll mid=(left+right)/2;
-        		if(edj[mid].size()<V[i]){
-        			right=mid-1;
-        		}
-        		else{
-        			left=mid+1;
-        		}
-        	}
-        	if(left>ans)ans++;
-        	edj[left].PB(V[i]);
-        }
-        cout<<ans<<"\n";
+        ll n,sum=0;
+
+
+
     }
     return 0;
 }

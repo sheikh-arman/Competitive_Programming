@@ -34,38 +34,34 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
-vector<ll>di[100010];
-
-void divisor()
+ll ind[20010];
+vector<ll>edj[20010];
+ll color[20010];
+ll dfs(ll node)
 {
-    for(ll i=1; i<=100000; i++)
+
+    ll ans=0;
+    color[node]=true;
+    ll siz=edj[node].size();
+    if(siz==0)return 1;
+    for(ll i=0; i<siz; i++)
     {
-        for(ll j=i; j<=100000; j+=i)
+        ll val=edj[node][i];
+        if(color[val]==false)
         {
-            di[j].PB(i);
+            color[val]=true;
+            ans+=dfs(val);
+        }
+        else
+        {
+            ans+=1;
         }
     }
+    return ans;
 }
-double dp[100010];
 int main()
 {
-    divisor();
-    dp[1]=0;
-    for(ll i=2; i<=100000; i++)
-    {
-        double tm=1;
-        ll siz=di[i].size();
-        double frac=(1.0/(double)siz);
-        for(ll j:di[i])
-        {
-            if(i!=j)
-                tm+=frac*dp[j];
-        }
-        double mul=(siz-1);
-        tm*=((double)siz/mul);
-        dp[i]=tm;
-    }
-    //freopen("1input.txt","r",stdin);
+    freopen("1input.txt","r",stdin);
     //freopen("1output.txt","w",stdout);
     fast;
     ll tcase=1;
@@ -74,9 +70,36 @@ int main()
     {
         ll n;
         cin>>n;
-        cout<<"Case "<<test<<": "<<fixed<<setprecision(8)<<dp[n]<<"\n";
+        for(ll i=0;i<=n;i++){
+            color[i]=false;
+            edj[i].clear();
+            ind[i]=0;
+        }
+        for(ll i=0; i<=n; i++)
+        {
+            ind[i]=0;
+        }
+        for(ll i=0; i<n-1; i++)
+        {
+            ll a,b;
+            cin>>a>>b;
+            edj[b].PB(a);
+            ind[a]++;
+        }
+        ll ot=0,in=0;
+        ll ans=0;
+        for(ll i=0; i<n; i++)
+        {
+            if(ind[i]==0&&color[i]==false)
+            {
+
+                ans+=dfs(i);
+                //cout<<i<<" "<<ans<<"\n";
+            }
+        }
+        cout<<"Case "<<test<<": "<<ans<<"\n";
     }
-    return 0;0.57721566490153286060651209008240243
+    return 0;
 }
 
 

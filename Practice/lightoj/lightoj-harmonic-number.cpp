@@ -1,3 +1,4 @@
+
 /*
     Sk arman Hossain
     University of Barisal
@@ -34,37 +35,9 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
-vector<ll>di[100010];
-
-void divisor()
-{
-    for(ll i=1; i<=100000; i++)
-    {
-        for(ll j=i; j<=100000; j+=i)
-        {
-            di[j].PB(i);
-        }
-    }
-}
-double dp[100010];
+const double val=0.57721566490153286060651209008240243;
 int main()
 {
-    divisor();
-    dp[1]=0;
-    for(ll i=2; i<=100000; i++)
-    {
-        double tm=1;
-        ll siz=di[i].size();
-        double frac=(1.0/(double)siz);
-        for(ll j:di[i])
-        {
-            if(i!=j)
-                tm+=frac*dp[j];
-        }
-        double mul=(siz-1);
-        tm*=((double)siz/mul);
-        dp[i]=tm;
-    }
     //freopen("1input.txt","r",stdin);
     //freopen("1output.txt","w",stdout);
     fast;
@@ -74,9 +47,18 @@ int main()
     {
         ll n;
         cin>>n;
-        cout<<"Case "<<test<<": "<<fixed<<setprecision(8)<<dp[n]<<"\n";
+        double ans=0;
+        if(n<5000000){
+            for(int i=1;i<=n;i++){
+                ans+=(1.0/(double)i);
+            }
+        }
+        else{
+            ans=log((double)n)/log(2.718281828459045235360287471352662497757247093699959574966967627724076630353)+0.57721566490153286060651209008240243104215933593992;
+        }
+        cout<<"Case "<<test<<": "<<fixed<<setprecision(10)<<ans<<"\n";
     }
-    return 0;0.57721566490153286060651209008240243
+    return 0;
 }
 
 

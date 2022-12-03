@@ -28,43 +28,41 @@ typedef tree<ll, null_type, less_equal<ll>, rb_tree_tag,tree_order_statistics_no
 #define  base2 137
 #define  MOD1  1479386893
 #define  MOD2  1928476349
-#define MAX 2000010
 #define T(n) printf("test : %d\n",n);
 ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
-vector<ll>di[100010];
-
-void divisor()
+#define MAX 1000010
+vector<ll>prime_list;
+bool prime_ck[MAX+10];
+void seive()
 {
-    for(ll i=1; i<=100000; i++)
+    prime_ck[0]=prime_ck[1]=true;
+    prime_list.push_back(2);
+    for(ll i=4; i<=MAX; i+=2)
     {
-        for(ll j=i; j<=100000; j+=i)
+        prime_ck[i]=true;
+    }
+    for(ll i=3; i<=MAX; i+=2)
+    {
+        if(prime_ck[i]==0)
         {
-            di[j].PB(i);
+            prime_list.push_back(i);
+            for(ll j=i*i; j<=MAX; j+=(i+i))
+            {
+                prime_ck[j]=1;
+            }
         }
     }
 }
-double dp[100010];
 int main()
 {
-    divisor();
-    dp[1]=0;
-    for(ll i=2; i<=100000; i++)
-    {
-        double tm=1;
-        ll siz=di[i].size();
-        double frac=(1.0/(double)siz);
-        for(ll j:di[i])
-        {
-            if(i!=j)
-                tm+=frac*dp[j];
-        }
-        double mul=(siz-1);
-        tm*=((double)siz/mul);
-        dp[i]=tm;
-    }
+    seive();
+//    for(ll i=0;i<20;i++){
+//        cout<<prime_list[i]<<" ";
+//    }
+//    cout<<"\n";
     //freopen("1input.txt","r",stdin);
     //freopen("1output.txt","w",stdout);
     fast;
@@ -72,12 +70,15 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n;
-        cin>>n;
-        cout<<"Case "<<test<<": "<<fixed<<setprecision(8)<<dp[n]<<"\n";
+        ll n,m;
+        cin>>n>>m;
+        ll pos=lower_bound(prime_list.begin(),prime_list.end(),n)-prime_list.begin();
+        ll pos2=upper_bound(prime_list.begin(),prime_list.end(),m)-prime_list.begin();
+        cout<<(pos2-pos)<<"\n";
     }
-    return 0;0.57721566490153286060651209008240243
+    return 0;
 }
+
 
 
 
