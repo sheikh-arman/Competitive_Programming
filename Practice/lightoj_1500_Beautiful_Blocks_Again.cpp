@@ -80,10 +80,25 @@ int main()
                     } 
                     if(right<=left){
                         toggle=0;
+                        left=m;
                     }
                 }
                 else{
-                    
+                    if(ar[left]<n-1){
+                        ar[left]++;
+                        ans.PB(left);
+                    }
+                    else{
+                        left++;
+                        if(left>right){
+                            toggle=0;
+                            left=m;
+                        }
+                        else{
+                            ar[left]++;
+                            ans.PB(left);
+                        }
+                    }
                 }
             }
             else{
