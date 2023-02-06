@@ -43,14 +43,28 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,sum=0;
-
-
-
+        ll n;
+        cin>>n;
+        ll alice=1,bob=0;
+        n-=1;
+        ll val=5;
+        ll ck=1;
+        while(n>0){
+            ll va=min(n,val);
+            n-=va;
+            if(ck){
+                bob+=va;
+            }
+            else{
+                alice+=va;
+            }
+            ck=1-ck;
+            val+=4;
+        }
+        cout<<alice<<" "<<bob<<"\n";
     }
     return 0;
 }
-
 
 
 
