@@ -34,6 +34,34 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
+ll dis[510][20];
+class Compare {
+public:
+    bool operator()(pair< pair<ll,ll> ,ll> a, pair< pair<ll,ll> ,ll>b)
+    {
+        if (a.first.first > b.first.first) {
+            return true;
+        }
+        else if (a.first.second < b.first.second) {
+            return true;
+        }
+        return false;
+    }
+};
+void dijkstra(ll source){
+    priority_queue< pair< pair<ll,ll> ,ll>, vector< pair< pair<ll,ll> ,ll> >, Compare > pq;
+    for(int i=0;i<=500;i++){
+        for(int j=0;j<=17;j++){
+            dis[i][j]=100000000000;
+        }
+    }
+    pq.push({{0,0},source});
+    while(!pq.empty()){
+        pair< pair<ll,ll> ,ll> parent=pq.front();
+        pq.pop();
+        for()
+    }
+}
 int main()
 {
     //freopen("1input.txt","r",stdin);
@@ -43,20 +71,12 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n;
-        cin>>n;
-        for(ll i=2;i<=n;i++){
-            cout<<i<<" ";
-        }
-        cout<<"1\n";
-
+        ll n,m,s;
+        cin>>n>>m>>s;
+        vector<ll>V;
+        for(ll i=0;i<)
 
 
     }
     return 0;
 }
-
-
-
-
-

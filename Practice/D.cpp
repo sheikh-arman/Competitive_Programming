@@ -45,30 +45,34 @@ int main()
     {
         ll n;
         cin>>n;
-        vector<ll>V;
-        for(ll i=0;i<n;i++){
-            ll a;
-            cin>>a;
-            V.PB(a);
+        vector<ll>a;
+        for(ll i = 0; i < n; i++) {
+            ll x;
+            cin >> x;
+            a.PB(x);
         }
-        VST(V);
-        ll ans=0;
-        ll cnt=1;
-        for(ll i=0;i<n;i++){
-            if(V[i]==cnt){
-                cnt++;
-            }
-            else if(V[i]<cnt){
-                continue;
-            }
-            else{
-                ans+=V[i]-cnt;
-                cnt++;
+        VST(a);
+        ll ans=100000000000000;
+        for(ll i=1;i<n-1;i++){
+            ll val=a[i]*3;
+            for(int j=0;j<i;j++){
+                ll val2=a[j]+a[i];
+                ll baki=val-val2;
+                ll pos=upper_bound(a.begin(),a.end(),baki)-a.begin();
+                if(pos<n){
+                    val2+=a[pos];
+                ans=min(ans,abs(val2-val));
+                val2-=a[pos];
+                }
+                
+                pos--;
+                if(pos>i){
+                    val2+=a[pos];
+                    ans=min(ans,abs(val2-val));
+                }
             }
         }
         cout<<ans<<"\n";
-
-
     }
     return 0;
 }

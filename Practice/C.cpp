@@ -43,54 +43,10 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,w,h;
-        cin>>n>>w>>h;
-        vector<ll>V1,V2;
-        for(ll i=0;i<n;i++){
-            ll a;
-            cin>>a;
-            V2.PB(a-w);
-        }
-        for(ll i=0;i<n;i++){
-            ll a;
-            cin>>a;
-            V1.PB(a-h);
-        }
-        ll ck=1;
-        ll sft=0, extra=10000000000000;
-        for(ll i=0;i<n;i++){
-            V2[i]+=sft;
-            if(i==0){
-                sft+=V1[i]-V2[i];
-                extra=min(extra,(w-h)*2);
-            }
-            else{
-                if(V1[i]+h+h>V2[i]+w+w){
-                   // cout<<i<<" "<<V1[i]<<" "<<V2[i]<<" x\n";
-                    ck=0;break;
-                }
-                else if(V2[i]>V1[i]){
-                    ll need=V2[i]-V1[i];
-                    if(need<=extra){
-                        extra-=need;
-                        sft-=need;
-                    }
-                    else{
-                        ck=0;
-                        break;
-                    }
-                }
-                else{
-                    extra=min(extra,(V2[i]+w+w)-(V1[i]+h+h));
-                }
-            }
-        }
-        if(ck){
-            YES;
-        }
-        else{
-            NO;
-        }
+        ll n,sum=0;
+
+
+
     }
     return 0;
 }
