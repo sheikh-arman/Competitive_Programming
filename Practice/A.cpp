@@ -40,15 +40,12 @@ int main()
     //freopen("1output.txt","w",stdout);
     fast;
     ll tcase=1;
-    cin>>tcase;
+    //cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
         ll n;
-        cin>>n;
-        for(ll i=2;i<=n;i++){
-            cout<<i<<" ";
-        }
-        cout<<"1\n";
+        cout<<"Argentina\n";
+
 
 
 

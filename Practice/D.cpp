@@ -43,36 +43,10 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n;
-        cin>>n;
-        vector<ll>a;
-        for(ll i = 0; i < n; i++) {
-            ll x;
-            cin >> x;
-            a.PB(x);
-        }
-        VST(a);
-        ll ans=100000000000000;
-        for(ll i=1;i<n-1;i++){
-            ll val=a[i]*3;
-            for(int j=0;j<i;j++){
-                ll val2=a[j]+a[i];
-                ll baki=val-val2;
-                ll pos=upper_bound(a.begin(),a.end(),baki)-a.begin();
-                if(pos<n){
-                    val2+=a[pos];
-                ans=min(ans,abs(val2-val));
-                val2-=a[pos];
-                }
-                
-                pos--;
-                if(pos>i){
-                    val2+=a[pos];
-                    ans=min(ans,abs(val2-val));
-                }
-            }
-        }
-        cout<<ans<<"\n";
+        ll n,sum=0;
+
+
+
     }
     return 0;
 }
