@@ -43,10 +43,20 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,sum=0;
-
-
-
+        ll n;
+        cin>>n;
+        vector<ll>V;
+        for(ll i=0;i<n*2;i++){
+            ll a;
+            cin>>a;
+            V.PB(a);
+        }
+        VST(V);
+        ll ans=1000000000000;
+        for(ll i=0;i<=n;i++){
+            ans=min(ans,V[i+n-1]-V[i]);
+        }
+        cout<<ans<<"\n";
     }
     return 0;
 }

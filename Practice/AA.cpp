@@ -1,11 +1,3 @@
-/*
-    Sk arman Hossain
-    University of Barisal
-
-    Problem :
-    Solution :
-    Date:
- */
 
 #include<bits/stdc++.h>
 using namespace std;
@@ -43,67 +35,23 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n;
-        cin>>n;
-        vector<ll>V;
-        ll gcd=-1;
-        for(ll i=0; i<n; i++)
-        {
-            ll a;
-            cin>>a;
-            V.PB(a);
-            if(gcd==-1)
-            {
-                gcd=a;
-            }
-            else
-            {
-                gcd=__gcd(gcd,a);
-            }
+        ll x1,y1,x2,y2;
+        cin>>x1>>y1>>x2>>y2;
+        ll dif1=(x1*x1)+(y1*y1);
+        ll dif2=(x2*x2)+(y2*y2);
+        if(dif1>dif2){
+            cout<<"ALEX\n";
         }
-        if(gcd==1)
-        {
-            cout<<"0\n";
+        else if(dif1<dif2){
+            cout<<"BOB\n";
         }
-        else
-        {
-            ll ck=0;
-            ll tm=V[n-1];
-            V[n-1]=__gcd(n,tm);
-            gcd=-1;
-            for(ll i=0; i<n; i++)
-            {
-                if(gcd==-1)gcd=V[i];
-                else gcd=__gcd(gcd,V[i]);
-            }
-            V[n-1]=tm;
-            if(gcd==1)
-            {
-                cout<<"1\n";
-            }
-            else
-            {
-                tm=V[n-2];
-                V[n-2]=__gcd(n-1,tm);
-                gcd=-1;
-                for(ll i=0; i<n; i++)
-                {
-                    if(gcd==-1)gcd=V[i];
-                    else gcd=__gcd(gcd,V[i]);
-                }
-                if(gcd==1)
-                {
-                    cout<<"2\n";
-                }
-                else
-                {
-                    cout<<"3\n";
-                }
-            }
+        else{
+            cout<<"EQUAL\n";
         }
     }
     return 0;
 }
+
 
 
 
