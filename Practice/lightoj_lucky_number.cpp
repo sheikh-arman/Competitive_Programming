@@ -36,53 +36,40 @@ ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
 int main()
 {
+    ordered_set st;
+    ll cnt=0;
+    for(ll i=1;i<=1429431;i+=2){
+        st.insert(i);
+        cnt++;
+    }
+    for(int i=1;i<=1;i++){
+        ll x=*st.find_by_order(i);
+        //cout<<x<<" tut\n";
+        ll cn=x;
+        for(ll j=x-1;j<cnt;j+=cn){
+            //cout<<*st.find_by_order(j)<<" x\n";
+            st.erase(st.find_by_order(j));
+            //cout<<*st.find_by_order(j)<<" x2\n";
+            cnt--;
+            cn--;
+            if(cn<=0)cn=x;
+        }
+    }
+    for(ll i=0;i<10;i++){
+        ll x=*st.find_by_order(i);
+        cout<<x<<" x\n";
+    } 
     //freopen("1input.txt","r",stdin);
     //freopen("1output.txt","w",stdout);
-    fast;
+    //fast;
     ll tcase=1;
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,sum=0;
+        ll n;
         cin>>n;
-        vector<ll>V;
-        for(ll i=0;i<n;i++){
-            ll a;
-            cin>>a;
-            V.PB(a);
-            sum+=a;
-        }
-        ll s=(n*(n+1))/2;
-        if(sum!=s){
-            NO;
-        }
-        else{
-            ll ck=1;
-            ll cnt=n,nici=0;
-            for(ll i=n-1;i>=0;i--){
-                ll mi=min(nici,V[i]);
-                V[i]-=mi;
-                nici-=mi;
-                if(V[i]>cnt){
-                    ck=0;break;
-                }
-                nici+=cnt-V[i];
-                cnt--;
-            }
-            if(ck){
-            YES;
-        }
-        else{
-            NO;
-        }
-        }
-        
-
+        n=st.order_of_key(n-1);
+        cout<<n<<"\n";
     }
     return 0;
 }
-
-
-
-
-

@@ -36,6 +36,21 @@ ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
 int main()
 {
+    ordered_set st;
+    ll cnt=0;
+    for(ll i=1;i<=1429431;i+=2){
+        st.insert(i);
+        cnt++;
+    }
+    for(int i=1;i<=100000;i++){
+        ll x=st.find_by_key(i);
+        ll cn=0;
+        for(ll  j=0;j<cnt;j+=x+cn){
+            st.erase(*st.find_by_order(i+j));
+            cnt--;
+            cn++;
+        }
+    }
     //freopen("1input.txt","r",stdin);
     //freopen("1output.txt","w",stdout);
     fast;
@@ -43,44 +58,13 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,sum=0;
+        ll n;
         cin>>n;
-        vector<ll>V;
-        for(ll i=0;i<n;i++){
-            ll a;
-            cin>>a;
-            V.PB(a);
-            sum+=a;
-        }
-        ll s=(n*(n+1))/2;
-        if(sum!=s){
-            NO;
-        }
-        else{
-            ll ck=1;
-            ll cnt=n,nici=0;
-            for(ll i=n-1;i>=0;i--){
-                ll mi=min(nici,V[i]);
-                V[i]-=mi;
-                nici-=mi;
-                if(V[i]>cnt){
-                    ck=0;break;
-                }
-                nici+=cnt-V[i];
-                cnt--;
-            }
-            if(ck){
-            YES;
-        }
-        else{
-            NO;
-        }
-        }
-        
-
+        cout<<n<<"\n";
     }
     return 0;
 }
+
 
 
 
