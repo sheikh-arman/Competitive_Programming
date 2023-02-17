@@ -35,6 +35,7 @@ ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
 vector<ll>di[100010];
+
 void divisor()
 {
     for(ll i=1; i<=100000; i++)
@@ -75,7 +76,7 @@ int main()
         cin>>n;
         cout<<"Case "<<test<<": "<<fixed<<setprecision(8)<<dp[n]<<"\n";
     }
-    return 0;
+    return 0;0.57721566490153286060651209008240243
 }
 
 

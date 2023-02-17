@@ -43,6 +43,7 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
+<<<<<<< HEAD
         ll n;
         cin>>n;
         vector<ll>V;
@@ -57,10 +58,46 @@ int main()
             ans=min(ans,V[i+n-1]-V[i]);
         }
         cout<<ans<<"\n";
+=======
+        ll n,sum=0;
+        cin>>n;
+        vector<ll>V;
+        for(ll i=0;i<n;i++){
+            ll a;
+            cin>>a;
+            V.PB(a);
+            sum+=a;
+        }
+        ll s=(n*(n+1))/2;
+        if(sum!=s){
+            NO;
+        }
+        else{
+            ll ck=1;
+            ll cnt=n,nici=0;
+            for(ll i=n-1;i>=0;i--){
+                ll mi=min(nici,V[i]);
+                V[i]-=mi;
+                nici-=mi;
+                if(V[i]>cnt){
+                    ck=0;break;
+                }
+                nici+=cnt-V[i];
+                cnt--;
+            }
+            if(ck){
+            YES;
+        }
+        else{
+            NO;
+        }
+        }
+        
+
+>>>>>>> refs/remotes/origin/master
     }
     return 0;
 }
-
 
 
 

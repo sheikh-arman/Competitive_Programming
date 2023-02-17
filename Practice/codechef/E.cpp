@@ -43,40 +43,14 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n;
-        cin>>n;
-        vector<ll>V;
-        ll pre=0;
-        for(ll i=0;i<n;i++){
-            ll a;
-            cin>>a;
-            if(a>0)pre=1;
-            if(pre){
-                V.PB(a);
-            }
-        }
-        n=V.size();
-        if((ll)V.size()==1){
-            cout<<"Cook\n";
-        }
-        else{
-            ll cnt=0;
-            for(ll i=0;i<n-1;i++){
-                if(V[i]%2)cnt=1;
-            }
-            if(cnt%2){
-                cout<<"Chef\n";
-            }
-            else{
-                cout<<"Cook\n";
-            }
-        }
+        ll n,sum=0;
 
 
 
     }
     return 0;
 }
+
 
 
 

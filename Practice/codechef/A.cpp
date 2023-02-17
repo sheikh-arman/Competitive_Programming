@@ -45,18 +45,40 @@ int main()
     {
         ll n;
         cin>>n;
-        ll cnt=0;
-        while(n){
-            if(n%2!=0)cnt++;
-            n/=2;
+        ll sum1=0,sum2=0;
+        vector<ll>V1,V2;
+        for(ll i=0;i<n;i++){
+            ll a;
+            cin>>a;
+            sum1+=a;
+            V1.PB(a);
         }
-        cout<<cnt-1<<"\n";
+        for(ll i=0;i<n;i++){
+            ll a;
+            cin>>a;
+            sum2+=a;
+            V2.PB(a);
+        }
+
+        if(sum1==sum2){
+
+
+            ll ans=0;
+            for(ll i=0;i<n;i++){
+                ans+=abs(V1[i]-V2[i]);
+            }
+            cout<<ans/2<<"\n";
+        }
+        else{
+            cout<<"-1\n";
+        }
 
 
 
     }
     return 0;
 }
+
 
 
 

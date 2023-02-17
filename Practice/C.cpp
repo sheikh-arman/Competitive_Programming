@@ -34,6 +34,12 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
+ll rep[100010];
+ll sum[100010];
+ll cnt[100010];
+ll Find(ll node){
+    return (rep[node]==node?node:rep[node]=Find(rep[node]));
+}
 int main()
 {
     //freopen("1input.txt","r",stdin);
@@ -43,14 +49,63 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,sum=0;
-
-
+        ll n;
+        cin>>n;
+        for(ll i=0;i<=n;i++){
+            rep[i]=i;
+            cnt[i]=0;
+            sum[i]=0;
+        }
+        vector<ll>V;
+        for(ll i=0;i<n;i++){
+            ll a;
+            cin>>sum[i];
+            cnt[i]=1;
+        }
+        ll q;
+        cin>>q;
+        while(q--){
+            ll a;
+            cin>>a;
+            if(a==1){
+                ll u,v;
+                cin>>u>>v;
+                u--;
+                v--;
+                ll tm_u=u;
+                ll tm_v=v;
+                u=Find(u);
+                v=Find(v);
+                if(sum[u]!=sum[v]&&sum[v]&&sum[u]&&tm_u==u&&tm_v==v){
+                    if(sum[u]<sum[v]){
+                        swap(u,v);
+                    }
+                    rep[v]=u;
+                    sum[u]+=sum[v];
+                    sum[v]=0;
+                    cnt[u]+=cnt[v];
+                    cnt[v]=0;
+                }
+            }
+            else if(a==2){
+                ll x;
+                cin>>x;
+                x--;
+                x=Find(x);
+                cout<<cnt[x]<<"\n";
+            }
+            else{
+                ll x;
+                cin>>x;
+                x--;
+                x=Find(x);
+                cout<<++x<<"\n";
+            }
+        }
 
     }
     return 0;
 }
-
 
 
 

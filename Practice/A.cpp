@@ -34,6 +34,7 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
+ll ar[133];
 int main()
 {
     //freopen("1input.txt","r",stdin);
@@ -43,10 +44,55 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,sum=0;
-
-
-
+        ll n;
+        cin>>n;
+        vector<ll>V;
+        for(ll i=0;i<40;i++){
+            ar[i]=0;
+        }
+        for(ll i=0;i<n;i++){
+            ll a;
+            cin>>a;
+            V.PB(a);
+        }
+        queue<ll>q;
+        ll ans=0;
+        for(ll i=0;i<n;i++){
+            ll val=V[i];
+            q.push(val);
+            ll ck=0,pos=0;
+            while(val){
+                if(ar[pos]&&val%2){
+                    ck=1;
+                }
+                ar[pos]+=val%2;
+                pos++;
+                val/=2;
+            }
+            while(ck){
+                val=q.front();
+                q.pop();
+                pos=0;       
+                while(val){
+                    if(val%2){
+                        ar[pos]--;
+                    }
+                    pos++;
+                    val/=2;
+                }
+                ll cc=1;
+                for(int j=0;j<40;j++){
+                    if(ar[j]>1){
+                        cc=0;break;
+                    }
+                }
+                if(cc){
+                    ck=0;break;
+                }
+            }
+            ans+=q.size();
+        }
+        cout<<ans<<"\n";
     }
     return 0;
 }
