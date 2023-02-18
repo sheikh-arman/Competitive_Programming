@@ -1,3 +1,11 @@
+/*
+    Sk arman Hossain
+    University of Barisal
+
+    Problem :
+    Solution :
+    Date:
+ */
 
 #include<bits/stdc++.h>
 using namespace std;
@@ -35,19 +43,10 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll x1,y1,x2,y2;
-        cin>>x1>>y1>>x2>>y2;
-        ll dif1=(x1*x1)+(y1*y1);
-        ll dif2=(x2*x2)+(y2*y2);
-        if(dif1>dif2){
-            cout<<"ALEX\n";
-        }
-        else if(dif1<dif2){
-            cout<<"BOB\n";
-        }
-        else{
-            cout<<"EQUAL\n";
-        }
+        ll n,sum=0;
+
+
+
     }
     return 0;
 }

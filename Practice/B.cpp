@@ -81,9 +81,29 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
+<<<<<<< HEAD
         V.clear();
         V2.clear();
         ll n,ck=1;
+=======
+<<<<<<< HEAD
+        ll n;
+        cin>>n;
+        vector<ll>V;
+        for(ll i=0;i<n*2;i++){
+            ll a;
+            cin>>a;
+            V.PB(a);
+        }
+        VST(V);
+        ll ans=1000000000000;
+        for(ll i=0;i<=n;i++){
+            ans=min(ans,V[i+n-1]-V[i]);
+        }
+        cout<<ans<<"\n";
+=======
+        ll n,sum=0;
+>>>>>>> refs/remotes/origin/master
         cin>>n;
         ll gcd=0;
         for(ll i=0;i<n;i++){
@@ -188,6 +208,12 @@ int main()
         else{
             cout<<"No\n";
         }
+<<<<<<< HEAD
+=======
+        
+
+>>>>>>> refs/remotes/origin/master
+>>>>>>> refs/remotes/origin/master
     }
     return 0;
 }
