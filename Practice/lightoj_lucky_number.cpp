@@ -42,34 +42,32 @@ int main()
         st.insert(i);
         cnt++;
     }
-    for(int i=1;i<=1;i++){
+    cnt--;
+    for(int i=1;i<=100000;i++){
         ll x=*st.find_by_order(i);
         //cout<<x<<" tut\n";
-        ll cn=x;
-        for(ll j=x-1;j<cnt;j+=cn){
-            //cout<<*st.find_by_order(j)<<" x\n";
-            st.erase(st.find_by_order(j));
-            //cout<<*st.find_by_order(j)<<" x2\n";
+        ll cn=0;
+        for(ll j=x-1;j-cn<cnt;j+=x){
+            st.erase(st.find_by_order(j-cn));
             cnt--;
-            cn--;
-            if(cn<=0)cn=x;
+            cn++;
         }
     }
-    for(ll i=0;i<10;i++){
+    /* for(ll i=0;i<10;i++){
         ll x=*st.find_by_order(i);
-        cout<<x<<" x\n";
-    } 
+       // cout<<x<<" x\n";
+    }  */
     //freopen("1input.txt","r",stdin);
     //freopen("1output.txt","w",stdout);
-    //fast;
+    fast;
     ll tcase=1;
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
         ll n;
         cin>>n;
-        n=st.order_of_key(n-1);
-        cout<<n<<"\n";
+        n=*st.find_by_order(n-1);
+        cout<<"Case "<<test<<": "<<n<<"\n";
     }
     return 0;
 }

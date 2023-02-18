@@ -34,75 +34,77 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
-ll rep[100010];
-ll sum[100010];
-ll cnt[100010];
-ll Find(ll node){
-    return (rep[node]==node?node:rep[node]=Find(rep[node]));
-}
 int main()
 {
     //freopen("1input.txt","r",stdin);
     //freopen("1output.txt","w",stdout);
     fast;
     ll tcase=1;
-    cin>>tcase;
+    //cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n;
-        cin>>n;
-        for(ll i=0;i<=n;i++){
-            rep[i]=i;
-            cnt[i]=0;
-            sum[i]=0;
-        }
-        vector<ll>V;
+        ll n,k;
+        cin>>n>>k;
+        vector<ll>V,V2;
         for(ll i=0;i<n;i++){
             ll a;
-            cin>>sum[i];
-            cnt[i]=1;
-        }
-        ll q;
-        cin>>q;
-        while(q--){
-            ll a;
             cin>>a;
-            if(a==1){
-                ll u,v;
-                cin>>u>>v;
-                u--;
-                v--;
-                ll tm_u=u;
-                ll tm_v=v;
-                u=Find(u);
-                v=Find(v);
-                if(sum[u]!=sum[v]&&sum[v]&&sum[u]&&tm_u==u&&tm_v==v){
-                    if(sum[u]<sum[v]){
-                        swap(u,v);
-                    }
-                    rep[v]=u;
-                    sum[u]+=sum[v];
-                    sum[v]=0;
-                    cnt[u]+=cnt[v];
-                    cnt[v]=0;
+            V.PB(a);
+        }
+        for(ll i=0;i<n;i++){
+            ll cnt=1;
+            ll j=i+1;
+            while(j<n){
+                if(V[j]==V[i]){
+                    j++;
+                    cnt++;
+                }
+                else{
+                    break;
                 }
             }
-            else if(a==2){
-                ll x;
-                cin>>x;
-                x--;
-                x=Find(x);
-                cout<<cnt[x]<<"\n";
+            i=j-1;
+            V2.PB(cnt);
+        }
+        if((ll)V2.size()>k){
+            cout<<"1\n";
+            for(ll i=1;i<=k-1;i++){
+                cout<<i<<" "<<i<<"\n";
             }
-            else{
-                ll x;
-                cin>>x;
-                x--;
-                x=Find(x);
-                cout<<++x<<"\n";
+            cout<<k<<" "<<n<<"\n";
+        }
+        else{
+            cout<<"0\n";
+            ll siz=V2.size();
+            ll cnt=1;
+            V.clear();
+            for(ll j=0;j<siz;j++){
+                //cout<<j<<" "<<V2[j]<<" x\n";
+                ll val=V2[j];
+                ll ck=0;
+                while(val){
+                    ll baki=(siz-j)-1;
+                    if(baki+1+(ll)V.size()==k){
+                        ck=1;
+                        break;
+                    }
+                    else{
+                        V.PB(1);
+                        val--;
+                    }
+                }
+                V2[j]=val;
+                if(ck)break;
+            }
+            for(ll j=0;j<siz;j++){
+                if(V2[j])V.PB(V2[j]);
+            }
+            for(ll i:V){
+                //cout<<i<<" tt\n";
+                cout<<cnt<<" "<<cnt+(i-1)<<"\n";
+                cnt+=i;
             }
         }
-
     }
     return 0;
 }
