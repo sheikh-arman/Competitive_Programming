@@ -34,99 +34,105 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
-ll s[4][30];
-ll check[30];
+vector< pair<ll,ll> >ed;
+vector<ll>V;
+ll label[100100];
+vector<ll>edj[100010];
+ll n,dist;
+vector<ll>tm4,tm2;
+ll bfs(ll node){
+    queue<ll>q;
+    q.push(node);
+    label[node]=0;
+    ll ma=0;
+    while(!q.empty()){
+        node=q.front();
+        tm4.PB(node);
+        tm2.PB(node);
+        q.pop();
+        for(ll i:edj[node]){
+            if(label[i]==-1){
+                label[i]=label[node]+1;
+                if(label[i]>ma){
+                    ma=label[i];
+                    dist=i;
+                }
+                ma=max(ma,label[i]);
+                q.push(i);
+            }
+        }
+    }
+    return ma;
+}
+ll ar[1000010];
+ll ck(ll val){
+    for(auto i:ed){
+        ll u=i.first;
+        ll v=i.second;
+        if(ar[u]<=val&&ar[v]<=val){
+            edj[u].PB(v);
+            edj[v].PB(u);
+        }
+    }
+    ll ans=0;
+    for(ll i=1;i<=n;i++){
+        if(label[i]==-1){
+            tm2.clear();
+            ll ma=bfs(i);
+            for(ll j:tm2){
+                label[j]=-1;
+            }
+            tm2.clear();
+            ma=bfs(dist);
+            ans=max(ans,ma);
+        }
+    }
+    for(ll i:tm4){
+        label[i]=-1;
+        edj[i].clear();
+    }
+    tm4.clear();
+    return ans;
+}
 int main()
 {
     //freopen("1input.txt","r",stdin);
     //freopen("1output.txt","w",stdout);
     fast;
     ll tcase=1;
-    cin>>tcase;
+    //cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        for(ll j=1; j<=2; j++)
-            for(ll i=0; i<=26; i++)
-            {
-                s[j][i]=0;
-
-            }
-        ll n;
-        s[1][0]=1;
-        s[2][0]=1;
-
-        cin>>n;
-        for(ll i=0; i<n; i++)
-        {
-            ll type,k;
-            string str;
-            cin>>type>>k>>str;
-            for(ll j=0; str[j]!='\0'; j++)
-            {
-                s[type][str[j]-'a']+=k;
-            }
-            ll ck=0,last=0,last2=0;
-            for(ll j=0; j<26; j++)
-            {
-                if(s[1][j])last++;
-            }
-            for(ll j=0; j<26; j++)
-            {
-                if(s[2][j])last2++;
-            }
-            if(last>1&&last2>1)
-            {
-                YES;
-            }
-            else
-            {
-                if(last==1&&last2==1)
-                {
-                    ck=0;
-                    for(ll j=0; j<26; j++)
-                    {
-                        if(s[1][j]==s[2][j])continue;
-                        if(s[1][j]>0&&s[2][j]>0)
-                        {
-                            if(s[1][j]<s[2][j])
-                            {
-                                ck=1;
-                                break;
-                            }
-                            else
-                            {
-                                ck=0;
-                                break;
-                            }
-                        }
-                        else if(s[1][j]>0)
-                        {
-                            ck=1;
-                            break;
-                        }
-                        else if(s[2][j]>0)
-                        {
-                            ck=0;
-                            break;
-                        }
-                    }
-                    if(ck)
-                    {
-                        YES;
-                    }
-                    else
-                    {
-                        NO;
-                    }
-                }
-                else
-                {
-
-                }
-
-            }
-
+        ll k;
+        cin>>n>>k;
+        V.clear();
+        ed.clear();
+        for(ll i=1;i<=n;i++){
+            cin>>ar[i];
+            V.PB(ar[i]);
+            label[i]=-1;
         }
+        VST(V);
+        
+        for(ll i=0;i<n-1;i++){
+            ll u,v;
+            cin>>u>>v;
+            ed.PB({u,v});
+        }
+        ll ans=-1;
+        ll left=0,right=n-1;
+        while(left<=right){
+            ll mid=(left+right)/2;
+            ll c=ck(V[mid]);
+            if(c>=k){
+                ans=V[mid];
+                right=mid-1;
+            }
+            else{
+                left=mid+1;
+            }
+        }
+        cout<<ans<<"\n";
     }
     return 0;
 }

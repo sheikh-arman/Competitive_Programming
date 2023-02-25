@@ -1,3 +1,4 @@
+
 /*
     Sk arman Hossain
     University of Barisal
@@ -36,39 +37,22 @@ ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
 int main()
 {
-    ordered_set st;
-    ll cnt=0;
-    for(ll i=1;i<=1429431;i+=2){
-        st.insert(i);
-        cnt++;
-    }
-    cnt--;
-    for(int i=1;i<=100000;i++){
-        ll x=*st.find_by_order(i);
-        //cout<<x<<" tut\n";
-        ll cn=0;
-        for(ll j=x-1;j-cn<cnt;j+=x){
-            st.erase(st.find_by_order(j-cn));
-            cnt--;
-            cn++;
-        }
-    }
-    cout<<"asdsua\n";
-    /* for(ll i=0;i<10;i++){
-        ll x=*st.find_by_order(i);
-       // cout<<x<<" x\n";
-    }  */
     //freopen("1input.txt","r",stdin);
     //freopen("1output.txt","w",stdout);
-    //fast;
+    fast;
     ll tcase=1;
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n;
-        cin>>n;
-        n=*st.find_by_order(n-1);
-        cout<<"Case "<<test<<": "<<n<<"\n";
+        ll n,sum=0;
+
+
+
     }
     return 0;
 }
+
+
+
+
+

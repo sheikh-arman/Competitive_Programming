@@ -34,63 +34,50 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
-ll ar[133];
+ll ar[310][310];
+ll ck[310];
 int main()
 {
+   // cout<<"hjg\n";
     //freopen("1input.txt","r",stdin);
     //freopen("1output.txt","w",stdout);
     fast;
     ll tcase=1;
-    cin>>tcase;
+    //cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n;
-        cin>>n;
-        vector<ll>V;
-        for(ll i=0;i<40;i++){
-            ar[i]=0;
-        }
-        for(ll i=0;i<n;i++){
-            ll a;
-            cin>>a;
-            V.PB(a);
-        }
-        queue<ll>q;
-        ll ans=0;
-        for(ll i=0;i<n;i++){
-            ll val=V[i];
-            q.push(val);
-            ll ck=0,pos=0;
-            while(val){
-                if(ar[pos]&&val%2){
-                    ck=1;
-                }
-                ar[pos]+=val%2;
-                pos++;
-                val/=2;
+        ll n,m;
+        cin>>n>>m;
+        for(ll i=0;i<=n;i++)ar[i][0]=-1;
+        for(ll i=1;i<=n;i++){
+            for(ll j=1;j<=m;j++){
+                cin>>ar[i][j];
             }
-            while(ck){
-                val=q.front();
-                q.pop();
-                pos=0;       
-                while(val){
-                    if(val%2){
-                        ar[pos]--;
-                    }
-                    pos++;
-                    val/=2;
-                }
-                ll cc=1;
-                for(int j=0;j<40;j++){
-                    if(ar[j]>1){
-                        cc=0;break;
-                    }
-                }
-                if(cc){
-                    ck=0;break;
+        }
+        ll ans=999999999999;
+        for(ll i=1;i<=m;i++){
+            ll tm=0,val=0;
+            for(ll j=1;j<=n;j++){
+                if(ar[j][i-1]==-1){
+                    if(ck[ar[j][i]]!=-1)
+                        ck[ar[j][i]]++;
+                    cout<<ar[j][i]<<" "<<ck[ar[j][i]]<<" t\n";
                 }
             }
-            ans+=q.size();
+            for(ll j=1;j<=m;j++){
+                if(ck[j]>tm){
+                    tm=ck[j];
+                    val=j;
+                }
+            }
+            ck[val]=-1;
+             for(ll j=1;j<=n;j++){
+                if(ar[j][i]==val){
+                    ar[j][i]=-1;
+                }
+            }
+            cout<<val<<" "<<tm<<" x\n";
+            ans=min(ans,tm);
         }
         cout<<ans<<"\n";
     }

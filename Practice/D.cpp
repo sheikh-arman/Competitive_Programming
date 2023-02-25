@@ -1,6 +1,21 @@
+/*
+    Sk arman Hossain
+    University of Barisal
+
+    Problem :
+    Solution :
+    Date:
+ */
+
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long int ll;
+
+#include <ext/pb_ds/assoc_container.hpp> // Common file
+#include <ext/pb_ds/tree_policy.hpp>
+using namespace __gnu_pbds;
+typedef tree<ll, null_type, less_equal<ll>, rb_tree_tag,tree_order_statistics_node_update> ordered_set;
+
 #define sf(n) scanf("%lld",&n);
 #define YES cout<<"YES\n";
 #define NO cout<<"NO\n";
@@ -15,126 +30,70 @@ typedef long long int ll;
 #define  MOD2  1928476349
 #define MAX 2000010
 #define T(n) printf("test : %d\n",n);
-#define N 200010
-class node
-{
-public:
-    ll prop;
-    ll sum;
-    ll ar[30];
-};
-node seg_tree[3*N];
-void build(ll n,ll b,ll e)
-{
-    if(b==e)
-    {
-        seg_tree[n].prop=-1;
-        seg_tree[n].sum=0;
-        for(ll j=0;j<26;j++){
-            seg_tree[n].ar[j]=0;
-        }
-        return;
-    }
-    build(n*2,b,(b+e)/2);
-    build((n*2)+1,((b+e)/2)+1,e);
-    seg_tree[n].prop=-1;
-    seg_tree[n].sum=0;
-    for(ll j=0;j<26;j++){
-        seg_tree[n].ar[j]=seg_tree[n*2].ar[j]+seg_tree[n*2+1].ar[j];
-    }
-}
-void propagation(ll n,ll b,ll e)
-{
-    ll mid=(b+e)/2;
-    seg_tree[n*2].prop=seg_tree[n].prop;
-    seg_tree[(n*2)+1].prop=seg_tree[n].prop;
-    seg_tree[n*2].sum=((mid-b)+1)*seg_tree[n*2].prop;
-    seg_tree[(n*2)+1].sum=(e-mid)*seg_tree[n*2].prop;
-    seg_tree[n].prop=-1;
-}
-void query(ll n,ll b,ll e,ll i,ll j)
-{
-    if(b>=i&&e<=j)
-    {
-        for(ll j=0;j<26;j++){
-            res[j]+=seg_tree[n].ar[j];
-        }
-        return;
-    }
-    if(e<i||b>j)
-    {
-        return;
-    }
-    if(seg_tree[n].prop!=-1)
-        propagation(n,b,e);
-    query(n*2,b,(b+e)/2,i,j);
-    query(n*2+1,(b+e)/2+1,e,i,j);   
-}
-void update(ll n,ll b,ll e,ll i,ll j,ll val)
-{
-    if(b>=i&&e<=j)
-    {
-        seg_tree[n].prop=val;
-        seg_tree[n].sum=val*(e-b+1);  
-        return;
-    }
-    if(e<i||b>j)
-    {
-        return;
-    }
-    if(seg_tree[n].prop!=-1)
-        propagation(n,b,e);
-    update(n*2,b,(b+e)/2,i,j,val);
-    update(n*2+1,(b+e)/2+1,e,i,j,val);
-    seg_tree[n].sum=seg_tree[2*n].sum+seg_tree[2*n+1].sum;
+ll dx[]= {1,-1,0,0,1,-1,-1,1};
+ll dy[]= {0,0,1,-1,1,1,-1,-1};
+ll knx[]= {2,2,1,-1,-2,-2,1,-1};
+ll kny[]= {1,-1,2,2,1,-1,-2,-2};
+ll node_cnt[300010];
+ll rep[300010];
+ll current[300010];
+ll Find(ll node){
+    return (rep[node]==node?node:rep[node]=Find(rep[node]));
 }
 int main()
 {
+    //cout<<log2(500000);
+   // cout<<"hjg\n";
     //freopen("1input.txt","r",stdin);
     //freopen("1output.txt","w",stdout);
     fast;
     ll tcase=1;
-    cin>>tcase;
+    //cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,q;
-        cin>>n>>q;
-        build(1,1,n);
-        cout<<"Case "<<test<<":"<<"\n";
-        for(ll i=0; i<q; i++)
-        {
-            ll status;
-            cin>>status;
-            if(status==1)
-            {
-                ll i,j,val;
-                cin>>i>>j>>val;
-                i++;
-                j++;
-                update(1,1,n,i,j,val);
-            }
-            else
-            {
-                ll i,j;
-                cin>>i>>j;
-                i++;
-                j++;
-                ll ans=query(1,1,n,i,j);
-                ll dif=j-i+1;
-                //cout<<ans<<" "<<dif<<" x\n";
-                ll gcd=__gcd(min(ans,dif),max(ans,dif));
-                ans/=gcd;
-                dif/=gcd;
-                if(dif==1)
-                {
-                    cout<<ans<<"\n";
+        ll n,l;
+        cin>>n>>l;
+        for(ll i=0;i<=l;i++){
+            rep[i]=i;
+            current[i]=0;
+            node_cnt[i]=1;
+        }
+        for(ll i=0;i<n;i++){
+            ll u,v;
+            cin>>u>>v;
+            u=Find(u);
+            v=Find(v);
+            if(u==v){
+                if(node_cnt[u]>current[u]){
+                    cout<<"LADICA\n";
+                    current[u]++;
                 }
-                else
-                {
-                    cout<<ans<<"/"<<dif<<"\n";
+                else{
+                    cout<<"SMECE\n";
+                }
+            }
+            else{
+                if(node_cnt[u]<node_cnt[v])swap(u,v);
+                rep[v]=u;
+                node_cnt[u]+=node_cnt[v];
+                current[u]+=current[v];
+                u=Find(u);
+                v=Find(v);
+                if(node_cnt[u]>current[u]){
+                    cout<<"LADICA\n";
+                    current[u]++;
+                }
+                else{
+                    cout<<"SMECE\n";
                 }
             }
         }
+        
     }
     return 0;
 }
+
+
+
+
+

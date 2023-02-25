@@ -34,41 +34,54 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
+bitset<1000000010>color;
+vector<ll>V;
+ll n;
+ll ar[20];
+void dp(ll pos,ll val){
+    if(pos>=n){
+        if(val<=1e9 && color[val]==0){
+            V.PB(val);
+            color[val]=1;
+        }
+        return;
+    }
+    dp(pos+1,val+ar[pos]);
+    dp(pos+1,val);
+}
 int main()
 {
-    ordered_set st;
-    ll cnt=0;
-    for(ll i=1;i<=1429431;i+=2){
-        st.insert(i);
-        cnt++;
-    }
-    cnt--;
-    for(int i=1;i<=100000;i++){
-        ll x=*st.find_by_order(i);
-        //cout<<x<<" tut\n";
-        ll cn=0;
-        for(ll j=x-1;j-cn<cnt;j+=x){
-            st.erase(st.find_by_order(j-cn));
-            cnt--;
-            cn++;
-        }
-    }
-    cout<<"asdsua\n";
-    /* for(ll i=0;i<10;i++){
-        ll x=*st.find_by_order(i);
-       // cout<<x<<" x\n";
-    }  */
     //freopen("1input.txt","r",stdin);
     //freopen("1output.txt","w",stdout);
-    //fast;
+    fast;
     ll tcase=1;
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n;
-        cin>>n;
-        n=*st.find_by_order(n-1);
-        cout<<"Case "<<test<<": "<<n<<"\n";
+        ll k;
+        cin>>n>>k;
+        for(ll i=0;i<n;i++){
+            cin>>ar[i];
+        }
+        V.clear();
+        dp(0,0);
+        ll ck=0;
+        ll siz=V.size();
+        for(ll i:V){
+            ll val=k-i;
+            if(color[k]==1||(val>=0&&color[val]==1)){
+                ck=1;
+            }
+        }
+        cout<<"Case "<<test<<": "<<(ck?"Yes":"No")<<"\n";
+        for(ll i:V){
+            color[i]=0;
+        }
     }
     return 0;
 }
+
+
+
+
+

@@ -34,76 +34,39 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
+char s[100010];
 int main()
 {
+   // cout<<"hjg\n";
     //freopen("1input.txt","r",stdin);
     //freopen("1output.txt","w",stdout);
-    fast;
+    //fast;
     ll tcase=1;
     //cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,k;
-        cin>>n>>k;
-        vector<ll>V,V2;
-        for(ll i=0;i<n;i++){
-            ll a;
-            cin>>a;
-            V.PB(a);
-        }
-        for(ll i=0;i<n;i++){
-            ll cnt=1;
-            ll j=i+1;
-            while(j<n){
-                if(V[j]==V[i]){
-                    j++;
-                    cnt++;
+        while(scanf("%s",s)!=EOF){
+            ll ans=0,j=0;
+            ll n=strlen(s);
+            ll pos=n/2;
+            j=pos-1;
+            if(n%2){pos++;}
+           // cout<<j<<" "<<pos<<" xx\n";
+            for(ll i=pos;i<n;i++){
+                ll val=s[i]-'a';
+                val+=ans;
+                val%=26;
+                ll val_banabo=s[j]-'a';
+                if(val_banabo>val){
+                    ans+=val_banabo-val;
                 }
-                else{
-                    break;
+                else if(val_banabo<val){
+                    ans+=val_banabo;
+                    ans+=26-val;
                 }
+                j--;
             }
-            i=j-1;
-            V2.PB(cnt);
-        }
-        if((ll)V2.size()>k){
-            cout<<"1\n";
-            for(ll i=1;i<=k-1;i++){
-                cout<<i<<" "<<i<<"\n";
-            }
-            cout<<k<<" "<<n<<"\n";
-        }
-        else{
-            cout<<"0\n";
-            ll siz=V2.size();
-            ll cnt=1;
-            V.clear();
-            for(ll j=0;j<siz;j++){
-                //cout<<j<<" "<<V2[j]<<" x\n";
-                ll val=V2[j];
-                ll ck=0;
-                while(val){
-                    ll baki=(siz-j)-1;
-                    if(baki+1+(ll)V.size()==k){
-                        ck=1;
-                        break;
-                    }
-                    else{
-                        V.PB(1);
-                        val--;
-                    }
-                }
-                V2[j]=val;
-                if(ck)break;
-            }
-            for(ll j=0;j<siz;j++){
-                if(V2[j])V.PB(V2[j]);
-            }
-            for(ll i:V){
-                //cout<<i<<" tt\n";
-                cout<<cnt<<" "<<cnt+(i-1)<<"\n";
-                cnt+=i;
-            }
+            printf("%lld\n",ans);
         }
     }
     return 0;

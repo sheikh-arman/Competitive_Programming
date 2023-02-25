@@ -36,39 +36,59 @@ ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
 int main()
 {
-    ordered_set st;
-    ll cnt=0;
-    for(ll i=1;i<=1429431;i+=2){
-        st.insert(i);
-        cnt++;
-    }
-    cnt--;
-    for(int i=1;i<=100000;i++){
-        ll x=*st.find_by_order(i);
-        //cout<<x<<" tut\n";
-        ll cn=0;
-        for(ll j=x-1;j-cn<cnt;j+=x){
-            st.erase(st.find_by_order(j-cn));
-            cnt--;
-            cn++;
-        }
-    }
-    cout<<"asdsua\n";
-    /* for(ll i=0;i<10;i++){
-        ll x=*st.find_by_order(i);
-       // cout<<x<<" x\n";
-    }  */
     //freopen("1input.txt","r",stdin);
     //freopen("1output.txt","w",stdout);
-    //fast;
+    fast;
     ll tcase=1;
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n;
+        ll n,sum=0;
         cin>>n;
-        n=*st.find_by_order(n-1);
-        cout<<"Case "<<test<<": "<<n<<"\n";
+
+        ll a[n+1],r[n+1],mx=0,id=0;
+        a[0]=0;
+        r[0]=0;
+        for(ll i=1;i<=n;i++){
+            cin>>a[i];
+            r[i]=a[i];
+            a[i]+=a[i-1];
+            if(a[i]>mx){
+                mx=a[i];
+                id=i;
+            }
+        }
+
+        ll ans[n+1],c[n+1];
+        ans[id]=n+1;
+        //cout<<id<<endl;
+        for(ll i=id+1;i<=n;i++){
+            ans[i]=ans[i-1]+r[i];
+        }
+        for(ll i=id-1;i>=0;i--){
+            ans[i]=ans[i+1]-r[i+1];
+        }
+
+        for(ll i=0;i<=n;i++){
+            c[i]=ans[i];
+            //cout<<c[i]<<" ";
+        }//cout<<endl;
+        ll chk=0;
+        sort(c,c+n+1);
+        for(ll i=0;i<=n;i++) if(c[i]!=i+1) chk=1;
+        if(chk){
+            cout<<-1<<endl;
+            continue;
+        }
+
+        for(ll i=0;i<=n;i++) cout<<ans[i]<<" ";
+        cout<<endl;
+
     }
     return 0;
 }
+
+
+
+
+
