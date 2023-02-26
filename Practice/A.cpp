@@ -34,8 +34,6 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
-ll ar[310][310];
-ll ck[310];
 int main()
 {
    // cout<<"hjg\n";
@@ -43,43 +41,36 @@ int main()
     //freopen("1output.txt","w",stdout);
     fast;
     ll tcase=1;
-    //cin>>tcase;
+    cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,m;
-        cin>>n>>m;
-        for(ll i=0;i<=n;i++)ar[i][0]=-1;
-        for(ll i=1;i<=n;i++){
-            for(ll j=1;j<=m;j++){
-                cin>>ar[i][j];
+        ll n;
+        cin>>n;
+        vector<ll>V;
+        for(ll i=0;i<n;i++){
+            ll a;
+            cin>>a;
+            V.PB(a);
+        }
+        ll ck=1;
+        for(ll i=0;i<n-1&&ck;i++){
+            for(ll j=i+1;j<n&&ck;j++){
+                ll va=__gcd(V[i],V[j]);
+                if(va<3)
+                {
+                    ck=0;
+                    break;
+                }
             }
         }
-        ll ans=999999999999;
-        for(ll i=1;i<=m;i++){
-            ll tm=0,val=0;
-            for(ll j=1;j<=n;j++){
-                if(ar[j][i-1]==-1){
-                    if(ck[ar[j][i]]!=-1)
-                        ck[ar[j][i]]++;
-                    cout<<ar[j][i]<<" "<<ck[ar[j][i]]<<" t\n";
-                }
-            }
-            for(ll j=1;j<=m;j++){
-                if(ck[j]>tm){
-                    tm=ck[j];
-                    val=j;
-                }
-            }
-            ck[val]=-1;
-             for(ll j=1;j<=n;j++){
-                if(ar[j][i]==val){
-                    ar[j][i]=-1;
-                }
-            }
-            cout<<val<<" "<<tm<<" x\n";
-            ans=min(ans,tm);
+        if(ck){
+            cout<<"No\n";
         }
-        cout<<ans<<"\n";
+        else{
+            cout<<"Yes\n";
+        }
+
+
     }
     return 0;
 }
