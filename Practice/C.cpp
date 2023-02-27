@@ -34,11 +34,9 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
-ll cnt[500010];
-ll ar[500010];
-ll pre_modified[500100];
 int main()
 {
+   // cout<<"hjg\n";
     //freopen("1input.txt","r",stdin);
     //freopen("1output.txt","w",stdout);
     fast;
@@ -46,37 +44,10 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,m;
-        cin>>n>>m;
-        for(ll i=0;i<=n+m;i++){
-            pre_modified[i]=-1;
-            cnt[i]=0;
-        }
-        for(ll i=1;i<=n;i++){
-            cin>>ar[i];
-            pre_modified[ar[i]]=0;
-            cnt[i]=0;
-        }
-        for(ll i=1;i<=m;i++){
-            ll pos,val;
-            cin>>pos>>val;
-            cnt[ar[pos]]+=i-pre_modified[ar[pos]];
-            pre_modified[ar[pos]]=-1;
-            pre_modified[val]=i;
-            ar[pos]=val;
-        }
-        ll ans=0;
-        for(ll i=1;i<=m+n;i++){
-            if(pre_modified[i]!=-1){
-                cnt[i]+=(m+1)-pre_modified[i];
-            }
-            ll x=m+1;
-            ll val=max(0LL,(x-cnt[i])-1);
-            ans+=(x*(x-1))/2;
-            //cout<<i<<" "<<ans<<" x\n";
-            ans-=(val*(val+1))/2;
-        }
-        cout<<ans<<"\n";
+        ll n,sum=0;
+
+
+
     }
     return 0;
 }

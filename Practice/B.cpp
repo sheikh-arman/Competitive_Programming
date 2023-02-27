@@ -44,35 +44,7 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n;
-        cin>>n;
-        string s;
-        cin>>s;
-        ll ck=1;
-        ll toggle=0;
-        for(ll i=0;i<n/2;i++){
-            if(toggle==0){
-                if(s[i]!=s[n-i-1]){
-                    toggle=1;
-                }
-            }
-            else if(toggle==1){
-                if(s[i]==s[n-i-1]){
-                    toggle=2;
-                }
-            }
-            else{
-                if(s[i]!=s[n-i-1]){
-                    ck=0;break;
-                }
-            }
-        }
-        if(ck){
-            YES;
-        }
-        else{
-            NO;
-        }
+        ll n,sum=0;
 
 
 

@@ -44,31 +44,8 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n;
-        cin>>n;
-        vector<ll>V;
-        for(ll i=0;i<n;i++){
-            ll a;
-            cin>>a;
-            V.PB(a);
-        }
-        ll ck=1;
-        for(ll i=0;i<n-1&&ck;i++){
-            for(ll j=i+1;j<n&&ck;j++){
-                ll va=__gcd(V[i],V[j]);
-                if(va<3)
-                {
-                    ck=0;
-                    break;
-                }
-            }
-        }
-        if(ck){
-            cout<<"No\n";
-        }
-        else{
-            cout<<"Yes\n";
-        }
+        ll n,sum=0;
+
 
 
     }
