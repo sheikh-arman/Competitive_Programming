@@ -34,6 +34,23 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
+ll mem[100010];
+ll A[100010];
+ll B[100010];
+ll n;
+ll dp(ll i){
+    if(i>=n){
+        return 0;
+    }
+    if(mem[i]!=-1){
+        return mem[i];
+    }
+    ll ans=LONG_LONG_MAX;
+    ans=min(ans,dp(i+1)+A[i]);
+    if(i+1<n)ans=min(ans,dp(i+2)+B[i]+B[i+1]);
+    if(i+2<n)ans=min(ans,dp(i+3)+B[i]+B[i+1]+B[i+2]);
+    return mem[i]=ans;
+}
 int main()
 {
    // cout<<"hjg\n";
@@ -41,13 +58,21 @@ int main()
     //freopen("1output.txt","w",stdout);
     fast;
     ll tcase=1;
-    cin>>tcase;
+   // cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,sum=0;
-
-
-
+        cin>>n;
+        for(ll i=0;i<n;i++){
+            cin>>A[i];
+        }
+        for(ll i=0;i<n;i++){
+            cin>>B[i];
+        }
+        for(ll i=0;i<=n;i++){
+            mem[i]=-1;
+        }
+        ll ans=dp(0);
+        cout<<ans<<"\n";
     }
     return 0;
 }

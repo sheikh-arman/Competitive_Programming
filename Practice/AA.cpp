@@ -1,3 +1,11 @@
+/*
+    Sk arman Hossain
+    University of Barisal
+
+    Problem :
+    Solution :
+    Date:
+ */
 
 #include<bits/stdc++.h>
 using namespace std;
@@ -28,30 +36,126 @@ ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
 int main()
 {
+    // cout<<"hjg\n";
     //freopen("1input.txt","r",stdin);
     //freopen("1output.txt","w",stdout);
-    fast;
+    //fast;
     ll tcase=1;
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll x1,y1,x2,y2;
-        cin>>x1>>y1>>x2>>y2;
-        ll dif1=(x1*x1)+(y1*y1);
-        ll dif2=(x2*x2)+(y2*y2);
-        if(dif1>dif2){
-            cout<<"ALEX\n";
+        ll n,ck=0;
+        cin>>n;
+        vector<ll>V,track1,track2;
+        set<ll>st;
+        for(ll i=0; i<n; i++)
+        {
+            ll a;
+            cin>>a;
+            V.PB(a);
+            st.insert(a);
+            if(a==1)ck=1;
         }
-        else if(dif1<dif2){
-            cout<<"BOB\n";
+        if((ll)st.size()==1)
+        {
+            cout<<"0\n";
+            continue;
         }
-        else{
-            cout<<"EQUAL\n";
+        if(ck)
+        {
+            cout<<"-1\n";
+            continue;
+        }
+        ll pos1=-1,pos2=-1;
+        st.clear();
+        for(ll i=0; i<n-1&&pos1==-1; i++)
+        {
+            for(ll j=i+1; j<n; j++)
+            {
+                ll a=V[i],b=V[j];
+                ll p=i,q=j;
+                if(a>b)
+                {
+                    swap(a,b);
+                    swap(p,q);
+                }
+                while(a!=b&&a!=2&&a!=1)
+                {
+                    //cout<<a<<" "<<b<<" x\n";
+                    b=b/a+(b%a!=0);
+                    track1.PB(q);
+                    track2.PB(p);
+                    swap(p,q);
+                    swap(a,b);
+                }
+                if(a==2)
+                {
+                    pos1=p;
+                    V[q]=b;
+                    break;
+                }
+                else
+                {
+                    track1.clear();
+                    track2.clear();
+                }
+            }
+        }
+        //cout<<pos1<<" tut\n";
+        if(pos1!=-1)
+        {
+            for(ll i=0; i<n; i++)
+            {
+                if(i!=pos1)
+                {
+                    while(V[i]!=2)
+                    {
+                        track1.PB(i);
+                        track2.PB(pos1);
+                        V[i]=(V[i]/2)+(V[i]%2!=0);
+                    }
+                }
+            }
+        }
+        else
+        {
+            ll a=V[0];
+            ll b=V[1];
+            ll p=0,q=1;
+            if(a>b)
+            {
+                swap(a,b);
+                swap(p,q);
+            }
+            while(a!=b&&a!=-1)
+            {
+                cout<<"a\n";
+                b=b/a+(b%a!=0);
+                track1.PB(q);
+                track2.PB(p);
+                swap(p,q);
+                swap(a,b);
+            }
+            for(ll i=2; i<n; i++)
+            {
+                while(V[i]!=V[0])
+                {
+                cout<<"b\n";
+                    track1.PB(i);
+                    track2.PB(0);
+                    V[i]/=V[0];
+                }
+            }
+        }
+        cout<<track1.size()<<"\n";
+        ll siz=track1.size();
+        for(ll i=0; i<siz; i++)
+        {
+            cout<<track1[i]+1<<" "<<track2[i]+1<<"\n";
         }
     }
     return 0;
 }
-
 
 
 

@@ -34,66 +34,6 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
-vector< pair<ll,ll> >ed;
-vector<ll>V;
-ll label[100100];
-vector<ll>edj[100010];
-ll n,dist;
-vector<ll>tm4,tm2;
-ll bfs(ll node){
-    queue<ll>q;
-    q.push(node);
-    label[node]=0;
-    ll ma=0;
-    while(!q.empty()){
-        node=q.front();
-        tm4.PB(node);
-        tm2.PB(node);
-        q.pop();
-        for(ll i:edj[node]){
-            if(label[i]==-1){
-                label[i]=label[node]+1;
-                if(label[i]>ma){
-                    ma=label[i];
-                    dist=i;
-                }
-                ma=max(ma,label[i]);
-                q.push(i);
-            }
-        }
-    }
-    return ma;
-}
-ll ar[1000010];
-ll ck(ll val){
-    for(auto i:ed){
-        ll u=i.first;
-        ll v=i.second;
-        if(ar[u]<=val&&ar[v]<=val){
-            edj[u].PB(v);
-            edj[v].PB(u);
-        }
-    }
-    ll ans=0;
-    for(ll i=1;i<=n;i++){
-        if(label[i]==-1){
-            tm2.clear();
-            ll ma=bfs(i);
-            for(ll j:tm2){
-                label[j]=-1;
-            }
-            tm2.clear();
-            ma=bfs(dist);
-            ans=max(ans,ma);
-        }
-    }
-    for(ll i:tm4){
-        label[i]=-1;
-        edj[i].clear();
-    }
-    tm4.clear();
-    return ans;
-}
 int main()
 {
     //freopen("1input.txt","r",stdin);
@@ -103,36 +43,43 @@ int main()
     //cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll k;
-        cin>>n>>k;
-        V.clear();
-        ed.clear();
-        for(ll i=1;i<=n;i++){
-            cin>>ar[i];
-            V.PB(ar[i]);
-            label[i]=-1;
+        ll n;
+        cin>>n;
+        vector<ll>V,V2;
+        for(ll i=0;i<n;i++){
+            ll a;
+            cin>>a;
+            V2.PB(a);
+        }
+        VST(V2);
+        for(ll i=0;i<n;i++){
+            ll j=i+1;
+            while(j<n){
+                if(V2[i]!=V2[j]){
+                    break;
+                }
+                j++;
+            }
+            V.PB(j-i);
+            i=j-1;
         }
         VST(V);
-        
-        for(ll i=0;i<n-1;i++){
-            ll u,v;
-            cin>>u>>v;
-            ed.PB({u,v});
+        for(ll i:V){
+            cout<<i<<" ";
         }
-        ll ans=-1;
-        ll left=0,right=n-1;
-        while(left<=right){
-            ll mid=(left+right)/2;
-            ll c=ck(V[mid]);
-            if(c>=k){
-                ans=V[mid];
-                right=mid-1;
+        cout<<" t\n";
+        for(ll i=1;i<=1;i++){
+            ll left=0,right=left+(i-1);
+            ll siz=V.size()-1;
+            ll ans=0;
+            while(right<n){
+                ans+=V[left];
+                ll pos=lower_bound(V.begin(),V.end(),V[left]+1)-V.begin();
+                left=min(left+i,pos);
+                right=left+i;
             }
-            else{
-                left=mid+1;
-            }
+            cout<<ans<<"\n";
         }
-        cout<<ans<<"\n";
     }
     return 0;
 }
