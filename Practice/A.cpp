@@ -46,38 +46,13 @@ int main()
     {
         ll n;
         cin>>n;
-        string s;
-        cin>>s;
-        for(ll i=0;i<n;i++){
-            if(s[i]>=97){
-                s[i]-=32;
-            }
-        }
-        string s2="MEOW";
-        ll left=0,i;
-        for(i=0;i<n;i++){
-            if(s[i]==s2[left]){
-                ll j=i+1;
-                while(j<n&&s[j]==s2[left]){
-                     j++;
-                }
-                i=j-1;
-                left++;
-            }
-            else break;
-        }
-        if(i>=n&&s[n-1]=='W'){
-            YES;
-        }
-        else{
-            NO;
-        }
         
 
 
 
     }
     return 0;
+ ////////////------Alhamdulliah----------////////
 }
 
 
