@@ -44,18 +44,47 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n;
-        cin>>n;
-        
-
-
-
+        ll n,k;
+        cin>>n>>k;
+        string s,t;
+        cin>>s>>t;
+        if(k>=n){
+            if(s==t){
+                YES;
+            }
+            else{
+                NO;
+            }
+            continue;
+        }
+        ll en=k;
+        ll st=(n-k);
+        if(st>=en){
+            VST(s);
+            VST(t);
+            if(s==t){
+                YES;
+            }
+            else{
+                NO;
+            }
+        }
+        else{
+            ll ck=1;
+            for(ll i=st;i<en;i++){
+                if(s[i]!=t[i]){
+                    ck=0;break;
+                }
+            }
+            VST(s);
+            VST(t);
+            if(s==t&&ck){
+                YES;
+            }
+            else{
+                NO;
+            }
+        }
     }
     return 0;
- ///*****************************  ALHAMDULILLAH  *****************************/
 }
-
-
-
-
-

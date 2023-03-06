@@ -44,40 +44,33 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,k;
-        cin>>n>>k;
-        string s,t;
-        cin>>s>>t;
-        ll en=k;
-        ll st=(n-k);
-        if(st>=en){
-            VST(s);
-            VST(t);
-            if(s==t){
-                YES;
-            }
-            else{
-                NO;
+        ll n;
+        cin>>n;
+        vector<ll>V;
+        for(ll i=0;i<n;i++){
+            ll a;
+            cin>>a;
+            V.PB(a);
+        }
+        ll cnt=0;
+        if(V[0]==1){
+            V[0]+=1;
+            cnt++;
+        }
+        for(ll i=1;i<n;i++){
+            if(V[i]==1){V[i]+=1;cnt++;}
+            while(V[i]%V[i-1]==0){
+                V[i]+=1;cnt++;
             }
         }
-        else{
-            ll ck=1;
-            for(ll i=st;i<en;i++){
-                if(s[i]!=t[i]){
-                    ck=0;break;
-                }
-            }
-            VST(s);
-            VST(t);
-            if(s==t&&ck){
-                YES;
-            }
-            else{
-                NO;
-            }
+       // cout<<cnt<<" x\n";
+        for(ll i=0;i<n;i++){
+            cout<<V[i]<<" ";
         }
+        cout<<"\n";
     }
     return 0;
+ ///*****************************  ALHAMDULILLAH  *****************************/
 }
 
 

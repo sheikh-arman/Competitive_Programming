@@ -46,13 +46,40 @@ int main()
     {
         ll n;
         cin>>n;
+        vector<string>V;
+        for(ll i=0;i<(n-1)*2;i++){
+            string s;
+            cin>>s;
+            if(s.size()==n-1){
+                V.PB(s);
+            }
+        }
+        string s1=V[0];
+        string s2;
+        s1+=V[1][n-2];
+        if(s1.find(V[0])!=string::npos&&s1.find(V[1])!=string::npos){
+            s2=s1;
+            reverse(s2.begin(),s2.end());
+        }
+        else{
+            s1=V[1];
+            s1+=V[0][n-2];
+            s2=s1;
+            reverse(s2.begin(),s2.end());
+        }
+        if(s1==s2){
+            YES;
+        }
+        else{
+            NO;
+        }
         
 
 
 
     }
     return 0;
- ////////////------Alhamdulliah----------////////
+ ///*****************************  ALHAMDULILLAH  *****************************/
 }
 
 
