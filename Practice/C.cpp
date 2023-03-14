@@ -34,26 +34,9 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
-/* vector<ll>prime;
-bitset<100000000>color;
-void sieve(){
-    prime.PB(2);
-    for(ll i=3;i<=100000;i+=2){
-        if(color[i]==0){
-            prime.PB(i);
-            for(ll j=i*i;j<=100000;j+=i+i){
-                color[j]=1;
-            }
-        }
-    }
-} */
 int main()
 {
-    //sieve();
-    /* for(ll i=0;i<10;i++){
-        cout<<prime[i]<<" ";
-    }
-    cout<<prime.size()<<" x\n"; */
+   // cout<<"hjg\n";
     //freopen("1input.txt","r",stdin);
     //freopen("1output.txt","w",stdout);
     fast;
@@ -63,23 +46,10 @@ int main()
     {
         ll n;
         cin>>n;
-        deque<ll>V;
-        for(ll i=0;i<n;i++){
-            ll a;
-            cin>>a;
-            V.PB(a);
-            while((ll)V.size()){
-                if(V[0]<(ll)V.size()){
-                    V.pop_front();
-                }
-                else{
-                    break;
-                }
-            }
-            ll ans=max(1LL,(ll)V.size());
-            cout<<ans<<" ";
-        }
-        cout<<"\n";
+        
+
+
+
     }
     return 0;
  ///*****************************  ALHAMDULILLAH  *****************************/

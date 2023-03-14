@@ -1,13 +1,19 @@
-Case 1: 1
-Case 2: 30
-Case 3: 2
-Case 4: 1
-Case 5: 31
-Case 6: 5
-Case 7: 5
-Case 8: 6
-Case 9: 6
-Case 10: 2
-Case 11: 2
-Case 12: 2
-Case 13: 6
+Case 1: Yes
+ba aba ab bab
+Case 2: Yes
+bab bab ba aba
+Case 3: Yes
+ab bab
+Case 4: Yes
+baaaaaaaaaaaaaaaaaaaaaaab
+Case 5: Yes
+ba ac ca ab
+Case 6: Yes
+ab ba ab
+Case 7: Yes
+ab bb a
+Case 8: Yes
+fa ab bc cd df
+Case 9: Yes
+zama abcf fzzp pxrp pqrs
+Case 10: No

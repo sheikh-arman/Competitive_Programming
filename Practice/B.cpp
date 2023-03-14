@@ -46,28 +46,10 @@ int main()
     {
         ll n;
         cin>>n;
-        vector<ll>V;
-        for(ll i=0;i<n;i++){
-            ll a;
-            cin>>a;
-            V.PB(a);
-        }
-        ll cnt=0;
-        if(V[0]==1){
-            V[0]+=1;
-            cnt++;
-        }
-        for(ll i=1;i<n;i++){
-            if(V[i]==1){V[i]+=1;cnt++;}
-            while(V[i]%V[i-1]==0){
-                V[i]+=1;cnt++;
-            }
-        }
-       // cout<<cnt<<" x\n";
-        for(ll i=0;i<n;i++){
-            cout<<V[i]<<" ";
-        }
-        cout<<"\n";
+        
+
+
+
     }
     return 0;
  ///*****************************  ALHAMDULILLAH  *****************************/
