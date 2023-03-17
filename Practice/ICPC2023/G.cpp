@@ -145,8 +145,10 @@ int main()
             cin>>a;
             V.PB(a);
         }
-        if(k>=n){
-            cout<<"-1\n";continue;
+        if(k>=n)
+        {
+            cout<<"-1\n";
+            continue;
         }
         for(ll i=2; i<=n; i++)
         {

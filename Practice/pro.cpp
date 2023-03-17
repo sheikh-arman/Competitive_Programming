@@ -36,6 +36,7 @@ ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
 int main()
 {
+   // cout<<"hjg\n";
     //freopen("1input.txt","r",stdin);
     //freopen("1output.txt","w",stdout);
     fast;
@@ -43,12 +44,19 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
+<<<<<<< HEAD
         ll n,sum
+=======
+        ll n;
+        cin>>n;
+        
+>>>>>>> 574ab86cc3831b5e3a57af58a39f777a9dddd23e
 
 
 
     }
     return 0;
+ ///*****************************  ALHAMDULILLAH  *****************************/
 }
 
 

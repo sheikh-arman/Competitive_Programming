@@ -34,98 +34,51 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
-ll s[4][30];
-ll check[30];
 int main()
 {
     //freopen("1input.txt","r",stdin);
     //freopen("1output.txt","w",stdout);
     fast;
     ll tcase=1;
-    cin>>tcase;
+    //cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        for(ll j=1; j<=2; j++)
-            for(ll i=0; i<=26; i++)
-            {
-                s[j][i]=0;
-
-            }
         ll n;
-        s[1][0]=1;
-        s[2][0]=1;
-
         cin>>n;
-        for(ll i=0; i<n; i++)
-        {
-            ll type,k;
-            string str;
-            cin>>type>>k>>str;
-            for(ll j=0; str[j]!='\0'; j++)
-            {
-                s[type][str[j]-'a']+=k;
-            }
-            ll ck=0,last=0,last2=0;
-            for(ll j=0; j<26; j++)
-            {
-                if(s[1][j])last++;
-            }
-            for(ll j=0; j<26; j++)
-            {
-                if(s[2][j])last2++;
-            }
-            if(last>1&&last2>1)
-            {
-                YES;
-            }
-            else
-            {
-                if(last==1&&last2==1)
-                {
-                    ck=0;
-                    for(ll j=0; j<26; j++)
-                    {
-                        if(s[1][j]==s[2][j])continue;
-                        if(s[1][j]>0&&s[2][j]>0)
-                        {
-                            if(s[1][j]<s[2][j])
-                            {
-                                ck=1;
-                                break;
-                            }
-                            else
-                            {
-                                ck=0;
-                                break;
-                            }
-                        }
-                        else if(s[1][j]>0)
-                        {
-                            ck=1;
-                            break;
-                        }
-                        else if(s[2][j]>0)
-                        {
-                            ck=0;
-                            break;
-                        }
-                    }
-                    if(ck)
-                    {
-                        YES;
-                    }
-                    else
-                    {
-                        NO;
-                    }
+        vector<ll>V,V2;
+        for(ll i=0;i<n;i++){
+            ll a;
+            cin>>a;
+            V2.PB(a);
+        }
+        VST(V2);
+        for(ll i=0;i<n;i++){
+            ll j=i+1;
+            while(j<n){
+                if(V2[i]!=V2[j]){
+                    break;
                 }
-                else
-                {
-
-                }
-
+                j++;
             }
-
+            V.PB(j-i);
+            i=j-1;
+        }
+        VST(V);
+        for(ll i:V){
+            cout<<i<<" ";
+        }
+        cout<<" t\n";
+        for(ll i=1;i<=1;i++){
+            ll left=0,right=left+(i-1);
+            ll siz=V.size()-1;
+            ll ans=0;
+            while(right<n){
+                ans+=V[left];
+                ll pos=lower_bound(V.begin(),V.end(),V[left]+1)-V.begin();
+                left=min(left+i,pos);
+                right=left+i;
+            }
+            cout<<ans<<"\n";
         }
     }
     return 0;

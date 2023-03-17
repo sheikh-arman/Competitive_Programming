@@ -34,53 +34,9 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
-#define MAX 40000
-vector<ll>prime_list;
-bool prime_ck[1000001];
-void seive()
-{
-    prime_ck[0]=prime_ck[1]=true;
-    prime_list.push_back(2);
-    for(ll i=4; i<=MAX; i+=2)
-    {
-        prime_ck[i]=true;
-    }
-    for(ll i=3; i<=MAX; i+=2)
-    {
-        if(prime_ck[i]==0)
-        {
-            prime_list.push_back(i);
-            for(ll j=i*i; j<=MAX; j+=(i+i))
-            {
-                prime_ck[j]=1;
-            }
-        }
-    }
-}
-vector<ll> fact(ll n)
-{
-    vector<ll>V;
-    for(ll i:prime_list)
-    {
-        if(i*i>n)break;
-        if(n%i==0)
-        {
-            V.PB(i);
-        }
-        while(n%i==0)
-        {
-            n/=i;
-        }
-    }
-    if(n>1)
-    {
-        V.PB(n);
-    }
-    return V;
-}
 int main()
 {
-    seive();
+   // cout<<"hjg\n";
     //freopen("1input.txt","r",stdin);
     //freopen("1output.txt","w",stdout);
     fast;
@@ -88,57 +44,16 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,m;
-        cin>>n>>m;
-        ll gcd=__gcd(n,m);
-//        if(gcd==1)
-//        {
-//            if(n==m)
-//            {
-//                YES;
-//            }
-//            else
-//            {
-//                NO;
-//            }
-//            continue;
-//        }
-        ll num1=gcd;
-        ll num2=m/gcd;
-        ll ck=0;
-        if(num1<=num2)
-        {
-            vector<ll>V;
-            V=fact(num1);
-            for(ll i:V)
-            {
-                while(num2%i==0)num2/=i;
-            }
-            if(num2==1)ck=1;
-        }
-        else
-        {
-            vector<ll>V;
-            V=fact(num2);
-            ll cc=1;
-            for(ll i:V)
-            {
-                if(num1%i!=0)cc=0;
-            }
-            if(cc==1)ck=1;
-        }
-        if(ck)
-        {
-            YES;
-        }
-        else
-        {
-            NO;
-        }
+        ll n;
+        cin>>n;
+        
+
+
+
     }
     return 0;
+ ///*****************************  ALHAMDULILLAH  *****************************/
 }
-
 
 
 

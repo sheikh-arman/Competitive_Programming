@@ -1,9 +1,19 @@
-**********************************************************
-Network #1
-Cable requirement to connect (127,56) to (32,89) is 116.57 feet.
-Cable requirement to connect (32,89) to (43,105) is 35.42 feet.
-Cable requirement to connect (43,105) to (56,108) is 29.34 feet.
-Cable requirement to connect (56,108) to (54,135) is 43.07 feet.
-Cable requirement to connect (54,135) to (29,132) is 41.18 feet.
-Cable requirement to connect (29,132) to (30,146) is 30.04 feet.
-Number of feet of cable required is 295.62.
+Case 1: Yes
+ba aba ab bab
+Case 2: Yes
+bab bab ba aba
+Case 3: Yes
+ab bab
+Case 4: Yes
+baaaaaaaaaaaaaaaaaaaaaaab
+Case 5: Yes
+ba ac ca ab
+Case 6: Yes
+ab ba ab
+Case 7: Yes
+ab bb a
+Case 8: Yes
+fa ab bc cd df
+Case 9: Yes
+zama abcf fzzp pxrp pqrs
+Case 10: No

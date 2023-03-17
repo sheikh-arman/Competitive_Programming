@@ -153,6 +153,7 @@ ll sol(ll val){
 }
 int main()
 {
+   // cout<<"hjg\n";
     //freopen("1input.txt","r",stdin);
     //freopen("1output.txt","w",stdout);
     fast;
@@ -160,6 +161,7 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
+<<<<<<< HEAD
        
        vector<ll>V;
        cin>>n;
@@ -176,3 +178,20 @@ int main()
     }
     return 0;
 }
+=======
+        ll n;
+        cin>>n;
+        
+
+
+
+    }
+    return 0;
+ ///*****************************  ALHAMDULILLAH  *****************************/
+}
+
+
+
+
+
+>>>>>>> 574ab86cc3831b5e3a57af58a39f777a9dddd23e
