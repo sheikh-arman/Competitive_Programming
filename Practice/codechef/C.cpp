@@ -43,79 +43,14 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n;
-        cin>>n;
-        ll zero=0,one=0;
-        deque<ll>V;
-        set<ll>st;
-        for(ll i=0; i<n; i++)
-        {
-            ll a;
-            cin>>a;
-            V.PB(a);
-            st.insert(a);
-        }
-        if((ll)st.size()==1)
-        {
-            cout<<"Bob\n";
-        }
-        else
-        {
-            while(V[0]==1)
-            {
-                V.PB(1);
-                V.pop_front();
-            }
-            ll sum=0,tot=0;
-            for(ll i=0; i<n; i++)
-            {
-                if(V[i]==1)
-                {
-                    sum++;
-                }
-                else
-                {
-                    one+=max(0LL,sum-1);
-                    sum=0;
-                }
-            }
-            one+=max(0LL,sum-1);
-            sum=0;
+        ll n,sum
 
-            while(V[0]==0)
-            {
-                V.PB(0);
-                V.pop_front();
-            }
-            sum=0;
-            for(ll i=0; i<n; i++)
-            {
-                if(V[i]==0)
-                {
-                    sum++;
-                }
-                else
-                {
-                    zero+=max(0LL,sum-1);
-                    sum=0;
-                }
-            }
-            zero+=max(0LL,sum-1);
-            sum=0;
-            ll mi=min(one,zero);
-            //cout<<mi<<" t\n";
-            if(mi%2==0)
-            {
-                cout<<"Bob\n";
-            }
-            else
-            {
-                cout<<"Alice\n";
-            }
-        }
+
+
     }
     return 0;
 }
+
 
 
 
