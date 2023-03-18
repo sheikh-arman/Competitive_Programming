@@ -34,40 +34,42 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
-vector<ll>edj[110];
-ll ans=0;
-void dfs(ll node,ll parent, ll val){
-    ans=max(ans,val);
-    for(ll i:edj[node]){
-        if(i==parent){
-            continue;
-        }
-        dfs(i,node,val+1);
-    }
-}
 int main()
 {
     //freopen("1input.txt","r",stdin);
     //freopen("1output.txt","w",stdout);
-    fast;
+    //fast;
     ll tcase=1;
-    //cin>>tcase;
+    cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
         ll n;
         cin>>n;
-        for(ll i=0;i<n-1;i++){
-            ll u,v;
-            cin>>u>>v;
-            edj[u].PB(v);
-            edj[v].PB(u);
+        if(n==0){
+            cout<<"0 0"<<"\n";
+            continue;
         }
-        dfs(1,-1,0);
-        cout<<ans<<"\n";
+        ll cnt=0,cnt2=0;
+        while(n)
+        {
+            if(n%2)cnt++;
+            else cnt2++;
+            n/=2;
+        }
+        ll val=pow(2,cnt-1)-1;
+        ll val2=pow(2,(cnt+cnt2)-1);
+        ll num=val+val2;
+        if(cnt2==0){
+            n=-1;
+        }
+        else{
+            n=num/cnt2;
+        }
+
+        cout<<num<<" "<<n<<"\n";
     }
     return 0;
 }
-
 
 
 

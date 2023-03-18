@@ -43,7 +43,7 @@ int main()
             s=b[i];
             while(s>1)
             {
-                m[a[s]]=1;
+                m[a[s]]++;
                 s/=a[s];
             }
             // m[s]++;
