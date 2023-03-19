@@ -1,11 +1,4 @@
-/*
-    Sk arman Hossain
-    University of Barisal
 
-    Problem :
-    Solution :
-    Date:
- */
 
 #include<bits/stdc++.h>
 using namespace std;
@@ -34,52 +27,47 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
-ll ar[310][310];
-ll ck[310];
+ll ar[2000010];
 int main()
 {
-   // cout<<"hjg\n";
+    // cout<<"hjg\n";
     //freopen("1input.txt","r",stdin);
     //freopen("1output.txt","w",stdout);
     fast;
     ll tcase=1;
-    //cin>>tcase;
+    cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,m;
-        cin>>n>>m;
-        for(ll i=0;i<=n;i++)ar[i][0]=-1;
-        for(ll i=1;i<=n;i++){
-            for(ll j=1;j<=m;j++){
-                cin>>ar[i][j];
+        ll n,q;
+        cin>>n>>q;
+        for(ll i=1; i<=n; i++)
+        {
+            cin>>ar[i];
+            ar[i]+=ar[i-1];
+        }
+        for(ll i=0; i<q; i++)
+        {
+            ll l,r,x;
+            cin>>l>>r>>x;
+            ll dif=(r-l)+1;
+            ll par=ar[n]%2;
+            ll pre=(ar[r]-ar[l-1])%2;
+            ll ne=0;
+            if(x%2&&dif%2)ne=1;
+            if(pre!=ne)
+            {
+                par=1-par;
+            }
+            if(par%2)
+            {
+                YES;
+            }
+            else
+            {
+                NO;
             }
         }
-        ll ans=999999999999;
-        for(ll i=1;i<=m;i++){
-            ll tm=0,val=0;
-            for(ll j=1;j<=n;j++){
-                if(ar[j][i-1]==-1){
-                    if(ck[ar[j][i]]!=-1)
-                        ck[ar[j][i]]++;
-                    cout<<ar[j][i]<<" "<<ck[ar[j][i]]<<" t\n";
-                }
-            }
-            for(ll j=1;j<=m;j++){
-                if(ck[j]>tm){
-                    tm=ck[j];
-                    val=j;
-                }
-            }
-            ck[val]=-1;
-             for(ll j=1;j<=n;j++){
-                if(ar[j][i]==val){
-                    ar[j][i]=-1;
-                }
-            }
-            cout<<val<<" "<<tm<<" x\n";
-            ans=min(ans,tm);
-        }
-        cout<<ans<<"\n";
+
     }
     return 0;
 }

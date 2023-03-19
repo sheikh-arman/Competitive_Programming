@@ -35,41 +35,85 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
+ll cum[2000101];
+vector<ll>V;
+ll fix=7;
+ll query2(ll l,ll r)
+{
+//    cout<<"?";
+//    for(ll i=l; i<=r; i++)
+//    {
+//        cout<<" "<<i;
+//    }
+//    cout<<"\n";
+    ll x;
+    //cin>>x;
+    ll sum=cum[r]-cum[l-1];
+    ll ck=0;
+    if(fix>=l&&fix<=r)ck=1;
+    x=sum+ck;
+    return (sum!=x);
+}
+ll query(ll l,ll r)
+{
+    cout<<"? "<<(r-l)+1;
+    for(ll i=l; i<=r; i++)
+    {
+        cout<<" "<<i;
+    }
+    cout<<"\n";
+    ll x;
+    cin>>x;
+    ll sum=cum[r]-cum[l-1];
+    return (sum!=x);
+}
 int main()
 {
-   // cout<<"hjg\n";
+    cout.flush();
+    // cout<<"hjg\n";
     //freopen("1input.txt","r",stdin);
     //freopen("1output.txt","w",stdout);
-    fast;
+    //fast;
     ll tcase=1;
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
         ll n;
         cin>>n;
-        vector<ll>V;
-        for(ll i=0;i<n;i++){
+        for(ll i=0; i<n+2; i++)cum[i]=0;
+        V.clear();
+        V.PB(0);
+        for(ll i=0; i<n; i++)
+        {
             ll a;
             cin>>a;
             V.PB(a);
         }
-        VST(V);
-        ll sum=V[0],ck=1;
-        for(ll i=1;i<n;i++){
-            if(V[i]>sum){
-                ck=0;break;
-            }
+        ll sum=0;
+        for(ll i=1; i<=n; i++)
+        {
             sum+=V[i];
+            cum[i]=sum;
         }
-        if(ck&&V[0]==1){
-            YES;
+        ll left=1,right=n;
+        while(left<right)
+        {
+            ll mid=(left+right)/2;
+            ll tm=query(left,mid);
+            if(tm)
+            {
+                right=mid;
+            }
+            else
+            {
+                left=mid+1;
+            }
         }
-        else{
-            NO;
-        }
+        cout<<"! "<<left<<"\n";
     }
     return 0;
 }
+
 
 
 
