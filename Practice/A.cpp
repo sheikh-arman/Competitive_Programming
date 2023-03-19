@@ -27,10 +27,15 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
+<<<<<<< HEAD
 ll ar[2000010];
 int main()
 {
     // cout<<"hjg\n";
+=======
+int main()
+{
+>>>>>>> 53f1cd93ed3d250b28360b312ec0e3e7a40bad68
     //freopen("1input.txt","r",stdin);
     //freopen("1output.txt","w",stdout);
     fast;
@@ -38,6 +43,7 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
+<<<<<<< HEAD
         ll n,q;
         cin>>n>>q;
         for(ll i=1; i<=n; i++)
@@ -67,9 +73,17 @@ int main()
                 NO;
             }
         }
+=======
+        ll n;
+        cin>>n;
+        
+
+
+>>>>>>> 53f1cd93ed3d250b28360b312ec0e3e7a40bad68
 
     }
     return 0;
+ ///*****************************  ALHAMDULILLAH  *****************************/
 }
 
 

@@ -34,63 +34,25 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
-ll node_cnt[300010];
-ll rep[300010];
-ll current[300010];
-ll Find(ll node){
-    return (rep[node]==node?node:rep[node]=Find(rep[node]));
-}
 int main()
 {
-    //cout<<log2(500000);
    // cout<<"hjg\n";
     //freopen("1input.txt","r",stdin);
     //freopen("1output.txt","w",stdout);
     fast;
     ll tcase=1;
-    //cin>>tcase;
+    cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,l;
-        cin>>n>>l;
-        for(ll i=0;i<=l;i++){
-            rep[i]=i;
-            current[i]=0;
-            node_cnt[i]=1;
-        }
-        for(ll i=0;i<n;i++){
-            ll u,v;
-            cin>>u>>v;
-            u=Find(u);
-            v=Find(v);
-            if(u==v){
-                if(node_cnt[u]>current[u]){
-                    cout<<"LADICA\n";
-                    current[u]++;
-                }
-                else{
-                    cout<<"SMECE\n";
-                }
-            }
-            else{
-                if(node_cnt[u]<node_cnt[v])swap(u,v);
-                rep[v]=u;
-                node_cnt[u]+=node_cnt[v];
-                current[u]+=current[v];
-                u=Find(u);
-                v=Find(v);
-                if(node_cnt[u]>current[u]){
-                    cout<<"LADICA\n";
-                    current[u]++;
-                }
-                else{
-                    cout<<"SMECE\n";
-                }
-            }
-        }
+        ll n;
+        cin>>n;
         
+
+
+
     }
     return 0;
+ ///*****************************  ALHAMDULILLAH  *****************************/
 }
 
 

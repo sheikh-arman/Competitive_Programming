@@ -44,12 +44,19 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,sum=0;
+<<<<<<< HEAD
+        ll n,sum
+=======
+        ll n;
+        cin>>n;
+        
+>>>>>>> 574ab86cc3831b5e3a57af58a39f777a9dddd23e
 
 
 
     }
     return 0;
+ ///*****************************  ALHAMDULILLAH  *****************************/
 }
 
 

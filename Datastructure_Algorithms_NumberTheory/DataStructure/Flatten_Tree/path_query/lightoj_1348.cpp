@@ -81,7 +81,7 @@ void init()
     {
         for(ll i=1; i<=n; i++)
         {
-            sparse[i][j]=sparse[sparse[i][j-1]][j-1];
+            sparse[i][j]=sparse[sparse[i][j-1]][j-1];(
         }
     }
 }
