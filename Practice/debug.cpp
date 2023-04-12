@@ -1,70 +1,81 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 #define ll long long
-const ll N=1e7+7;
-ll a[N],b[N],c[N];
-void seive(){
-	ll i,j;
-	a[1]=1;
-	for(i=2;i<N;i++) a[i]=2;
-	for(i=2;i*i<N;i++){
-		if(a[i]<i) continue;
-		for(j=i*i;j<N;j+=i) a[j]=min(a[j],i);
+const int N=1e5+7;
+ll start[N],ending[N];
+ll s=1;
+bitset<N>bt;
+vector<ll>g[N],v;
+ll arr[N],n,parent[N],size[N];
+void dfs(int i){
+	bt[i]=1;
+	start[i]=s++;
+	for(auto j:g[i]){
+		if(bt[j]==0) dfs(j);		
 	}
+	ending[i]=s-1;
+	v.push_back(i);
 }
-int main(){
-    ios_base::sync_with_stdio(0);
-    cin.tie(0);
-    seive();
-    int t;
-    cin>>t;
-    int l=t;
-    while(t--){
-    	cout<<"Case "<<l-t<<": ";
-    	ll n,i,j,s=0,s2=0,gcd,x=0,y=0,s3=0;
-    	cin>>n;
-    	map<ll,ll>m,m2;
-    	for(i=0;i<n;i++){
-    		cin>>b[i];
-    		if(i==0) gcd=b[i];
-    		else gcd=__gcd(gcd,b[i]);
-    		s=b[i];
-    		while(s>1){
-    			m[a[s]]++;
-    			s/=a[s];
-    		}
-    		// m[s]++;
-    	}
-    	set<ll>st;
-    	for(i=0;i<n;i++){
-    		cin>>c[i];
-			s2=__gcd(b[i],c[i]);
-			s2=(b[i]*c[i])/s2;
-			while(s2>1){
-				if(m[a[s2]]==0){x=1;break;}
-				s2/=a[s2];
-			}
-			//cout<<s2<<"  "<<a[s2]<<endl;
-			//if(m[s2]==0) x=1;
-			if(b[i]>c[i] && y==0){
-				if(b[i]%c[i]) y=1;
-				else st.insert(b[i]/c[i]);
-				s3=b[i]/c[i];
-			}
-			else if(b[i]<=c[i] && y==0){
-				if(c[i]%b[i]) y=1;
-				else st.insert(c[i]/b[i]);
-				s3=c[i]/b[i];    				
-			}
-    	}
-    	if(x==0) cout<<"Yes ";
-    	else cout<<"No ";
-    	if(y==0 ){
-    		if(st.size()==0) cout<<"Yes\n";
-    		else if (st.size()==1 && gcd%s3==0)cout<<"Yes\n";
-    		else cout<<"No\n";
-    	}
-    	else cout<<"No\n";
+void make(ll v){
+    parent[v]=v;
+    size[v]=1;
+}
+ll find(ll v){
+    if(v==parent[v]) return v;
+    return parent[v]=find(parent[v]);
+}
+void Union(ll a,ll b,ll val,ll e){
+    a=find(a);
+    b=find(b);
+    //cout<<n<<" "<<b;
+    parent[a]=b;
+    bt[b]=0;
+    if(val>0) {
+    	if(b+1<=e)Union(b,b+1,val-1,e);
     }
-    return 0;
+    /*if(a!=b){
+        if(size[a]<size[b]){
+            swap(a,b);
+        }
+        parent[b]=a;
+        size[a]+=size[b];
+    }*/
+    return;
+}
+int main() {
+	ios::sync_with_stdio(0);
+    cin.tie(0);
+  	int t;
+  	cin>>t;
+  	int l=t;
+  	while(t--){  		
+	  	cout<<"Case "<<l-t<<":\n";
+	  	ll n,i,j,s=0,s2=0;
+	  	cin>>n;
+	  	for(i=1;i<n;i++){
+	  		ll u,v;
+	  		cin>>u>>v;
+	  		g[v].push_back(u);
+	  		g[u].push_back(v);
+	  	}
+	  	dfs(1);
+	  	for(i=1;i<=n;i++){
+	  		make(i);
+	  		//cout<<start[i]<<" "<<ending[i]<<endl;
+	  	}
+	  	ll q;
+	  	cin>>q;
+	  	while(q--){
+	  		ll x,y,z;
+	  		cin>>x>>y;
+	  		if(x==1){
+	  			cin>>z;
+	  		    ll r=find(start[y]);
+	  		    if(r<=ending[y]) {bt[r]=0;z--;}
+	  		    if(r+1<=ending[y])Union(r,r+1,z,ending[y]);
+			}
+			else cout<<(bt[y]^1)<<"\n";
+	  	}
+  	}
+  	return 0;
 }

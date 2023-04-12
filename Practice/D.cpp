@@ -36,7 +36,6 @@ ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
 int main()
 {
-   // cout<<"hjg\n";
     //freopen("1input.txt","r",stdin);
     //freopen("1output.txt","w",stdout);
     fast;
@@ -47,7 +46,6 @@ int main()
         ll n;
         cin>>n;
         
-
 
 
     }
