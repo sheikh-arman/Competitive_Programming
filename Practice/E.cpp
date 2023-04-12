@@ -1,3 +1,4 @@
+
 /*
     Sk arman Hossain
     University of Barisal
@@ -34,6 +35,33 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
+<<<<<<< HEAD
+ll cum[2000101];
+vector<ll>V;
+ll fix=7;
+ll query2(ll l,ll r)
+{
+//    cout<<"?";
+//    for(ll i=l; i<=r; i++)
+//    {
+//        cout<<" "<<i;
+//    }
+//    cout<<"\n";
+    ll x;
+    //cin>>x;
+    ll sum=cum[r]-cum[l-1];
+    ll ck=0;
+    if(fix>=l&&fix<=r)ck=1;
+    x=sum+ck;
+    return (sum!=x);
+}
+ll query(ll l,ll r)
+{
+    cout<<"? "<<(r-l)+1;
+    for(ll i=l; i<=r; i++)
+    {
+        cout<<" "<<i;
+=======
 ll seg[2000000];
 ll ar[300010];
 void build(ll n,ll b,ll e){
@@ -78,8 +106,13 @@ ll bin_1(ll l,ll r,ll val){
             ans=mid;
             l=mid+1;
         }
+>>>>>>> 53f1cd93ed3d250b28360b312ec0e3e7a40bad68
     }
-    return ans;
+    cout<<"\n";
+    ll x;
+    cin>>x;
+    ll sum=cum[r]-cum[l-1];
+    return (sum!=x);
 }
 ll bin_2(ll l,ll r,ll val){
     ll ans=1;
@@ -153,14 +186,53 @@ ll sol(ll val){
 }
 int main()
 {
+<<<<<<< HEAD
+    cout.flush();
+    // cout<<"hjg\n";
+=======
    // cout<<"hjg\n";
+>>>>>>> 53f1cd93ed3d250b28360b312ec0e3e7a40bad68
     //freopen("1input.txt","r",stdin);
     //freopen("1output.txt","w",stdout);
-    fast;
+    //fast;
     ll tcase=1;
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
+<<<<<<< HEAD
+        ll n;
+        cin>>n;
+        for(ll i=0; i<n+2; i++)cum[i]=0;
+        V.clear();
+        V.PB(0);
+        for(ll i=0; i<n; i++)
+        {
+            ll a;
+            cin>>a;
+            V.PB(a);
+        }
+        ll sum=0;
+        for(ll i=1; i<=n; i++)
+        {
+            sum+=V[i];
+            cum[i]=sum;
+        }
+        ll left=1,right=n;
+        while(left<right)
+        {
+            ll mid=(left+right)/2;
+            ll tm=query(left,mid);
+            if(tm)
+            {
+                right=mid;
+            }
+            else
+            {
+                left=mid+1;
+            }
+        }
+        cout<<"! "<<left<<"\n";
+=======
 <<<<<<< HEAD
        
        vector<ll>V;
@@ -175,6 +247,7 @@ int main()
            cout<<ans<<" ";
        }
        cout<<"\n";
+>>>>>>> 53f1cd93ed3d250b28360b312ec0e3e7a40bad68
     }
     return 0;
 }
