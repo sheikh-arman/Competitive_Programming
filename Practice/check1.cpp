@@ -34,46 +34,33 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
-ll ck(string s){
-    ll n=s.size();
-    for(ll i=1;i<n;i++){
-        if(s[i]==s[i-1]&&s[i]!='W')return 0;
-    }
-    return 1;
-}
 int main()
 {
-    map<int,char>mp;
-    mp[0]='R'; mp[1]='G';mp[2]='B';mp[3]='W';
-    //freopen("1input.txt","r",stdin);
-    freopen("1input.txt","w",stdout);
-    fast;
-    ll tcase=1000;
-    //cin>>tcase;
-    cout<<tcase<<"\n";
+    map<char,ll>mp;
+    mp['W']=1;
+    mp['R']=1;
+    mp['G']=1;
+    mp['B']=1;
+    freopen("1input.txt","r",stdin);
+    //freopen("1output.txt","w",stdout);
+    //fast;
+    ll tcase=1;
+    cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
         string s;
-        while(1){
-            s.clear();
-            ll pre=-1;
-            while(s.size()<100000){
-                ll val=(rand()+1919)%4;
-                if(val>3||val<0)continue;
-                if(val==3){s+=mp[val];}
-                else{
-                    if(pre!=val){
-                        s+=mp[val];
-                    }
-                }
-                pre=val;
+        cin>>s;
+        ll n=s.size();
+        for(ll i=1;i<n;i++){
+            if(mp[s[i]]!=1||mp[s[i-1]]!=1){
+                cout<<test<<" Char\n";
             }
-            if(ck(s)){
-                break;
+            if(s[i]==s[i-1]&&s[i]!='W'){
+                cout<<"Dup\n";
             }
         }
-        cout<<s<<"\n";
     }
+    cout<<"ses\n";
     return 0;
  ///*****************************  ALHAMDULILLAH  *****************************/
 }

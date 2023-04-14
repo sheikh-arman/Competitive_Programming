@@ -2,8 +2,8 @@
     Sk arman Hossain
     University of Barisal
 
-    Problem :
-    Solution :
+    Problem : Kattis coprime integer
+    Solution : Exclusion Inclusion
     Date:
  */
 
@@ -34,15 +34,15 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
-ll N=100000;
+ll N=10000000;
 int prime[10000003];
 void seive(){
     for(ll i=1;i<=N;i++)prime[i]=i;
-    for(ll i=2;i<=N;i+=2)prime[i]=i;
-    for(ll i=3;i<=N;i++){
+    for(ll i=2;i<=N;i+=2)prime[i]=2;
+    for(ll i=3;i<=N;i+=2){
         if(prime[i]==i){
-            for(int j=i*i;j<=N;j+=i+i){
-                prime[j]=min(prime[j],j);
+            for(ll j=i*i;j<=N;j+=i+i){
+                prime[j]=min(prime[j],(int)i);
             }
         }
     }
@@ -70,7 +70,6 @@ int main()
             V.PB({i,cnt});
         }
     }
-
     //freopen("1input.txt","r",stdin);
     //freopen("1output.txt","w",stdout);
     fast;
@@ -96,16 +95,13 @@ int main()
             }
         }
         ll len1=(b-a)+1;
-        ll len2=(c-d)+1;
-        ans-=(len1*len2);
-        ans*=2;
-        if(a==1&&c==1)ans-=1;
+        ll len2=(d-c)+1;
+        ans=(len1*len2)-ans;
         cout<<ans<<"\n";
     }
     return 0;
  ///*****************************  ALHAMDULILLAH  *****************************/
 }
-
 
 
 

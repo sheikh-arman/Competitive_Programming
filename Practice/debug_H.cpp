@@ -63,6 +63,7 @@ int main() {
 	    	if(s2==n && n>1){s*=2;s%=mod;}
 	    	else if(n>1){
 	    		s+=(s*big_mod(3,mod-2))%mod;
+				//s+=s/3;
 	    		s%=mod;
 	    	}
 	    	if(s2==1 && n>1) s=2;
