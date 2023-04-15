@@ -1,4 +1,11 @@
+/*
+    Sk arman Hossain
+    University of Barisal
 
+    Problem :
+    Solution :
+    Date:
+ */
 
 #include<bits/stdc++.h>
 using namespace std;
@@ -27,15 +34,8 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
-<<<<<<< HEAD
-ll ar[2000010];
 int main()
 {
-    // cout<<"hjg\n";
-=======
-int main()
-{
->>>>>>> 53f1cd93ed3d250b28360b312ec0e3e7a40bad68
     //freopen("1input.txt","r",stdin);
     //freopen("1output.txt","w",stdout);
     fast;
@@ -43,47 +43,8 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-<<<<<<< HEAD
-        ll n,q;
-        cin>>n>>q;
-        for(ll i=1; i<=n; i++)
-        {
-            cin>>ar[i];
-            ar[i]+=ar[i-1];
-        }
-        for(ll i=0; i<q; i++)
-        {
-            ll l,r,x;
-            cin>>l>>r>>x;
-            ll dif=(r-l)+1;
-            ll par=ar[n]%2;
-            ll pre=(ar[r]-ar[l-1])%2;
-            ll ne=0;
-            if(x%2&&dif%2)ne=1;
-            if(pre!=ne)
-            {
-                par=1-par;
-            }
-            if(par%2)
-            {
-                YES;
-            }
-            else
-            {
-                NO;
-            }
-        }
-=======
         ll n;
-        cin>>n;
         
-
-
-<<<<<<< HEAD
-=======
->>>>>>> 53f1cd93ed3d250b28360b312ec0e3e7a40bad68
-
->>>>>>> ff4db7232ca74ce032463fd026d48ebdc0400ab5
     }
     return 0;
  ///*****************************  ALHAMDULILLAH  *****************************/

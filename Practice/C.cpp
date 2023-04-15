@@ -38,47 +38,13 @@ int main()
 {
     //freopen("1input.txt","r",stdin);
     //freopen("1output.txt","w",stdout);
-   // fast;
+    fast;
     ll tcase=1;
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,x=1e15;
-        cin>>n;
-        vector<ll>V;
-        for(ll i=0;i<n;i++){
-            ll a;
-            cin>>a;
-            V.PB(a);
-        }
-        V[n-2]+=x;
-        V[n-1]+=x;
-        for(ll i=n-3;i>=0;i--){
-            if(V[i+1]>V[i+2]){
-                ll dif=V[i+1]-V[i+2];
-                V[i]-=dif;
-                V[i+1]-=dif;
-            }
-            else{
-                ll dif=V[i+2]-V[i+1];
-                V[i]+=dif;
-                V[i+1]+=dif;
-            }
-        }
-        ll ck=1;
-        for(ll i=0;i<n;i++){
-            //cout<<V[i]<<" ";
-            if(i>0&&V[i]<V[i-1]){
-                ck=0;//break;
-            }
-        }
-        //cout<<"\n";
-        if(ck){
-            YES;
-        }
-        else{
-            NO;
-        }
+        ll n;
+        
     }
     return 0;
  ///*****************************  ALHAMDULILLAH  *****************************/

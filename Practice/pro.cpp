@@ -43,11 +43,8 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll x,y;
-        cin>>x>>y;
-        cout<<"2\n";
-        cout<<x-1<<" 1"<<"\n";
-        cout<<x<<" "<<y<<"\n";
+        ll n;
+        
     }
     return 0;
  ///*****************************  ALHAMDULILLAH  *****************************/

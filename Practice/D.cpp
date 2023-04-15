@@ -44,10 +44,7 @@ int main()
     for(ll test=1; test<=tcase; test++)
     {
         ll n;
-        cin>>n;
         
-
-
     }
     return 0;
  ///*****************************  ALHAMDULILLAH  *****************************/
