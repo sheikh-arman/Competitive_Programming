@@ -34,6 +34,7 @@ ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
+
 int main()
 {
     //freopen("1input.txt","r",stdin);
@@ -43,12 +44,46 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n;
-        
+        ll n,mod=1e9+7;
+        cin>>n;
+        vector<ll>a,b;
+        ll ans=1;
+        for(ll i=0; i<n; i++)
+        {
+            ll x;
+            cin>>x;
+            a.PB(x);
+        }
+        for(ll i=0; i<n; i++)
+        {
+            ll x;
+            cin>>x;
+            b.PB(x);
+        }
+        VST(a);
+        VST(b);
+        ll cn=0;
+        for(ll i=n-1; i>=0; i--)
+        {
+            if(a[i]<=b[i])
+            {
+                ans=0;
+                break;
+            }
+            ll pos=upper_bound(a.begin(),a.end(),b[i])-a.begin();
+            ll cnt=(n-pos);
+            cnt-=cn;
+            cn++;
+            ans*=cnt;
+            ans%=mod;
+        }
+        cout<<ans<<"\n";
+
     }
     return 0;
- ///*****************************  ALHAMDULILLAH  *****************************/
+///*****************************  ALHAMDULILLAH  *****************************/
 }
+
 
 
 

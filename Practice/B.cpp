@@ -44,11 +44,26 @@ int main()
     for(ll test=1; test<=tcase; test++)
     {
         ll n;
-        
+        cin>>n;
+        vector<ll>V1,V2;
+        for(ll i=1;i<=n;i++){
+            ll a;
+            cin>>a;
+            V1.PB(a);
+        }
+        ll ans=0;
+        for(ll i=0;i<n;i++){
+            if(V1[i]!=i+1){
+                ans=__gcd(ans,abs((i+1)-V1[i]));
+            }
+        }
+        cout<<ans<<"\n";
+
     }
     return 0;
  ///*****************************  ALHAMDULILLAH  *****************************/
 }
+
 
 
 

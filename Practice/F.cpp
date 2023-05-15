@@ -43,46 +43,23 @@ int main()
     //cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n;
-        cin>>n;
-        vector<ll>V,V2;
-        for(ll i=0;i<n;i++){
-            ll a;
-            cin>>a;
-            V2.PB(a);
+        ll n,m,ans;
+        char ch;
+        scanf("%lld %c %lld ",&n,&ch,&m);
+        if(ch=='+'){
+            ans=n+m;
         }
-        VST(V2);
-        for(ll i=0;i<n;i++){
-            ll j=i+1;
-            while(j<n){
-                if(V2[i]!=V2[j]){
-                    break;
-                }
-                j++;
-            }
-            V.PB(j-i);
-            i=j-1;
+        else{
+            ans=n*m;
         }
-        VST(V);
-        for(ll i:V){
-            cout<<i<<" ";
-        }
-        cout<<" t\n";
-        for(ll i=1;i<=1;i++){
-            ll left=0,right=left+(i-1);
-            ll siz=V.size()-1;
-            ll ans=0;
-            while(right<n){
-                ans+=V[left];
-                ll pos=lower_bound(V.begin(),V.end(),V[left]+1)-V.begin();
-                left=min(left+i,pos);
-                right=left+i;
-            }
-            cout<<ans<<"\n";
-        }
+        printf("%lld\n",ans);
+
+
     }
     return 0;
+ ///*****************************  ALHAMDULILLAH  *****************************/
 }
+
 
 
 

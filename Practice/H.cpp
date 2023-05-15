@@ -1,57 +1,114 @@
-#include <bits/stdc++.h>
+/*
+    Sk arman Hossain
+    University of Barisal
+
+    Problem :
+    Solution :
+    Date:
+ */
+
+#include<bits/stdc++.h>
 using namespace std;
-#define ll long long
-const int N=5e6+7;
-//ll b[N],a[N];
-const ll mod=1000000007 ;
-ll dp[N][4];
-int main() {
+typedef long long int ll;
+
+#include <ext/pb_ds/assoc_container.hpp> // Common file
+#include <ext/pb_ds/tree_policy.hpp>
+using namespace __gnu_pbds;
+typedef tree<ll, null_type, less_equal<ll>, rb_tree_tag,tree_order_statistics_node_update> ordered_set;
+
+#define sf(n) scanf("%lld",&n);
+#define YES cout<<"YES\n";
+#define NO cout<<"NO\n";
+#define nl cout<<"\n";
+#define PB push_back
+#define VST(V) sort(V.begin(),V.end())
+#define VSTrev(V) sort(V.begin(),V.end(),greater<long long int>())
+#define fast ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
+#define  base1 129
+#define  base2 137
+#define  MOD1  1479386893
+#define  MOD2  1928476349
+#define MAX 2000010
+#define T(n) printf("test : %d\n",n);
+ll dx[]= {1,-1,0,0,1,-1,-1,1};
+ll dy[]= {0,0,1,-1,1,1,-1,-1};
+ll knx[]= {2,2,1,-1,-2,-2,1,-1};
+ll kny[]= {1,-1,2,2,1,-1,-2,-2};
+ll mem[200010][80];
+ll bit_cnt[80],ar[200010];
+ll n,k,mod=1e9+7;
+ll dp(ll i,ll pre)
+{
+    if(pre!=70&&bit_cnt[pre]<k)return 0;
+    if(i>=n)
+    {
+        if(pre==70)return 0;
+        ll cnt=bit_cnt[pre];
+        return (cnt==k);
+    }
+    if(mem[i][pre]!=-1)
+    {
+        return mem[i][pre];
+    }
+    //cout<<i<<" "<<pre<<" x\n";
+    ll ans=0;
+    if(pre==70)
+    {
+        ans+=dp(i+1,ar[i]);
+        ans%=mod;
+        ans+=dp(i+1,pre);
+        ans%=mod;
+    }
+    else
+    {
+        ans+=dp(i+1,(pre&ar[i]));
+        ans%=mod;
+        ans+=dp(i+1,pre);
+        ans%=mod;
+    }
+
+    return mem[i][pre]=ans;
+}
+int main()
+{
+    for(ll i=0; i<=76; i++)
+    {
+        ll num=i,cn=0;
+        while(num)
+        {
+            cn+=num%2;
+            num/=2;
+        }
+        bit_cnt[i]=cn;
+    }
     //freopen("1input.txt","r",stdin);
     //freopen("1output.txt","w",stdout);
-    map<char,int>mp;
-    mp['R']=0; mp['G']=1;mp['B']=2;
-	ios::sync_with_stdio(0);cin.tie(0);
-    int t;
-    cin>>t;
-    int tt=t,tcase=1;
-    while(t--){
-    	string s;
-        cin>>s;
-        ll n=s.size();
-        for(ll i=0;i<=n;i++){
-            for(ll j=0;j<3;j++)dp[i][j]=0;
-        }
-        if(s[0]=='W'){
-            dp[0][0]=dp[0][1]=dp[0][2]=1;
-        }
-        else{
-            dp[0][mp[s[0]]]=1;
-        }
-        for(ll i=1;i<n;i++){
-            if(s[i]=='W'){
-                dp[i][0]=dp[i-1][1]+dp[i-1][2];
-                dp[i][1]=dp[i-1][0]+dp[i-1][2];
-                dp[i][2]=dp[i-1][1]+dp[i-1][0];
-            }
-            else if(s[i]=='R'){
-                dp[i][0]=dp[i-1][1]+dp[i-1][2];
-            }
-            else if(s[i]=='G'){
-                dp[i][1]=dp[i-1][0]+dp[i-1][2];
-            }
-            else{
-                dp[i][2]=dp[i-1][1]+dp[i-1][0];
-            }
-            for(ll j=0;j<3;j++){
-                dp[i][j]%=mod;
+    fast;
+    ll tcase=1;
+    cin>>tcase;
+    for(ll test=1; test<=tcase; test++)
+    {
+        cin>>n>>k;
+        for(ll i=0; i<=n; i++)
+        {
+            for(ll j=0; j<=70; j++)
+            {
+                mem[i][j]=-1;
             }
         }
-        ll ans=0;
-        for(ll j=0;j<3;j++){
-                ans+=dp[n-1][j];
-                ans%=mod;
+        for(ll i=0; i<n; i++)
+        {
+            cin>>ar[i];
         }
-        cout<<"Case "<<tcase++<<": "<<ans<<"\n";
+        ll ans=dp(0,70);
+        cout<<ans<<"\n";
+
     }
     return 0;
+///*****************************  ALHAMDULILLAH  *****************************/
 }
+
+
+
+
+

@@ -38,32 +38,27 @@ int main()
 {
     //freopen("1input.txt","r",stdin);
     //freopen("1output.txt","w",stdout);
-    //fast;
+    fast;
     ll tcase=1;
     //cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
         ll n;
-        cin>>n;
-        vector<ll>V;
-        for(ll i=0; i<n; i++)
-        {
-            ll a;
-            cin>>a;
-            ll pos=upper_bound(V.begin(),V.end(),a)-V.begin();
-            if(pos>=V.size())
-            {
-                V.PB(a);
-            }
-            else
-            {
-                V[pos]=a;
-            }
+        //cin>>n;
+        string s;
+        cin>>s;
+        n=s.size();
+        map<ll,ll>mp;
+        stack<ll>stk;
+        ll cnt=0;
+        for(ll i=0;i<n;i++){
+
         }
-        cout<<V.size()<<"\n";
+
+
     }
     return 0;
-///*****************************  ALHAMDULILLAH  *****************************/
+ ///*****************************  ALHAMDULILLAH  *****************************/
 }
 
 

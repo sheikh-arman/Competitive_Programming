@@ -1,3 +1,4 @@
+
 /*
     Sk arman Hossain
     University of Barisal
@@ -28,15 +29,24 @@ typedef tree<ll, null_type, less_equal<ll>, rb_tree_tag,tree_order_statistics_no
 #define  base2 137
 #define  MOD1  1479386893
 #define  MOD2  1928476349
-#define MAX 200000000010
+#define MAX 2000010
 #define T(n) printf("test : %d\n",n);
 ll dx[]= {1,-1,0,0,1,-1,-1,1};
 ll dy[]= {0,0,1,-1,1,1,-1,-1};
 ll knx[]= {2,2,1,-1,-2,-2,1,-1};
 ll kny[]= {1,-1,2,2,1,-1,-2,-2};
+ll ans=100000000000000000,w;
+void sol(ll i,ll val,vector<ll>& V){
+    ll n=V.size();
+    if(i>=n){
+        ans=min(ans,abs(val-(w-val)));
+        return;
+    }
+    sol(i+1,val,V);
+    sol(i+1,val+V[i],V);
+}
 int main()
 {
-   // cout<<"hjg\n";
     //freopen("1input.txt","r",stdin);
     //freopen("1output.txt","w",stdout);
     fast;
@@ -44,52 +54,20 @@ int main()
     //cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,m;
-        cin>>n>>m;
-
-        ll a[n][m];
-        ll chk[n],cnt[m+1];
-        memset(cnt,0,sizeof(cnt));
-
-        vector<pair<ll,ll>> pos[m+1];
-
+        ll n;
+        cin>>n;
+        vector<ll>V;
         for(ll i=0;i<n;i++){
-            for(ll j=0;j<m;j++){
-                cin>>a[i][j];
-                pos[a[i][j]].PB({i,j});
-            }
-            chk[i]=0;
-            cnt[a[i][0]]++;
+            ll a;
+            cin>>a;
+            V.PB(a);
+            w+=a;
         }
-
-        ll ans=n;
-        for(ll i=0;i<m;i++){
-            ll mx=0,val=-1;
-            for(ll j=1;j<=m;j++){
-                if(cnt[j]>=mx){
-                    mx=cnt[j];
-                    val=j;
-                }
-            }
-            //cout<<i<<" "<<val<<" "<<mx<<endl;
-            ans=min(ans,mx);
-            cnt[val]-=mx;
-            for(ll j=0;j<pos[val].size();j++){
-                a[pos[val][j].first][pos[val][j].second]=-1;
-            }
-            for(ll j=0;j<n;j++){
-                if(a[j][chk[j]]!=-1) continue;
-                while(chk[j]<m && a[j][chk[j]]==-1) chk[j]++;
-                //cout<<j<<" "<<chk[j]<<endl;
-                if(chk[j]<m) cnt[a[j][chk[j]]]++;
-            }
-        }
-
-        cout<<ans<<endl;
-
-
+        sol(0,0,V);
+        cout<<ans<<"\n";
     }
     return 0;
+ ///*****************************  ALHAMDULILLAH  *****************************/
 }
 
 
